@@ -4,6 +4,8 @@ import { useState } from "react";
 import { brands } from "@/data/brands";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +29,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const navigate = useNavigate();
   const [clickedSlug, setClickedSlug] = useState<string | null>(null);
+  const { t, lang } = useLanguage();
 
   const handleClick = (slug: string) => {
     if (clickedSlug) return;
@@ -35,14 +38,17 @@ function HomePage() {
   };
 
   return (
-    <main className="relative min-h-screen">
+    <main key={lang} className="relative min-h-screen animate-in fade-in duration-300">
       <AnimatedBackground />
 
-      <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 pt-8">
+      <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between gap-3 px-6 pt-8">
         <AutoInfoLogo size="sm" />
-        <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          Premium Car Explorer
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="hidden text-xs uppercase tracking-[0.3em] text-muted-foreground sm:inline">
+            {t("site.tagline")}
+          </span>
+          <LanguageSwitcher />
+        </div>
       </header>
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-12 text-center">
@@ -52,7 +58,7 @@ function HomePage() {
           transition={{ delay: 0.4 }}
           className="mb-3 text-xs uppercase tracking-[0.4em] text-primary/80"
         >
-          Choose your brand
+          {t("home.chooseBrand")}
         </motion.p>
         <AutoInfoLogo />
         <motion.p
@@ -61,7 +67,7 @@ function HomePage() {
           transition={{ delay: 0.9 }}
           className="mx-auto mt-4 max-w-xl text-base text-muted-foreground"
         >
-          Explore iconic models from the world's most legendary automakers.
+          {t("home.subtitle")}
         </motion.p>
       </section>
 
@@ -112,7 +118,7 @@ function HomePage() {
                   {brand.name}
                 </h2>
                 <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-                  {brand.models.length} Models
+                  {brand.models.length} {t("home.modelsCount")}
                 </p>
               </div>
             </motion.button>
@@ -121,7 +127,7 @@ function HomePage() {
       </section>
 
       <footer className="relative z-10 pb-8 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} AutoINFO. Drive the future.
+        © {new Date().getFullYear()} {t("home.footer")}
       </footer>
     </main>
   );

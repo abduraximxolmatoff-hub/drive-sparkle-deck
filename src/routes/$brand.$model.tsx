@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { getBrandModel } from "@/data/brands";
 import { CAR_PARTS, type CarPart } from "@/data/carParts";
 
@@ -68,16 +70,16 @@ export const Route = createFileRoute("/$brand/$model")({
     return (
       <div className="flex min-h-screen items-center justify-center p-6 text-center">
         <div>
-          <h1 className="font-display text-3xl">Model topilmadi</h1>
+          <h1 className="font-display text-3xl">Model not found</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Tanlangan model uchun ma’lumot hozircha mavjud emas.
+            Information for the selected model is not available yet.
           </p>
           <Link
             to="/brand/$slug"
             params={{ slug: brand }}
             className="mt-4 inline-block text-primary underline"
           >
-            Modellarga qaytish
+            Back to models
           </Link>
         </div>
       </div>
@@ -88,9 +90,10 @@ export const Route = createFileRoute("/$brand/$model")({
 function ModelDetailPage() {
   const { brand, model } = Route.useLoaderData();
   const [activePart, setActivePart] = useState<CarPart | null>(null);
+  const { t, lang } = useLanguage();
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main key={lang} className="relative min-h-screen overflow-hidden animate-in fade-in duration-300">
       <AnimatedBackground />
 
       <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 pt-6 sm:px-6 sm:pt-8">
@@ -100,9 +103,12 @@ function ModelDetailPage() {
           className="group flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground sm:text-sm"
         >
           <span className="transition-transform group-hover:-translate-x-1">←</span>
-          Modellarga qaytish
+          {t("model.backToModels")}
         </Link>
-        <AutoInfoLogo size="sm" />
+        <div className="flex items-center gap-3">
+          <AutoInfoLogo size="sm" />
+          <LanguageSwitcher />
+        </div>
       </header>
 
       <section className="relative z-10 mx-auto max-w-7xl px-4 pb-4 pt-6 sm:px-6 sm:pb-6 sm:pt-8">
@@ -130,7 +136,7 @@ function ModelDetailPage() {
               transition={{ delay: 0.28 }}
               className="mt-3 max-w-2xl text-sm text-muted-foreground sm:text-base"
             >
-              {model.tagline ?? brand.tagline}
+              {model.taglineKey ? t(model.taglineKey) : brand.tagline}
             </motion.p>
           </div>
           <img
@@ -145,14 +151,14 @@ function ModelDetailPage() {
         <aside className="order-2 lg:order-1">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-              Qismlar
+              {t("model.parts")}
             </h2>
             {activePart && (
               <button
                 onClick={() => setActivePart(null)}
                 className="text-[10px] uppercase tracking-wider text-primary hover:underline"
               >
-                Reset view
+                {t("model.resetView")}
               </button>
             )}
           </div>
@@ -195,8 +201,8 @@ function ModelDetailPage() {
                       {part.icon}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-display text-sm font-semibold">{part.uz}</p>
-                      <p className="truncate text-[11px] text-muted-foreground">{part.subtitle}</p>
+                      <p className="truncate font-display text-sm font-semibold">{part.name[lang]}</p>
+                      <p className="truncate text-[11px] text-muted-foreground">{part.subtitle[lang]}</p>
                     </div>
                   </button>
                 </motion.li>
@@ -294,7 +300,7 @@ function ModelDetailPage() {
                 className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto"
               >
                 <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                  Interactive model view
+                  {t("model.interactiveView")}
                 </p>
                 <p className="font-display text-lg sm:text-xl">{brand.tagline}</p>
               </motion.div>
@@ -323,16 +329,16 @@ function ModelDetailPage() {
                   </span>
                   <div>
                     <h3 className="font-display text-xl font-semibold sm:text-2xl">
-                      {activePart.title}
+                      {activePart.title[lang]}
                     </h3>
                     <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                      {activePart.uz}
+                      {activePart.name[lang]}
                     </p>
                   </div>
                 </div>
 
                 <ul className="space-y-2 text-sm leading-relaxed text-foreground/90">
-                  {activePart.bullets.map((bullet, index) => (
+                  {activePart.bullets[lang].map((bullet, index) => (
                     <motion.li
                       key={index}
                       initial={{ opacity: 0, x: -8 }}
@@ -353,16 +359,16 @@ function ModelDetailPage() {
                   <div className="mt-5 grid gap-2 sm:grid-cols-3">
                     {activePart.seasonal.map((season) => (
                       <div
-                        key={season.label}
+                        key={season.labelKey}
                         className="rounded-lg border border-border/60 bg-background/40 p-3"
                       >
                         <p
                           className="text-[10px] font-semibold uppercase tracking-wider"
                           style={{ color: brand.accent }}
                         >
-                          {season.label}
+                          {t(season.labelKey)}
                         </p>
-                        <p className="mt-1 text-xs text-muted-foreground">{season.text}</p>
+                        <p className="mt-1 text-xs text-muted-foreground">{season.text[lang]}</p>
                       </div>
                     ))}
                   </div>
@@ -376,7 +382,7 @@ function ModelDetailPage() {
                 exit={{ opacity: 0 }}
                 className="mt-5 rounded-2xl border border-dashed border-border bg-card-gradient/50 p-5 text-center text-sm text-muted-foreground backdrop-blur-md"
               >
-                Chap paneldan qism tanlang — avtomobil tasviri shu hududga yaqinlashadi va foydali servis ma’lumoti ochiladi.
+                {t("model.hint")}
               </motion.div>
             )}
           </AnimatePresence>

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { getBrand, type Brand } from "@/data/brands";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export const Route = createFileRoute("/brand/$slug")({
   loader: ({ params }) => {
@@ -68,6 +70,7 @@ export const Route = createFileRoute("/brand/$slug")({
 
 function BrandPage() {
   const { brand } = Route.useLoaderData() as { brand: Brand };
+  const { t, lang } = useLanguage();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -76,7 +79,7 @@ function BrandPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen">
+    <main key={lang} className="relative min-h-screen animate-in fade-in duration-300">
       <AnimatedBackground />
 
       <AnimatePresence>
@@ -109,15 +112,18 @@ function BrandPage() {
         )}
       </AnimatePresence>
 
-      <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 pt-8">
+      <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 pt-8">
         <Link
           to="/"
           className="group flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <span className="transition-transform group-hover:-translate-x-1">←</span>
-          All brands
+          {t("brand.allBrands")}
         </Link>
-        <AutoInfoLogo size="sm" />
+        <div className="flex items-center gap-3">
+          <AutoInfoLogo size="sm" />
+          <LanguageSwitcher />
+        </div>
       </header>
 
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-10 pt-10 text-center">
@@ -188,11 +194,11 @@ function BrandPage() {
                 <h2 className="font-display text-2xl font-semibold md:text-3xl">
                   {model.name}
                 </h2>
-                {model.tagline && (
-                  <p className="text-sm text-muted-foreground">{model.tagline}</p>
+                {model.taglineKey && (
+                  <p className="text-sm text-muted-foreground">{t(model.taglineKey)}</p>
                 )}
                  <span className="mt-2 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                  Explore parts →
+                  {t("brand.exploreParts")}
                 </span>
               </div>
             </Link>
