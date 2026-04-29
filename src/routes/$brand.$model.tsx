@@ -300,7 +300,7 @@ function ModelDetailPage() {
                 className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto"
               >
                 <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                  Interactive model view
+                  {t("model.interactiveView")}
                 </p>
                 <p className="font-display text-lg sm:text-xl">{brand.tagline}</p>
               </motion.div>
@@ -329,16 +329,16 @@ function ModelDetailPage() {
                   </span>
                   <div>
                     <h3 className="font-display text-xl font-semibold sm:text-2xl">
-                      {activePart.title}
+                      {activePart.title[lang]}
                     </h3>
                     <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                      {activePart.uz}
+                      {activePart.name[lang]}
                     </p>
                   </div>
                 </div>
 
                 <ul className="space-y-2 text-sm leading-relaxed text-foreground/90">
-                  {activePart.bullets.map((bullet, index) => (
+                  {activePart.bullets[lang].map((bullet, index) => (
                     <motion.li
                       key={index}
                       initial={{ opacity: 0, x: -8 }}
@@ -359,16 +359,16 @@ function ModelDetailPage() {
                   <div className="mt-5 grid gap-2 sm:grid-cols-3">
                     {activePart.seasonal.map((season) => (
                       <div
-                        key={season.label}
+                        key={season.labelKey}
                         className="rounded-lg border border-border/60 bg-background/40 p-3"
                       >
                         <p
                           className="text-[10px] font-semibold uppercase tracking-wider"
                           style={{ color: brand.accent }}
                         >
-                          {season.label}
+                          {t(season.labelKey)}
                         </p>
-                        <p className="mt-1 text-xs text-muted-foreground">{season.text}</p>
+                        <p className="mt-1 text-xs text-muted-foreground">{season.text[lang]}</p>
                       </div>
                     ))}
                   </div>
@@ -382,7 +382,7 @@ function ModelDetailPage() {
                 exit={{ opacity: 0 }}
                 className="mt-5 rounded-2xl border border-dashed border-border bg-card-gradient/50 p-5 text-center text-sm text-muted-foreground backdrop-blur-md"
               >
-                Chap paneldan qism tanlang — avtomobil tasviri shu hududga yaqinlashadi va foydali servis ma’lumoti ochiladi.
+                {t("model.hint")}
               </motion.div>
             )}
           </AnimatePresence>
