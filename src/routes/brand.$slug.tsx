@@ -157,9 +157,13 @@ function BrandPage() {
             whileHover={{ y: -4 }}
           >
             <Link
-              to="/brand/$slug/model/$model"
-              params={{ slug: brand.slug, model: model.slug }}
-              className="group relative flex cursor-pointer flex-col items-center overflow-hidden rounded-2xl border border-border bg-card-gradient shadow-card backdrop-blur-md transition-all hover:scale-[1.02] hover:border-primary/40 hover:shadow-glow sm:flex-row"
+              to="/$brand/$model"
+              params={{ brand: brand.slug, model: model.slug }}
+              preload="intent"
+              className="group relative flex cursor-pointer flex-col items-center overflow-hidden rounded-2xl border border-border bg-card-gradient shadow-card backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-primary/40 hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 sm:flex-row"
+              style={{
+                boxShadow: `0 18px 50px -30px ${brand.accent}66`,
+              }}
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-auto sm:h-44 sm:w-1/2">
                 <img
@@ -168,7 +172,7 @@ function BrandPage() {
                   width={800}
                   height={512}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div
                   className="absolute inset-0 opacity-60"
@@ -187,7 +191,7 @@ function BrandPage() {
                 {model.tagline && (
                   <p className="text-sm text-muted-foreground">{model.tagline}</p>
                 )}
-                <span className="mt-2 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                 <span className="mt-2 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary opacity-0 transition-opacity group-hover:opacity-100">
                   Explore parts →
                 </span>
               </div>
