@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { getBrand } from "@/data/brands";
+import { getBrand, type Brand } from "@/data/brands";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
 
@@ -67,7 +67,7 @@ export const Route = createFileRoute("/brand/$slug")({
 });
 
 function BrandPage() {
-  const { brand } = Route.useLoaderData();
+  const { brand } = Route.useLoaderData() as { brand: Brand };
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
