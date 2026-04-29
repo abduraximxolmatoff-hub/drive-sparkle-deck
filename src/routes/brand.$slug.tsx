@@ -145,7 +145,7 @@ function BrandPage() {
 
       <section className="relative z-10 mx-auto max-w-4xl space-y-5 px-6 pb-24">
         {brand.models.map((model, i) => (
-          <motion.article
+          <motion.div
             key={model.slug}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: loading ? 0 : 1, y: loading ? 40 : 0 }}
@@ -155,41 +155,44 @@ function BrandPage() {
               ease: "easeOut",
             }}
             whileHover={{ y: -4 }}
-            className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-border bg-card-gradient shadow-card backdrop-blur-md transition-all hover:border-primary/40 hover:shadow-glow sm:flex-row"
           >
-            <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-auto sm:h-44 sm:w-1/2">
-              <img
-                src={model.image}
-                alt={model.name}
-                width={800}
-                height={512}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div
-                className="absolute inset-0 opacity-60"
-                style={{
-                  background: `linear-gradient(90deg, transparent 40%, ${brand.accent}22)`,
-                }}
-              />
-            </div>
-            <div className="flex flex-1 flex-col items-start gap-2 p-6 sm:items-end sm:p-8 sm:text-right">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                {brand.name}
-              </span>
-              <h2 className="font-display text-2xl font-semibold md:text-3xl">
-                {model.name}
-              </h2>
-              {model.tagline && (
-                <p className="text-sm text-muted-foreground">{model.tagline}</p>
-              )}
-              <span
-                className="mt-2 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary opacity-0 transition-opacity group-hover:opacity-100"
-              >
-                Coming soon →
-              </span>
-            </div>
-          </motion.article>
+            <Link
+              to="/brand/$slug/$model"
+              params={{ slug: brand.slug, model: model.slug }}
+              className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-border bg-card-gradient shadow-card backdrop-blur-md transition-all hover:border-primary/40 hover:shadow-glow sm:flex-row"
+            >
+              <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-auto sm:h-44 sm:w-1/2">
+                <img
+                  src={model.image}
+                  alt={model.name}
+                  width={800}
+                  height={512}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div
+                  className="absolute inset-0 opacity-60"
+                  style={{
+                    background: `linear-gradient(90deg, transparent 40%, ${brand.accent}22)`,
+                  }}
+                />
+              </div>
+              <div className="flex flex-1 flex-col items-start gap-2 p-6 sm:items-end sm:p-8 sm:text-right">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                  {brand.name}
+                </span>
+                <h2 className="font-display text-2xl font-semibold md:text-3xl">
+                  {model.name}
+                </h2>
+                {model.tagline && (
+                  <p className="text-sm text-muted-foreground">{model.tagline}</p>
+                )}
+                <span className="mt-2 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                  Explore parts →
+                </span>
+              </div>
+            </Link>
+          </motion.div>
         ))}
       </section>
     </main>
