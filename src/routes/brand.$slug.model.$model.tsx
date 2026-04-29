@@ -6,7 +6,7 @@ import { CAR_PARTS, type CarPart } from "@/data/carParts";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
 
-export const Route = createFileRoute("/brand/$slug/$model")({
+export const Route = createFileRoute("/brand/$slug/model/$model")({
   loader: ({ params }) => {
     const brand = getBrand(params.slug);
     if (!brand) throw notFound();
