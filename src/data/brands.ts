@@ -27,7 +27,8 @@ export interface CarModel {
   slug: string;
   name: string;
   image: string;
-  tagline?: string;
+  /** Translation key for tagline, e.g. "tagline.compactSedan" */
+  taglineKey?: string;
   legacySlugs?: string[];
 }
 
@@ -48,13 +49,13 @@ export const brands: Brand[] = [
     accent: "oklch(0.6 0.18 240)",
     tagline: "The Ultimate Driving Machine",
     models: [
-      { slug: "m5", name: "BMW M5", image: bmwM5, tagline: "4.4L V8 Twin-Turbo" },
-      { slug: "x5", name: "BMW X5", image: bmwX5, tagline: "Luxury SUV" },
+      { slug: "m5", name: "BMW M5", image: bmwM5, taglineKey: "tagline.v8TwinTurbo" },
+      { slug: "x5", name: "BMW X5", image: bmwX5, taglineKey: "tagline.luxurySUV" },
       {
         slug: "7-series-sedan",
         name: "BMW 7 Series Sedan",
         image: bmwI7,
-        tagline: "Flagship Luxury Sedan",
+        taglineKey: "tagline.flagshipLuxurySedan",
         legacySlugs: ["i7"],
       },
     ],
@@ -70,17 +71,17 @@ export const brands: Brand[] = [
         slug: "cobalt-16l",
         name: "Chevrolet Cobalt 1.6L",
         image: chevCobalt,
-        tagline: "Compact Sedan",
+        taglineKey: "tagline.compactSedan",
         legacySlugs: ["cobalt"],
       },
       {
         slug: "gentra-15l",
         name: "Chevrolet Gentra 1.5L",
         image: chevGentra,
-        tagline: "City Sedan",
+        taglineKey: "tagline.citySedan",
         legacySlugs: ["gentra"],
       },
-      { slug: "tracker", name: "Chevrolet Tracker", image: chevTracker, tagline: "Compact SUV" },
+      { slug: "tracker", name: "Chevrolet Tracker", image: chevTracker, taglineKey: "tagline.compactSUV" },
     ],
   },
   {
@@ -90,9 +91,9 @@ export const brands: Brand[] = [
     accent: "oklch(0.85 0.005 250)",
     tagline: "The Best or Nothing",
     models: [
-      { slug: "c-class", name: "Mercedes C-Class", image: mbC, tagline: "Compact Executive" },
-      { slug: "e-class", name: "Mercedes E-Class", image: mbE, tagline: "Business Sedan" },
-      { slug: "g63", name: "Mercedes G63 AMG", image: mbG63, tagline: "Iconic 4x4" },
+      { slug: "c-class", name: "Mercedes C-Class", image: mbC, taglineKey: "tagline.compactExecutive" },
+      { slug: "e-class", name: "Mercedes E-Class", image: mbE, taglineKey: "tagline.businessSedan" },
+      { slug: "g63", name: "Mercedes G63 AMG", image: mbG63, taglineKey: "tagline.iconic4x4" },
     ],
   },
   {
@@ -102,9 +103,9 @@ export const brands: Brand[] = [
     accent: "oklch(0.6 0.22 25)",
     tagline: "Vorsprung durch Technik",
     models: [
-      { slug: "a6", name: "Audi A6", image: audiA6, tagline: "Executive Sedan" },
-      { slug: "q7", name: "Audi Q7", image: audiQ7, tagline: "7-Seat SUV" },
-      { slug: "rs7", name: "Audi RS7", image: audiRs7, tagline: "600HP Sportback" },
+      { slug: "a6", name: "Audi A6", image: audiA6, taglineKey: "tagline.executiveSedan" },
+      { slug: "q7", name: "Audi Q7", image: audiQ7, taglineKey: "tagline.sevenSeatSUV" },
+      { slug: "rs7", name: "Audi RS7", image: audiRs7, taglineKey: "tagline.sportback600" },
     ],
   },
   {
@@ -114,9 +115,9 @@ export const brands: Brand[] = [
     accent: "oklch(0.82 0.16 85)",
     tagline: "There Is No Substitute",
     models: [
-      { slug: "cayenne", name: "Porsche Cayenne", image: porscheCayenne, tagline: "Performance SUV" },
-      { slug: "panamera", name: "Porsche Panamera", image: porschePanamera, tagline: "Luxury Sport Sedan" },
-      { slug: "911", name: "Porsche 911", image: porsche911, tagline: "Iconic Sports Car" },
+      { slug: "cayenne", name: "Porsche Cayenne", image: porscheCayenne, taglineKey: "tagline.performanceSUV" },
+      { slug: "panamera", name: "Porsche Panamera", image: porschePanamera, taglineKey: "tagline.luxurySportSedan" },
+      { slug: "911", name: "Porsche 911", image: porsche911, taglineKey: "tagline.iconicSportsCar" },
     ],
   },
   {
@@ -126,8 +127,8 @@ export const brands: Brand[] = [
     accent: "oklch(0.82 0.16 85)",
     tagline: "Expect the Unexpected",
     models: [
-      { slug: "huracan", name: "Lamborghini Huracán", image: lamboHuracan, tagline: "5.2L V10 Supercar" },
-      { slug: "aventador", name: "Lamborghini Aventador", image: lamboAventador, tagline: "6.5L V12 Flagship" },
+      { slug: "huracan", name: "Lamborghini Huracán", image: lamboHuracan, taglineKey: "tagline.v10Supercar" },
+      { slug: "aventador", name: "Lamborghini Aventador", image: lamboAventador, taglineKey: "tagline.v12Flagship" },
     ],
   },
 ];
