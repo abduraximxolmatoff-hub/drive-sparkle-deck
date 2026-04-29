@@ -28,6 +28,7 @@ export interface CarModel {
   name: string;
   image: string;
   tagline?: string;
+  legacySlugs?: string[];
 }
 
 export interface Brand {
@@ -49,7 +50,13 @@ export const brands: Brand[] = [
     models: [
       { slug: "m5", name: "BMW M5", image: bmwM5, tagline: "4.4L V8 Twin-Turbo" },
       { slug: "x5", name: "BMW X5", image: bmwX5, tagline: "Luxury SUV" },
-      { slug: "i7", name: "BMW i7", image: bmwI7, tagline: "All-Electric Flagship" },
+      {
+        slug: "7-series-sedan",
+        name: "BMW 7 Series Sedan",
+        image: bmwI7,
+        tagline: "Flagship Luxury Sedan",
+        legacySlugs: ["i7"],
+      },
     ],
   },
   {
@@ -59,8 +66,20 @@ export const brands: Brand[] = [
     accent: "oklch(0.82 0.16 85)",
     tagline: "Find New Roads",
     models: [
-      { slug: "cobalt", name: "Chevrolet Cobalt 1.6L", image: chevCobalt, tagline: "Compact Sedan" },
-      { slug: "gentra", name: "Chevrolet Gentra 1.5L", image: chevGentra, tagline: "City Sedan" },
+      {
+        slug: "cobalt-16l",
+        name: "Chevrolet Cobalt 1.6L",
+        image: chevCobalt,
+        tagline: "Compact Sedan",
+        legacySlugs: ["cobalt"],
+      },
+      {
+        slug: "gentra-15l",
+        name: "Chevrolet Gentra 1.5L",
+        image: chevGentra,
+        tagline: "City Sedan",
+        legacySlugs: ["gentra"],
+      },
       { slug: "tracker", name: "Chevrolet Tracker", image: chevTracker, tagline: "Compact SUV" },
     ],
   },
@@ -114,3 +133,21 @@ export const brands: Brand[] = [
 ];
 
 export const getBrand = (slug: string) => brands.find((b) => b.slug === slug);
+
+export const getBrandModel = (brandSlug: string, modelSlug: string) => {
+  const brand = getBrand(brandSlug);
+
+  if (!brand) {
+    return null;
+  }
+
+  const model = brand.models.find(
+    (entry) => entry.slug === modelSlug || entry.legacySlugs?.includes(modelSlug),
+  );
+
+  if (!model) {
+    return null;
+  }
+
+  return { brand, model };
+};
