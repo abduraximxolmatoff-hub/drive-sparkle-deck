@@ -157,9 +157,9 @@ function BrandPage() {
             whileHover={{ y: -4 }}
           >
             <Link
-              to="/brand/$slug/$model"
+              to="/brand/$slug/model/$model"
               params={{ slug: brand.slug, model: model.slug }}
-              className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-border bg-card-gradient shadow-card backdrop-blur-md transition-all hover:border-primary/40 hover:shadow-glow sm:flex-row"
+              className="group relative flex cursor-pointer flex-col items-center overflow-hidden rounded-2xl border border-border bg-card-gradient shadow-card backdrop-blur-md transition-all hover:scale-[1.02] hover:border-primary/40 hover:shadow-glow sm:flex-row"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-auto sm:h-44 sm:w-1/2">
                 <img
