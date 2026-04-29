@@ -145,7 +145,7 @@ function BrandPage() {
 
       <section className="relative z-10 mx-auto max-w-4xl space-y-5 px-6 pb-24">
         {brand.models.map((model, i) => (
-          <motion.article
+          <motion.div
             key={model.slug}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: loading ? 0 : 1, y: loading ? 40 : 0 }}
