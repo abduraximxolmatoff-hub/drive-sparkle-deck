@@ -213,100 +213,12 @@ function ModelDetailPage() {
         </aside>
 
         <div className="order-1 lg:order-2">
-          <div
-            className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl border border-border bg-card-gradient shadow-card backdrop-blur-md"
-            style={{
-              background: `radial-gradient(ellipse at center, ${brand.accent}1a, transparent 70%), var(--gradient-card)`,
-            }}
-          >
-            <div
-              className="pointer-events-none absolute inset-0 opacity-50"
-              style={{
-                background: `radial-gradient(ellipse at 70% 50%, ${brand.accent}22, transparent 60%)`,
-              }}
-            />
-
-            <motion.div
-              key={`${model.slug}-zoom`}
-              className="absolute inset-0"
-              initial={{ x: 400, opacity: 0, scale: 0.92 }}
-              animate={
-                activePart
-                  ? {
-                      x: 0,
-                      opacity: 1,
-                      scale: activePart.focus.scale,
-                      originX: activePart.focus.x / 100,
-                      originY: activePart.focus.y / 100,
-                    }
-                  : { x: 0, opacity: 1, scale: 1 }
-              }
-              transition={{
-                x: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
-                opacity: { duration: 0.8 },
-                scale: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
-              }}
-              style={{
-                transformOrigin: activePart
-                  ? `${activePart.focus.x}% ${activePart.focus.y}%`
-                  : "center",
-              }}
-            >
-              <img
-                src={model.image}
-                alt={model.name}
-                className="h-full w-full object-cover"
-              />
-            </motion.div>
-
-            <AnimatePresence>
-              {activePart && (
-                <motion.div
-                  key={activePart.id}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.5 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="pointer-events-none absolute"
-                  style={{
-                    left: "50%",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
-                    width: `${activePart.focus.size * 1.8}%`,
-                    aspectRatio: "1",
-                  }}
-                >
-                  <div
-                    className="absolute inset-0 animate-ping rounded-full opacity-60"
-                    style={{
-                      background: `radial-gradient(circle, ${brand.accent}88, transparent 60%)`,
-                    }}
-                  />
-                  <div
-                    className="absolute inset-[20%] rounded-full border-2"
-                    style={{
-                      borderColor: brand.accent,
-                      boxShadow: `0 0 30px ${brand.accent}, inset 0 0 20px ${brand.accent}66`,
-                    }}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {!activePart && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.25 }}
-                className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto"
-              >
-                <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                  {t("model.interactiveView")}
-                </p>
-                <p className="font-display text-lg sm:text-xl">{brand.tagline}</p>
-              </motion.div>
-            )}
-          </div>
+          <InteractiveCarViewer
+            model={model}
+            brandAccent={brand.accent}
+            selectedPartId={activePart?.id ?? null}
+            onResetView={() => setActivePart(null)}
+          />
 
           <AnimatePresence mode="wait">
             {activePart ? (
