@@ -26,6 +26,10 @@ export const translations: Record<Lang, Dict> = {
     "model.hint": "Chap paneldan qism tanlang — avtomobil tasviri shu hududga yaqinlashadi va foydali servis ma’lumoti ochiladi.",
     "model.notFound": "Model topilmadi",
     "model.notFoundDesc": "Tanlangan model uchun ma’lumot hozircha mavjud emas.",
+    "viewer.360": "360° ko‘rinish",
+    "viewer.dragHint": "Aylantirish uchun suring",
+    "viewer.reset": "Ko‘rinishni tiklash",
+    "viewer.zoomedTo": "Yaqinlashtirildi",
 
     "season.winter": "Qish",
     "season.summer": "Yoz",
@@ -70,6 +74,10 @@ export const translations: Record<Lang, Dict> = {
     "model.hint": "Выберите часть слева — изображение приблизится к ней, и появится полезная сервисная информация.",
     "model.notFound": "Модель не найдена",
     "model.notFoundDesc": "Информация для выбранной модели пока недоступна.",
+    "viewer.360": "360° обзор",
+    "viewer.dragHint": "Проведите, чтобы повернуть",
+    "viewer.reset": "Сбросить вид",
+    "viewer.zoomedTo": "Приближено к",
 
     "season.winter": "Зима",
     "season.summer": "Лето",
@@ -114,6 +122,10 @@ export const translations: Record<Lang, Dict> = {
     "model.hint": "Select a part from the left panel — the car image will zoom in and useful service info will appear.",
     "model.notFound": "Model not found",
     "model.notFoundDesc": "Information for the selected model is not available yet.",
+    "viewer.360": "360° View",
+    "viewer.dragHint": "Drag to rotate",
+    "viewer.reset": "Reset view",
+    "viewer.zoomedTo": "Zoomed to",
 
     "season.winter": "Winter",
     "season.summer": "Summer",

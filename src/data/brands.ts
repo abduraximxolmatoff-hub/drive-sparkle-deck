@@ -8,7 +8,7 @@ import lamboLogo from "@/assets/logo-lamborghini.png";
 import bmwM5 from "@/assets/bmw-m5.jpg";
 import bmwX5 from "@/assets/bmw-x5.jpg";
 import bmwI7 from "@/assets/bmw-i7.jpg";
-import chevCobalt from "@/assets/chev-cobalt.jpg";
+import cobalt15l from "@/assets/cobalt-15l-main.jpg";
 import chevGentra from "@/assets/chev-gentra.jpg";
 import chevTracker from "@/assets/chev-tracker.jpg";
 import mbC from "@/assets/mb-c.jpg";
@@ -23,6 +23,32 @@ import porsche911 from "@/assets/porsche-911.jpg";
 import lamboHuracan from "@/assets/lambo-huracan.jpg";
 import lamboAventador from "@/assets/lambo-aventador.jpg";
 
+// Cobalt high-quality part images
+import cobaltTires from "@/assets/parts/cobalt/tires.jpg";
+import cobaltEngineOil from "@/assets/parts/cobalt/engine-oil.jpg";
+import cobaltEngine from "@/assets/parts/cobalt/engine.jpg";
+import cobaltBattery from "@/assets/parts/cobalt/battery.jpg";
+import cobaltWindows from "@/assets/parts/cobalt/windows.jpg";
+import cobaltHeadlights from "@/assets/parts/cobalt/headlights.jpg";
+import cobaltBrakes from "@/assets/parts/cobalt/brakes.jpg";
+import cobaltCooling from "@/assets/parts/cobalt/cooling.jpg";
+import cobaltSuspension from "@/assets/parts/cobalt/suspension.jpg";
+
+/** Per-part high-resolution image keyed by CarPart.id */
+export type PartImageMap = Partial<Record<string, string>>;
+
+/** Marker overlay coordinates per part id (percentages of viewer area). */
+export interface PartMarker {
+  /** 0-100 horizontal percentage */
+  x: number;
+  /** 0-100 vertical percentage */
+  y: number;
+  /** marker diameter as a percentage of viewer width */
+  size: number;
+}
+
+export type PartMarkerMap = Partial<Record<string, PartMarker>>;
+
 export interface CarModel {
   slug: string;
   name: string;
@@ -30,6 +56,10 @@ export interface CarModel {
   /** Translation key for tagline, e.g. "tagline.compactSedan" */
   taglineKey?: string;
   legacySlugs?: string[];
+  /** Optional high-res image per part id (tires, engine, ...). */
+  partImages?: PartImageMap;
+  /** Optional marker positions per part id when shown on the main image. */
+  markers?: PartMarkerMap;
 }
 
 export interface Brand {
@@ -40,6 +70,34 @@ export interface Brand {
   tagline: string;
   models: CarModel[];
 }
+
+/** Default marker positions used when a model doesn't override them. */
+export const DEFAULT_MARKERS: PartMarkerMap = {
+  tires: { x: 22, y: 78, size: 18 },
+  windows: { x: 48, y: 32, size: 26 },
+  oil: { x: 22, y: 42, size: 18 },
+  engine: { x: 22, y: 44, size: 22 },
+  battery: { x: 26, y: 44, size: 16 },
+  brakes: { x: 22, y: 76, size: 18 },
+  headlights: { x: 12, y: 56, size: 16 },
+  cooling: { x: 18, y: 50, size: 18 },
+  airfilter: { x: 30, y: 44, size: 16 },
+  suspension: { x: 24, y: 80, size: 20 },
+};
+
+const cobaltPartImages: PartImageMap = {
+  tires: cobaltTires,
+  oil: cobaltEngineOil,
+  engine: cobaltEngine,
+  battery: cobaltBattery,
+  windows: cobaltWindows,
+  headlights: cobaltHeadlights,
+  brakes: cobaltBrakes,
+  cooling: cobaltCooling,
+  // airfilter image generation failed — fall back to engine bay
+  airfilter: cobaltEngine,
+  suspension: cobaltSuspension,
+};
 
 export const brands: Brand[] = [
   {
@@ -68,11 +126,12 @@ export const brands: Brand[] = [
     tagline: "Find New Roads",
     models: [
       {
-        slug: "cobalt-16l",
-        name: "Chevrolet Cobalt 1.6L",
-        image: chevCobalt,
+        slug: "cobalt-15l",
+        name: "Chevrolet Cobalt 1.5L",
+        image: cobalt15l,
         taglineKey: "tagline.compactSedan",
-        legacySlugs: ["cobalt"],
+        legacySlugs: ["cobalt", "cobalt-16l"],
+        partImages: cobaltPartImages,
       },
       {
         slug: "gentra-15l",
