@@ -60,6 +60,10 @@ export interface CarModel {
   partImages?: PartImageMap;
   /** Optional marker positions per part id when shown on the main image. */
   markers?: PartMarkerMap;
+  /** Optional ordered list of real 360° spin frames. When empty, simulated CSS 360 is used. */
+  images360?: string[];
+  /** Force simulated CSS 360 even if frames are present. Defaults to true when images360 is empty. */
+  useSimulated360?: boolean;
 }
 
 export interface Brand {
