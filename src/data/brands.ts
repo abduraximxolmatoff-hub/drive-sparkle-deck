@@ -205,9 +205,9 @@ export const brands: Brand[] = [
     accent: "oklch(0.82 0.16 85)",
     tagline: "Expect the Unexpected",
     models: [
-      { slug: "huracan", name: "Lamborghini Huracán", image: lamboHuracan, taglineKey: "tagline.v10Supercar" },
-      { slug: "aventador", name: "Lamborghini Aventador", image: lamboAventador, taglineKey: "tagline.v12Flagship" },
-      { slug: "urus", name: "Lamborghini Urus", image: lamboUrus, taglineKey: "tagline.superSUV" },
+      { slug: "huracan", name: "Lamborghini Huracán", image: lamboHuracan, taglineKey: "tagline.v10Supercar", images360: [], useSimulated360: true },
+      { slug: "aventador", name: "Lamborghini Aventador", image: lamboAventador, taglineKey: "tagline.v12Flagship", images360: [], useSimulated360: true },
+      { slug: "urus", name: "Lamborghini Urus", image: lamboUrus, taglineKey: "tagline.superSUV", images360: [], useSimulated360: true },
     ],
   },
 ];
