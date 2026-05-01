@@ -52,6 +52,7 @@ export const translations: Record<Lang, Dict> = {
     "tagline.v10Supercar": "5.2L V10 Supercar",
     "tagline.v12Flagship": "6.5L V12 Flagman",
     "tagline.v8TwinTurbo": "4.4L V8 Twin-Turbo",
+    "tagline.superSUV": "Super SUV",
   },
   ru: {
     "site.tagline": "Премиум автогид",
@@ -100,6 +101,7 @@ export const translations: Record<Lang, Dict> = {
     "tagline.v10Supercar": "5.2L V10 Суперкар",
     "tagline.v12Flagship": "6.5L V12 Флагман",
     "tagline.v8TwinTurbo": "4.4L V8 Twin-Turbo",
+    "tagline.superSUV": "Супер SUV",
   },
   en: {
     "site.tagline": "Premium Car Explorer",
@@ -148,5 +150,6 @@ export const translations: Record<Lang, Dict> = {
     "tagline.v10Supercar": "5.2L V10 Supercar",
     "tagline.v12Flagship": "6.5L V12 Flagship",
     "tagline.v8TwinTurbo": "4.4L V8 Twin-Turbo",
+    "tagline.superSUV": "Super SUV",
   },
 };
