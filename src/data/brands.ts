@@ -22,6 +22,7 @@ import porschePanamera from "@/assets/porsche-panamera.jpg";
 import porsche911 from "@/assets/porsche-911.jpg";
 import lamboHuracan from "@/assets/lambo-huracan.jpg";
 import lamboAventador from "@/assets/lambo-aventador.jpg";
+import lamboUrus from "@/assets/lambo-urus.jpg";
 
 // Cobalt high-quality part images
 import cobaltTires from "@/assets/parts/cobalt/tires.jpg";
@@ -154,9 +155,15 @@ export const brands: Brand[] = [
     accent: "oklch(0.85 0.005 250)",
     tagline: "The Best or Nothing",
     models: [
-      { slug: "c-class", name: "Mercedes C-Class", image: mbC, taglineKey: "tagline.compactExecutive" },
-      { slug: "e-class", name: "Mercedes E-Class", image: mbE, taglineKey: "tagline.businessSedan" },
-      { slug: "g63", name: "Mercedes G63 AMG", image: mbG63, taglineKey: "tagline.iconic4x4" },
+      { slug: "c-class", name: "Mercedes-Benz C-Class", image: mbC, taglineKey: "tagline.compactExecutive" },
+      { slug: "e-class", name: "Mercedes-Benz E-Class", image: mbE, taglineKey: "tagline.businessSedan" },
+      {
+        slug: "g-class",
+        name: "Mercedes-Benz G-Class",
+        image: mbG63,
+        taglineKey: "tagline.iconic4x4",
+        legacySlugs: ["g63"],
+      },
     ],
   },
   {
@@ -192,6 +199,7 @@ export const brands: Brand[] = [
     models: [
       { slug: "huracan", name: "Lamborghini Huracán", image: lamboHuracan, taglineKey: "tagline.v10Supercar" },
       { slug: "aventador", name: "Lamborghini Aventador", image: lamboAventador, taglineKey: "tagline.v12Flagship" },
+      { slug: "urus", name: "Lamborghini Urus", image: lamboUrus, taglineKey: "tagline.superSUV" },
     ],
   },
 ];
