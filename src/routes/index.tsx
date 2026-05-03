@@ -1,134 +1,64 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { brands } from "@/data/brands";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { BottomNav } from "@/components/BottomNav";
+import { BrandShowcaseCard } from "@/components/BrandShowcaseCard";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AutoINFO — Explore Premium Car Brands & Models" },
+      { title: "AutoINFO — Understand Your Car. Drive Smarter." },
       {
         name: "description",
         content:
-          "Browse luxury and performance cars from BMW, Mercedes-Benz, Audi, Porsche, Lamborghini, and Chevrolet. A premium automotive exploration experience.",
+          "AutoINFO helps you understand your car: which parts to maintain, when to check them, and how to drive smarter.",
       },
-      { property: "og:title", content: "AutoINFO — Premium Car Explorer" },
-      {
-        property: "og:description",
-        content: "Discover models from the world's most iconic car brands.",
-      },
+      { property: "og:title", content: "AutoINFO" },
+      { property: "og:description", content: "Understand your car. Drive smarter." },
     ],
   }),
   component: HomePage,
 });
 
 function HomePage() {
-  const navigate = useNavigate();
-  const [clickedSlug, setClickedSlug] = useState<string | null>(null);
   const { t, lang } = useLanguage();
 
-  const handleClick = (slug: string) => {
-    if (clickedSlug) return;
-    setClickedSlug(slug);
-    setTimeout(() => navigate({ to: "/brand/$slug", params: { slug } }), 850);
-  };
-
   return (
-    <main key={lang} className="relative min-h-screen animate-in fade-in duration-300">
+    <main key={lang} className="relative min-h-screen pb-28 animate-in fade-in duration-300">
       <AnimatedBackground />
 
-      <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between gap-3 px-6 pt-8">
+      <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 pt-6 sm:px-6 sm:pt-8">
         <AutoInfoLogo size="sm" />
-        <div className="flex items-center gap-3">
-          <span className="hidden text-xs uppercase tracking-[0.3em] text-muted-foreground sm:inline">
-            {t("site.tagline")}
-          </span>
-          <LanguageSwitcher />
-        </div>
+        <LanguageSwitcher />
       </header>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-12 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-3 text-xs uppercase tracking-[0.4em] text-primary/80"
-        >
-          {t("home.chooseBrand")}
-        </motion.p>
+      <section className="relative z-10 mx-auto max-w-3xl px-4 pb-6 pt-6 text-center sm:px-6 sm:pt-10">
         <AutoInfoLogo />
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
-          className="mx-auto mt-4 max-w-xl text-base text-muted-foreground"
+          transition={{ delay: 0.5 }}
+          className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground sm:text-base"
         >
           {t("home.subtitle")}
         </motion.p>
       </section>
 
-      <section className="relative z-10 mx-auto grid max-w-6xl grid-cols-2 gap-5 px-6 pb-24 sm:gap-6 md:grid-cols-3">
-        {brands.map((brand, i) => {
-          const isClicked = clickedSlug === brand.slug;
-          const isOther = clickedSlug && clickedSlug !== brand.slug;
-          return (
-            <motion.button
-              key={brand.slug}
-              onClick={() => handleClick(brand.slug)}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{
-                opacity: isOther ? 0 : 1,
-                y: 0,
-                scale: isClicked ? 1.4 : 1,
-              }}
-              transition={{
-                delay: clickedSlug ? 0 : 0.4 + i * 0.08,
-                duration: clickedSlug ? 0.6 : 0.5,
-                ease: "easeOut",
-              }}
-              whileHover={{ scale: 1.06, y: -4 }}
-              whileTap={{ scale: 0.97 }}
-              className="group relative flex aspect-[4/5] flex-col items-center justify-center overflow-hidden rounded-2xl border border-border bg-card-gradient p-6 shadow-card backdrop-blur-md transition-colors hover:border-primary/40"
-              style={{
-                ["--brand-accent" as string]: brand.accent,
-              }}
-            >
-              <div
-                className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                style={{
-                  background: `radial-gradient(circle at center, ${brand.accent}33, transparent 70%)`,
-                }}
-              />
-              <div className="relative flex flex-1 items-center justify-center">
-                <motion.img
-                  src={brand.logo}
-                  alt={`${brand.name} logo`}
-                  width={512}
-                  height={512}
-                  loading={i < 3 ? "eager" : "lazy"}
-                  className="h-24 w-24 object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:scale-110 sm:h-28 sm:w-28 md:h-32 md:w-32"
-                />
-              </div>
-              <div className="relative mt-4 text-center">
-                <h2 className="font-display text-lg font-semibold tracking-wide md:text-xl">
-                  {brand.name}
-                </h2>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-                  {brand.models.length} {t("home.modelsCount")}
-                </p>
-              </div>
-            </motion.button>
-          );
-        })}
+      <section className="relative z-10 mx-auto grid max-w-3xl gap-4 px-4 pb-6 sm:px-6">
+        {brands.map((brand, i) => (
+          <BrandShowcaseCard key={brand.slug} brand={brand} index={i} />
+        ))}
       </section>
 
-      <footer className="relative z-10 pb-8 text-center text-xs text-muted-foreground">
+      <footer className="relative z-10 pb-4 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} {t("home.footer")}
       </footer>
+
+      <BottomNav />
     </main>
   );
 }
