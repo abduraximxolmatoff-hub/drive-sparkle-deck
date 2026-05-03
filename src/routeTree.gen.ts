@@ -9,11 +9,29 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as MaintenanceRouteImport } from './routes/maintenance'
+import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BrandSlugRouteImport } from './routes/brand.$slug'
 import { Route as BrandModelRouteImport } from './routes/$brand.$model'
 import { Route as BrandSlugModelModelRouteImport } from './routes/brand.$slug.model.$model'
 
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaintenanceRoute = MaintenanceRouteImport.update({
+  id: '/maintenance',
+  path: '/maintenance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsRoute = BrandsRouteImport.update({
+  id: '/brands',
+  path: '/brands',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +55,18 @@ const BrandSlugModelModelRoute = BrandSlugModelModelRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/brands': typeof BrandsRoute
+  '/maintenance': typeof MaintenanceRoute
+  '/profile': typeof ProfileRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
   '/brand/$slug/model/$model': typeof BrandSlugModelModelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/brands': typeof BrandsRoute
+  '/maintenance': typeof MaintenanceRoute
+  '/profile': typeof ProfileRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
   '/brand/$slug/model/$model': typeof BrandSlugModelModelRoute
@@ -50,6 +74,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/brands': typeof BrandsRoute
+  '/maintenance': typeof MaintenanceRoute
+  '/profile': typeof ProfileRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
   '/brand/$slug/model/$model': typeof BrandSlugModelModelRoute
@@ -58,14 +85,27 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/brands'
+    | '/maintenance'
+    | '/profile'
     | '/$brand/$model'
     | '/brand/$slug'
     | '/brand/$slug/model/$model'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$brand/$model' | '/brand/$slug' | '/brand/$slug/model/$model'
+  to:
+    | '/'
+    | '/brands'
+    | '/maintenance'
+    | '/profile'
+    | '/$brand/$model'
+    | '/brand/$slug'
+    | '/brand/$slug/model/$model'
   id:
     | '__root__'
     | '/'
+    | '/brands'
+    | '/maintenance'
+    | '/profile'
     | '/$brand/$model'
     | '/brand/$slug'
     | '/brand/$slug/model/$model'
@@ -73,12 +113,36 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BrandsRoute: typeof BrandsRoute
+  MaintenanceRoute: typeof MaintenanceRoute
+  ProfileRoute: typeof ProfileRoute
   BrandModelRoute: typeof BrandModelRoute
   BrandSlugRoute: typeof BrandSlugRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maintenance': {
+      id: '/maintenance'
+      path: '/maintenance'
+      fullPath: '/maintenance'
+      preLoaderRoute: typeof MaintenanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands': {
+      id: '/brands'
+      path: '/brands'
+      fullPath: '/brands'
+      preLoaderRoute: typeof BrandsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -124,6 +188,9 @@ const BrandSlugRouteWithChildren = BrandSlugRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BrandsRoute: BrandsRoute,
+  MaintenanceRoute: MaintenanceRoute,
+  ProfileRoute: ProfileRoute,
   BrandModelRoute: BrandModelRoute,
   BrandSlugRoute: BrandSlugRouteWithChildren,
 }
