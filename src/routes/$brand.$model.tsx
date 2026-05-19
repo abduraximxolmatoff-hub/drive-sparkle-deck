@@ -5,6 +5,7 @@ import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { InteractiveCarViewer } from "@/components/InteractiveCarViewer";
+import { ServiceSchedule } from "@/components/ServiceSchedule";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getBrandModel } from "@/data/brands";
 import { CAR_PARTS, type CarPart } from "@/data/carParts";
@@ -299,6 +300,11 @@ function ModelDetailPage() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Premium official service schedule (currently authored for Cobalt) */}
+          {model.slug === "cobalt-15l" && (
+            <ServiceSchedule brandAccent={brand.accent} />
+          )}
         </div>
       </section>
     </main>
