@@ -295,6 +295,37 @@ const schedule: Record<Lang, Dict> = {
   },
 };
 
-for (const l of LANGS) Object.assign(translations[l], extra[l], schedule[l]);
+const more: Record<Lang, Dict> = {
+  uz: {
+    "tagline.fullSizeSUV": "Katta o‘lchamli SUV",
+    "tagline.largeSUV": "Katta o‘lchamli SUV",
+    "tagline.midsizeSedan": "O‘rta o‘lchamli sedan",
+    "maint.title": "Texnik xizmat reglamenti",
+    "maint.subtitle": "Servis bosqichlari va almashtirish muddatlari",
+    "maint.every": "Har",
+    "maint.placeholder": "Ma’lumot keyingi bosqichda qo‘shiladi.",
+  },
+  ru: {
+    "tagline.fullSizeSUV": "Полноразмерный SUV",
+    "tagline.largeSUV": "Большой SUV",
+    "tagline.midsizeSedan": "Среднеразмерный седан",
+    "maint.title": "Регламент технического обслуживания",
+    "maint.subtitle": "Этапы сервиса и сроки замены",
+    "maint.every": "Каждые",
+    "maint.placeholder": "Данные будут добавлены на следующем этапе.",
+  },
+  en: {
+    "tagline.fullSizeSUV": "Full-Size SUV",
+    "tagline.largeSUV": "Large SUV",
+    "tagline.midsizeSedan": "Midsize Sedan",
+    "maint.title": "Maintenance schedule",
+    "maint.subtitle": "Service intervals and replacement timings",
+    "maint.every": "Every",
+    "maint.placeholder": "Data will be added in the next step.",
+  },
+};
+
+for (const l of LANGS) Object.assign(translations[l], extra[l], schedule[l], more[l]);
+
 
 

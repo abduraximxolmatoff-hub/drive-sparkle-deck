@@ -8,9 +8,13 @@ import lamboLogo from "@/assets/logo-lamborghini.png";
 import bmwM5 from "@/assets/bmw-m5.jpg";
 import bmwX5 from "@/assets/bmw-x5.jpg";
 import bmwI7 from "@/assets/bmw-i7.jpg";
-import cobalt15l from "@/assets/cobalt-real-side.jpg";
-import chevGentra from "@/assets/chev-gentra.jpg";
-import chevTracker from "@/assets/chev-tracker.jpg";
+import cobalt15l from "@/assets/chev/cobalt.png";
+import chevTahoe from "@/assets/chev/tahoe.png";
+import chevTraverse from "@/assets/chev/traverse.png";
+import chevEquinox from "@/assets/chev/equinox.png";
+import chevMalibu from "@/assets/chev/malibu.png";
+import chevGentraBanner from "@/assets/chev/gentra.png";
+import chevTrackerBanner from "@/assets/chev/tracker.png";
 import mbC from "@/assets/mb-c.jpg";
 import mbE from "@/assets/mb-e.jpg";
 import mbG63 from "@/assets/mb-g63.jpg";
@@ -145,13 +149,17 @@ export const brands: Brand[] = [
       {
         slug: "gentra-15l",
         name: "Chevrolet Gentra 1.5L",
-        image: chevGentra,
+        image: chevGentraBanner,
         taglineKey: "tagline.citySedan",
         legacySlugs: ["gentra"],
         images360: [],
         useSimulated360: true,
       },
-      { slug: "tracker", name: "Chevrolet Tracker", image: chevTracker, taglineKey: "tagline.compactSUV", images360: [], useSimulated360: true },
+      { slug: "tracker", name: "Chevrolet Tracker", image: chevTrackerBanner, taglineKey: "tagline.compactSUV", images360: [], useSimulated360: true },
+      { slug: "tahoe", name: "Chevrolet Tahoe", image: chevTahoe, taglineKey: "tagline.fullSizeSUV", images360: [], useSimulated360: true },
+      { slug: "traverse", name: "Chevrolet Traverse", image: chevTraverse, taglineKey: "tagline.largeSUV", images360: [], useSimulated360: true },
+      { slug: "equinox", name: "Chevrolet Equinox", image: chevEquinox, taglineKey: "tagline.compactSUV", images360: [], useSimulated360: true },
+      { slug: "malibu", name: "Chevrolet Malibu", image: chevMalibu, taglineKey: "tagline.midsizeSedan", images360: [], useSimulated360: true },
     ],
   },
   {
