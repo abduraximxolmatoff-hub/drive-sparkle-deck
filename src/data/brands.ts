@@ -15,8 +15,6 @@ import chevEquinox from "@/assets/chev/equinox.png";
 import chevMalibu from "@/assets/chev/malibu.png";
 import chevGentraBanner from "@/assets/chev/gentra.png";
 import chevTrackerBanner from "@/assets/chev/tracker.png";
-import chevGentra from "@/assets/chev-gentra.jpg";
-import chevTracker from "@/assets/chev-tracker.jpg";
 import mbC from "@/assets/mb-c.jpg";
 import mbE from "@/assets/mb-e.jpg";
 import mbG63 from "@/assets/mb-g63.jpg";
