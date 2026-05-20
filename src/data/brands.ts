@@ -157,6 +157,7 @@ export const brands: Brand[] = [
         useSimulated360: true,
       },
       { slug: "tracker", name: "Chevrolet Tracker", image: chevTrackerBanner, taglineKey: "tagline.compactSUV", images360: [], useSimulated360: true },
+      { slug: "trailblazer", name: "Chevrolet Trailblazer", image: chevTrailblazer, taglineKey: "tagline.midsizeSUV", images360: [], useSimulated360: true },
       { slug: "tahoe", name: "Chevrolet Tahoe", image: chevTahoe, taglineKey: "tagline.fullSizeSUV", images360: [], useSimulated360: true },
       { slug: "traverse", name: "Chevrolet Traverse", image: chevTraverse, taglineKey: "tagline.largeSUV", images360: [], useSimulated360: true },
       { slug: "equinox", name: "Chevrolet Equinox", image: chevEquinox, taglineKey: "tagline.compactSUV", images360: [], useSimulated360: true },
