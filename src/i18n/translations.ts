@@ -299,6 +299,7 @@ const more: Record<Lang, Dict> = {
   uz: {
     "tagline.fullSizeSUV": "Katta o‘lchamli SUV",
     "tagline.largeSUV": "Katta o‘lchamli SUV",
+    "tagline.midsizeSUV": "O‘rta o‘lchamli SUV",
     "tagline.midsizeSedan": "O‘rta o‘lchamli sedan",
     "maint.title": "Texnik xizmat reglamenti",
     "maint.subtitle": "Servis bosqichlari va almashtirish muddatlari",
@@ -308,6 +309,7 @@ const more: Record<Lang, Dict> = {
   ru: {
     "tagline.fullSizeSUV": "Полноразмерный SUV",
     "tagline.largeSUV": "Большой SUV",
+    "tagline.midsizeSUV": "Среднеразмерный SUV",
     "tagline.midsizeSedan": "Среднеразмерный седан",
     "maint.title": "Регламент технического обслуживания",
     "maint.subtitle": "Этапы сервиса и сроки замены",
@@ -317,6 +319,7 @@ const more: Record<Lang, Dict> = {
   en: {
     "tagline.fullSizeSUV": "Full-Size SUV",
     "tagline.largeSUV": "Large SUV",
+    "tagline.midsizeSUV": "Midsize SUV",
     "tagline.midsizeSedan": "Midsize Sedan",
     "maint.title": "Maintenance schedule",
     "maint.subtitle": "Service intervals and replacement timings",
