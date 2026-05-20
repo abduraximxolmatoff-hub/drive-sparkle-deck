@@ -1,0 +1,186 @@
+import { motion } from "framer-motion";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { CarPart } from "@/data/carParts";
+import { COBALT_PART_INFO, type CobaltPartInfo } from "@/data/cobaltPartInfo";
+
+interface Props {
+  part: CarPart;
+  brandAccent: string;
+}
+
+function Badge({
+  kind,
+  accent,
+  label,
+}: {
+  kind: "inspect" | "replace" | "heavy" | "safety";
+  accent: string;
+  label: string;
+}) {
+  const styles: Record<typeof kind, { bg: string; fg: string; border: string }> = {
+    inspect: { bg: `${accent}1f`, fg: accent, border: `${accent}55` },
+    replace: { bg: accent, fg: "oklch(0.13 0.01 250)", border: accent },
+    heavy: { bg: "rgba(239,68,68,0.12)", fg: "rgb(248,113,113)", border: "rgba(239,68,68,0.4)" },
+    safety: { bg: "rgba(250,204,21,0.12)", fg: "rgb(250,204,21)", border: "rgba(250,204,21,0.4)" },
+  };
+  const s = styles[kind];
+  return (
+    <span
+      className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
+      style={{ background: s.bg, color: s.fg, borderColor: s.border }}
+    >
+      {label}
+    </span>
+  );
+}
+
+function Section({
+  title,
+  accent,
+  children,
+}: {
+  title: string;
+  accent: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-xl border border-border/60 bg-background/40 p-4">
+      <p
+        className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em]"
+        style={{ color: accent }}
+      >
+        {title}
+      </p>
+      {children}
+    </div>
+  );
+}
+
+function BulletList({ items, accent }: { items: string[]; accent: string }) {
+  return (
+    <ul className="space-y-1.5 text-xs leading-relaxed text-foreground/90">
+      {items.map((b, i) => (
+        <li key={i} className="flex gap-2">
+          <span
+            className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
+            style={{ background: accent }}
+          />
+          <span>{b}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
+  const { t, lang } = useLanguage();
+  const info: CobaltPartInfo | undefined = COBALT_PART_INFO[part.id];
+
+  if (!info) return null;
+
+  const badgeLabels: Record<"inspect" | "replace" | "heavy" | "safety", string> = {
+    inspect: t("cobalt.badge.inspect"),
+    replace: t("cobalt.badge.replace"),
+    heavy: t("cobalt.badge.heavy"),
+    safety: t("cobalt.badge.safety"),
+  };
+
+  return (
+    <motion.div
+      key={part.id}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.4 }}
+      className="mt-5 overflow-hidden rounded-2xl border border-border bg-card-gradient p-5 shadow-card backdrop-blur-md sm:p-6"
+      style={{ borderColor: `${brandAccent}40` }}
+    >
+      {/* Header */}
+      <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <span
+            className="flex h-11 w-11 items-center justify-center rounded-lg text-2xl"
+            style={{ background: `linear-gradient(135deg, ${brandAccent}44, transparent)` }}
+          >
+            {part.icon}
+          </span>
+          <div>
+            <p
+              className="text-[10px] font-semibold uppercase tracking-[0.3em]"
+              style={{ color: brandAccent }}
+            >
+              Chevrolet Cobalt 1.5L
+            </p>
+            <h3 className="font-display text-xl font-semibold sm:text-2xl">
+              {info.title[lang]}
+            </h3>
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span
+            className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
+            style={{
+              background: `${brandAccent}1a`,
+              color: brandAccent,
+              borderColor: `${brandAccent}55`,
+            }}
+          >
+            {t("cobalt.regulationBased")}
+          </span>
+          {info.badges.map((b) => (
+            <Badge key={b} kind={b} accent={brandAccent} label={badgeLabels[b]} />
+          ))}
+        </div>
+      </div>
+
+      {/* Function */}
+      <p className="mb-4 text-sm leading-relaxed text-foreground/85">
+        {info.function[lang]}
+      </p>
+
+      {/* Sections grid */}
+      <div className="grid gap-3 md:grid-cols-2">
+        <Section title={t("cobalt.section.inspection")} accent={brandAccent}>
+          <BulletList items={info.inspection[lang]} accent={brandAccent} />
+        </Section>
+        <Section title={t("cobalt.section.replacement")} accent={brandAccent}>
+          <BulletList items={info.replacement[lang]} accent={brandAccent} />
+        </Section>
+        <Section title={t("cobalt.section.heavy")} accent={brandAccent}>
+          <BulletList items={info.heavyUsage[lang]} accent={brandAccent} />
+        </Section>
+        <Section title={t("cobalt.section.warnings")} accent={brandAccent}>
+          <BulletList items={info.warnings[lang]} accent={brandAccent} />
+        </Section>
+      </div>
+
+      {/* Summary */}
+      <div
+        className="mt-4 grid gap-2 rounded-xl border p-4 sm:grid-cols-2"
+        style={{
+          borderColor: `${brandAccent}33`,
+          background: `linear-gradient(135deg, ${brandAccent}10, transparent)`,
+        }}
+      >
+        <div>
+          <p
+            className="text-[10px] font-semibold uppercase tracking-[0.25em]"
+            style={{ color: brandAccent }}
+          >
+            {t("cobalt.summary.inspection")}
+          </p>
+          <p className="mt-1 text-xs text-foreground/85">{info.summaryInspection[lang]}</p>
+        </div>
+        <div>
+          <p
+            className="text-[10px] font-semibold uppercase tracking-[0.25em]"
+            style={{ color: brandAccent }}
+          >
+            {t("cobalt.summary.replacement")}
+          </p>
+          <p className="mt-1 text-xs text-foreground/85">{info.summaryReplacement[lang]}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
