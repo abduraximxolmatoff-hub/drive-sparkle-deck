@@ -328,7 +328,74 @@ const more: Record<Lang, Dict> = {
   },
 };
 
-for (const l of LANGS) Object.assign(translations[l], extra[l], schedule[l], more[l]);
+const cobalt: Record<Lang, Dict> = {
+  uz: {
+    "cobalt.regulationBased": "Reglament asosida",
+    "cobalt.badge.inspect": "Tekshirish",
+    "cobalt.badge.replace": "Almashtirish",
+    "cobalt.badge.heavy": "Og‘ir foydalanish",
+    "cobalt.badge.safety": "Xavfsizlik muhim",
+    "cobalt.section.inspection": "Tekshirish",
+    "cobalt.section.replacement": "Almashtirish",
+    "cobalt.section.heavy": "Og‘ir foydalanish tavsiyalari",
+    "cobalt.section.warnings": "Ogohlantiruvchi belgilar",
+    "cobalt.summary.inspection": "Tekshirish interval",
+    "cobalt.summary.replacement": "Almashtirish interval",
+    "cobalt.reg.title": "Texnik xizmat reglamenti — qisqacha",
+    "cobalt.reg.iTitle": "I — Tekshirish",
+    "cobalt.reg.iDesc":
+      "Nazorat qilish, sozlash, tozalash, mahkamlash, moylash yoki suyuqliklarni to‘ldirish.",
+    "cobalt.reg.rTitle": "R — Almashtirish",
+    "cobalt.reg.rDesc": "Detalni yangisiga almashtirish kerak.",
+    "cobalt.reg.view": "To‘liq reglamentni ko‘rish",
+    "cobalt.reg.hide": "Reglamentni yopish",
+  },
+  ru: {
+    "cobalt.regulationBased": "По регламенту",
+    "cobalt.badge.inspect": "Проверка",
+    "cobalt.badge.replace": "Замена",
+    "cobalt.badge.heavy": "Тяжёлые условия",
+    "cobalt.badge.safety": "Критично для безопасности",
+    "cobalt.section.inspection": "Проверка",
+    "cobalt.section.replacement": "Замена",
+    "cobalt.section.heavy": "Тяжёлые условия — рекомендации",
+    "cobalt.section.warnings": "Тревожные признаки",
+    "cobalt.summary.inspection": "Интервал проверки",
+    "cobalt.summary.replacement": "Интервал замены",
+    "cobalt.reg.title": "Регламент ТО — кратко",
+    "cobalt.reg.iTitle": "I — Проверка",
+    "cobalt.reg.iDesc":
+      "Контроль, регулировка, очистка, подтяжка, смазка или доливка жидкостей.",
+    "cobalt.reg.rTitle": "R — Замена",
+    "cobalt.reg.rDesc": "Компонент необходимо заменить на новый.",
+    "cobalt.reg.view": "Показать полный регламент",
+    "cobalt.reg.hide": "Скрыть регламент",
+  },
+  en: {
+    "cobalt.regulationBased": "Regulation-based",
+    "cobalt.badge.inspect": "Inspect",
+    "cobalt.badge.replace": "Replace",
+    "cobalt.badge.heavy": "Heavy usage",
+    "cobalt.badge.safety": "Safety critical",
+    "cobalt.section.inspection": "Inspection",
+    "cobalt.section.replacement": "Replacement",
+    "cobalt.section.heavy": "Heavy usage recommendation",
+    "cobalt.section.warnings": "Warning signs",
+    "cobalt.summary.inspection": "Inspection interval",
+    "cobalt.summary.replacement": "Replacement interval",
+    "cobalt.reg.title": "Maintenance regulation — summary",
+    "cobalt.reg.iTitle": "I — Inspect",
+    "cobalt.reg.iDesc":
+      "Check, adjust, clean, tighten, lubricate or top up fluids as needed.",
+    "cobalt.reg.rTitle": "R — Replace",
+    "cobalt.reg.rDesc": "The component must be replaced with a new one.",
+    "cobalt.reg.view": "View full regulation",
+    "cobalt.reg.hide": "Hide regulation",
+  },
+};
+
+for (const l of LANGS)
+  Object.assign(translations[l], extra[l], schedule[l], more[l], cobalt[l]);
 
 
 
