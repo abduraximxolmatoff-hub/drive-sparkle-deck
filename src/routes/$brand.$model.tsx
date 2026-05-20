@@ -227,71 +227,79 @@ function ModelDetailPage() {
 
           <AnimatePresence mode="wait">
             {activePart ? (
-              <motion.div
-                key={activePart.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.4 }}
-                className="mt-5 overflow-hidden rounded-2xl border border-border bg-card-gradient p-5 shadow-card backdrop-blur-md sm:p-6"
-                style={{ borderColor: `${brand.accent}40` }}
-              >
-                <div className="mb-3 flex items-center gap-3">
-                  <span
-                    className="flex h-10 w-10 items-center justify-center rounded-lg text-xl"
-                    style={{
-                      background: `linear-gradient(135deg, ${brand.accent}44, transparent)`,
-                    }}
-                  >
-                    {activePart.icon}
-                  </span>
-                  <div>
-                    <h3 className="font-display text-xl font-semibold sm:text-2xl">
-                      {activePart.title[lang]}
-                    </h3>
-                    <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                      {activePart.name[lang]}
-                    </p>
-                  </div>
-                </div>
-
-                <ul className="space-y-2 text-sm leading-relaxed text-foreground/90">
-                  {activePart.bullets[lang].map((bullet, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + index * 0.05 }}
-                      className="flex gap-2"
+              model.slug === "cobalt-15l" && COBALT_PART_INFO[activePart.id] ? (
+                <CobaltPartInfoPanel
+                  key={activePart.id}
+                  part={activePart}
+                  brandAccent={brand.accent}
+                />
+              ) : (
+                <motion.div
+                  key={activePart.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4 }}
+                  className="mt-5 overflow-hidden rounded-2xl border border-border bg-card-gradient p-5 shadow-card backdrop-blur-md sm:p-6"
+                  style={{ borderColor: `${brand.accent}40` }}
+                >
+                  <div className="mb-3 flex items-center gap-3">
+                    <span
+                      className="flex h-10 w-10 items-center justify-center rounded-lg text-xl"
+                      style={{
+                        background: `linear-gradient(135deg, ${brand.accent}44, transparent)`,
+                      }}
                     >
-                      <span
-                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
-                        style={{ background: brand.accent }}
-                      />
-                      <span>{bullet}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-
-                {activePart.seasonal && (
-                  <div className="mt-5 grid gap-2 sm:grid-cols-3">
-                    {activePart.seasonal.map((season) => (
-                      <div
-                        key={season.labelKey}
-                        className="rounded-lg border border-border/60 bg-background/40 p-3"
-                      >
-                        <p
-                          className="text-[10px] font-semibold uppercase tracking-wider"
-                          style={{ color: brand.accent }}
-                        >
-                          {t(season.labelKey)}
-                        </p>
-                        <p className="mt-1 text-xs text-muted-foreground">{season.text[lang]}</p>
-                      </div>
-                    ))}
+                      {activePart.icon}
+                    </span>
+                    <div>
+                      <h3 className="font-display text-xl font-semibold sm:text-2xl">
+                        {activePart.title[lang]}
+                      </h3>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                        {activePart.name[lang]}
+                      </p>
+                    </div>
                   </div>
-                )}
-              </motion.div>
+
+                  <ul className="space-y-2 text-sm leading-relaxed text-foreground/90">
+                    {activePart.bullets[lang].map((bullet, index) => (
+                      <motion.li
+                        key={index}
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + index * 0.05 }}
+                        className="flex gap-2"
+                      >
+                        <span
+                          className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
+                          style={{ background: brand.accent }}
+                        />
+                        <span>{bullet}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  {activePart.seasonal && (
+                    <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                      {activePart.seasonal.map((season) => (
+                        <div
+                          key={season.labelKey}
+                          className="rounded-lg border border-border/60 bg-background/40 p-3"
+                        >
+                          <p
+                            className="text-[10px] font-semibold uppercase tracking-wider"
+                            style={{ color: brand.accent }}
+                          >
+                            {t(season.labelKey)}
+                          </p>
+                          <p className="mt-1 text-xs text-muted-foreground">{season.text[lang]}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+              )
             ) : (
               <motion.div
                 key="hint"
@@ -307,7 +315,7 @@ function ModelDetailPage() {
 
           {/* Premium official service schedule (currently authored for Cobalt) */}
           {model.slug === "cobalt-15l" ? (
-            <ServiceSchedule brandAccent={brand.accent} />
+            <CobaltRegulationSummary brandAccent={brand.accent} />
           ) : (
             <MaintenanceSchedulePlaceholder brandAccent={brand.accent} />
           )}
