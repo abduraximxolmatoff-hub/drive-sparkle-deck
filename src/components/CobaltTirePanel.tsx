@@ -254,13 +254,13 @@ export function CobaltTirePanel({ brandAccent }: Props) {
           className="text-[10px] font-semibold uppercase tracking-[0.3em]"
           style={{ color: brandAccent }}
         >
-          Chevrolet Cobalt 1.5L · {tx(T.regulationBased, L)}
+          Chevrolet Cobalt 1.5L · {ts(T.regulationBased, L)}
         </p>
         <h3 className="mt-1 font-display text-2xl font-bold sm:text-3xl">
-          🛞 {tx(T.funcTitle, L)}
+          🛞 {ts(T.funcTitle, L)}
         </h3>
         <ul className="mt-3 flex flex-wrap gap-1.5">
-          {tx(T.funcItems, L).map((it) => (
+          {tl(T.funcItems, L).map((it) => (
             <li
               key={it}
               className="rounded-full border px-2.5 py-1 text-[11px] text-foreground/85"
@@ -274,23 +274,23 @@ export function CobaltTirePanel({ brandAccent }: Props) {
 
       {/* Top grid: pressure + inspection */}
       <div className="grid gap-4 md:grid-cols-2">
-        <Card accent={brandAccent} icon="🎛️" title={tx(T.pressureTitle, L)} glow>
+        <Card accent={brandAccent} icon="🎛️" title={ts(T.pressureTitle, L)} glow>
           <div className="space-y-2">
-            <PressureRow label={tx(T.front, L)} value="32–33 PSI" accent={brandAccent} />
-            <PressureRow label={tx(T.rear, L)} value="30–32 PSI" accent={brandAccent} />
-            <PressureRow label={tx(T.loaded, L)} value="34–35 PSI" accent={brandAccent} />
+            <PressureRow label={ts(T.front, L)} value="32–33 PSI" accent={brandAccent} />
+            <PressureRow label={ts(T.rear, L)} value="30–32 PSI" accent={brandAccent} />
+            <PressureRow label={ts(T.loaded, L)} value="34–35 PSI" accent={brandAccent} />
           </div>
-          <p className="mt-3 text-[11px] italic text-muted-foreground">❄ {tx(T.coldNote, L)}</p>
+          <p className="mt-3 text-[11px] italic text-muted-foreground">❄ {ts(T.coldNote, L)}</p>
         </Card>
 
-        <Card accent={brandAccent} icon="📅" title={tx(T.inspectTitle, L)} badge={tx(T.regulationBased, L)}>
-          <Bullets items={tx(T.inspectItems, L)} accent={brandAccent} />
+        <Card accent={brandAccent} icon="📅" title={ts(T.inspectTitle, L)} badge={ts(T.regulationBased, L)}>
+          <Bullets items={tl(T.inspectItems, L)} accent={brandAccent} />
         </Card>
       </div>
 
       {/* Replacement + Tread */}
       <div className="grid gap-4 md:grid-cols-2">
-        <Card accent={brandAccent} icon="♻️" title={tx(T.replaceTitle, L)}>
+        <Card accent={brandAccent} icon="♻️" title={ts(T.replaceTitle, L)}>
           <div
             className="mb-3 flex items-center justify-between rounded-lg border px-3 py-2"
             style={{
@@ -298,32 +298,32 @@ export function CobaltTirePanel({ brandAccent }: Props) {
               background: "rgba(239,68,68,0.08)",
             }}
           >
-            <span className="text-xs text-muted-foreground">{tx(T.lifespan, L)}</span>
+            <span className="text-xs text-muted-foreground">{ts(T.lifespan, L)}</span>
             <span className="text-sm font-bold tabular-nums text-foreground">40,000–50,000 km</span>
           </div>
           <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-destructive/90">
-            {tx(T.replaceIf, L)}
+            {ts(T.replaceIf, L)}
           </p>
-          <Bullets items={tx(T.replaceItems, L)} accent="rgb(248,113,113)" />
+          <Bullets items={tl(T.replaceItems, L)} accent="rgb(248,113,113)" />
         </Card>
 
-        <Card accent={brandAccent} icon="📏" title={tx(T.treadTitle, L)}>
+        <Card accent={brandAccent} icon="📏" title={ts(T.treadTitle, L)}>
           <div className="space-y-3">
             <TreadBar
-              label={tx(T.treadGood, L)}
-              desc={tx(T.treadGoodDesc, L)}
+              label={ts(T.treadGood, L)}
+              desc={ts(T.treadGoodDesc, L)}
               pct={95}
               color="rgb(74,222,128)"
             />
             <TreadBar
-              label={tx(T.treadWarn, L)}
-              desc={tx(T.treadWarnDesc, L)}
+              label={ts(T.treadWarn, L)}
+              desc={ts(T.treadWarnDesc, L)}
               pct={50}
               color="rgb(250,204,21)"
             />
             <TreadBar
-              label={tx(T.treadCrit, L)}
-              desc={tx(T.treadCritDesc, L)}
+              label={ts(T.treadCrit, L)}
+              desc={ts(T.treadCritDesc, L)}
               pct={18}
               color="rgb(248,113,113)"
             />
@@ -332,7 +332,7 @@ export function CobaltTirePanel({ brandAccent }: Props) {
       </div>
 
       {/* Service Timeline */}
-      <Card accent={brandAccent} icon="🛣️" title={tx(T.timelineTitle, L)}>
+      <Card accent={brandAccent} icon="🛣️" title={ts(T.timelineTitle, L)}>
         <div className="relative pt-6">
           <div
             className="absolute left-2 right-2 top-9 h-[2px] rounded-full"
@@ -373,9 +373,9 @@ export function CobaltTirePanel({ brandAccent }: Props) {
 
       {/* Tips + Warnings */}
       <div className="grid gap-4 md:grid-cols-2">
-        <Card accent={brandAccent} icon="💡" title={tx(T.tipsTitle, L)}>
+        <Card accent={brandAccent} icon="💡" title={ts(T.tipsTitle, L)}>
           <ul className="grid gap-1.5">
-            {tx(T.tips, L).map((tip, i) => (
+            {tl(T.tips, L).map((tip, i) => (
               <motion.li
                 key={i}
                 initial={{ opacity: 0, x: -8 }}
@@ -390,9 +390,9 @@ export function CobaltTirePanel({ brandAccent }: Props) {
           </ul>
         </Card>
 
-        <Card accent="rgb(248,113,113)" icon="⚠️" title={tx(T.warnTitle, L)}>
+        <Card accent="rgb(248,113,113)" icon="⚠️" title={ts(T.warnTitle, L)}>
           <ul className="grid gap-1.5 sm:grid-cols-2">
-            {tx(T.warns, L).map((w, i) => (
+            {tl(T.warns, L).map((w, i) => (
               <motion.li
                 key={i}
                 initial={{ opacity: 0, scale: 0.97 }}
