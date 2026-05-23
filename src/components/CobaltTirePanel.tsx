@@ -105,7 +105,8 @@ const T = {
   } as Record<Lang, string[]>,
 };
 
-const tx = (v: Tri | Record<Lang, string[]>, lang: Lang) => v[lang];
+const ts = (v: Tri, lang: Lang): string => v[lang];
+const tl = (v: Record<Lang, string[]>, lang: Lang): string[] => v[lang];
 
 function Card({
   accent,
