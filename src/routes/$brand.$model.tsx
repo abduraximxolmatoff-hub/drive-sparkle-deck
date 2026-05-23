@@ -8,6 +8,7 @@ import { InteractiveCarViewer } from "@/components/InteractiveCarViewer";
 import { ServiceSchedule } from "@/components/ServiceSchedule";
 import { MaintenanceSchedulePlaceholder } from "@/components/MaintenanceSchedulePlaceholder";
 import { CobaltPartInfoPanel } from "@/components/CobaltPartInfoPanel";
+import { CobaltTirePanel } from "@/components/CobaltTirePanel";
 import { CobaltRegulationSummary } from "@/components/CobaltRegulationSummary";
 import { COBALT_PART_INFO } from "@/data/cobaltPartInfo";
 import { useLanguage } from "@/i18n/LanguageContext";
