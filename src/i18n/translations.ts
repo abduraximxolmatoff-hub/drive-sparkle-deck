@@ -387,6 +387,8 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.section.warnings": "Warning signs",
     "cobalt.summary.inspection": "Inspection interval",
     "cobalt.summary.replacement": "Replacement interval",
+    "cobalt.legendCompact": "I = Inspect · R = Replace",
+    "cobalt.legendTooltip": "I — inspect/adjust, R — replace",
     "cobalt.reg.title": "Maintenance regulation — summary",
     "cobalt.reg.iTitle": "I — Inspect",
     "cobalt.reg.iDesc":
