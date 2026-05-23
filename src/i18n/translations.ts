@@ -341,6 +341,8 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.section.warnings": "Ogohlantiruvchi belgilar",
     "cobalt.summary.inspection": "Tekshirish interval",
     "cobalt.summary.replacement": "Almashtirish interval",
+    "cobalt.legendCompact": "I = Tekshirish · R = Almashtirish",
+    "cobalt.legendTooltip": "I — tekshirish/sozlash, R — almashtirish",
     "cobalt.reg.title": "Texnik xizmat reglamenti — qisqacha",
     "cobalt.reg.iTitle": "I — Tekshirish",
     "cobalt.reg.iDesc":
@@ -362,6 +364,8 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.section.warnings": "Тревожные признаки",
     "cobalt.summary.inspection": "Интервал проверки",
     "cobalt.summary.replacement": "Интервал замены",
+    "cobalt.legendCompact": "I = Проверка · R = Замена",
+    "cobalt.legendTooltip": "I — проверка/регулировка, R — замена",
     "cobalt.reg.title": "Регламент ТО — кратко",
     "cobalt.reg.iTitle": "I — Проверка",
     "cobalt.reg.iDesc":
@@ -383,6 +387,8 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.section.warnings": "Warning signs",
     "cobalt.summary.inspection": "Inspection interval",
     "cobalt.summary.replacement": "Replacement interval",
+    "cobalt.legendCompact": "I = Inspect · R = Replace",
+    "cobalt.legendTooltip": "I — inspect/adjust, R — replace",
     "cobalt.reg.title": "Maintenance regulation — summary",
     "cobalt.reg.iTitle": "I — Inspect",
     "cobalt.reg.iDesc":
