@@ -341,6 +341,8 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.section.warnings": "Ogohlantiruvchi belgilar",
     "cobalt.summary.inspection": "Tekshirish interval",
     "cobalt.summary.replacement": "Almashtirish interval",
+    "cobalt.legendCompact": "I = Tekshirish · R = Almashtirish",
+    "cobalt.legendTooltip": "I — tekshirish/sozlash, R — almashtirish",
     "cobalt.reg.title": "Texnik xizmat reglamenti — qisqacha",
     "cobalt.reg.iTitle": "I — Tekshirish",
     "cobalt.reg.iDesc":
