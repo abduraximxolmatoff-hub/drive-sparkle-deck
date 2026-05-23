@@ -314,10 +314,7 @@ function ModelDetailPage() {
             )}
           </AnimatePresence>
 
-          {/* Premium official service schedule (currently authored for Cobalt) */}
-          {model.slug === "cobalt-15l" ? (
-            <CobaltRegulationSummary brandAccent={brand.accent} />
-          ) : (
+          {model.slug !== "cobalt-15l" && (
             <MaintenanceSchedulePlaceholder brandAccent={brand.accent} />
           )}
         </div>
