@@ -228,7 +228,9 @@ function ModelDetailPage() {
 
           <AnimatePresence mode="wait">
             {activePart ? (
-              model.slug === "cobalt-15l" && COBALT_PART_INFO[activePart.id] ? (
+              model.slug === "cobalt-15l" && activePart.id === "tires" ? (
+                <CobaltTirePanel key="tires" brandAccent={brand.accent} />
+              ) : model.slug === "cobalt-15l" && COBALT_PART_INFO[activePart.id] ? (
                 <CobaltPartInfoPanel
                   key={activePart.id}
                   part={activePart}
