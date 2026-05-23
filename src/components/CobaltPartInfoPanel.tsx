@@ -116,20 +116,29 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
             </h3>
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-1.5">
+        <div className="flex flex-col items-end gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span
+              className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
+              style={{
+                background: `${brandAccent}1a`,
+                color: brandAccent,
+                borderColor: `${brandAccent}55`,
+              }}
+            >
+              {t("cobalt.regulationBased")}
+            </span>
+            {info.badges.map((b) => (
+              <Badge key={b} kind={b} accent={brandAccent} label={badgeLabels[b]} />
+            ))}
+          </div>
           <span
-            className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
-            style={{
-              background: `${brandAccent}1a`,
-              color: brandAccent,
-              borderColor: `${brandAccent}55`,
-            }}
+            className="rounded-md px-1.5 py-0.5 text-[10px] text-muted-foreground"
+            style={{ background: `${brandAccent}0d` }}
+            title={t("cobalt.legendTooltip")}
           >
-            {t("cobalt.regulationBased")}
+            {t("cobalt.legendCompact")}
           </span>
-          {info.badges.map((b) => (
-            <Badge key={b} kind={b} accent={brandAccent} label={badgeLabels[b]} />
-          ))}
         </div>
       </div>
 
