@@ -8,6 +8,7 @@ import { InteractiveCarViewer } from "@/components/InteractiveCarViewer";
 import { ServiceSchedule } from "@/components/ServiceSchedule";
 import { MaintenanceSchedulePlaceholder } from "@/components/MaintenanceSchedulePlaceholder";
 import { CobaltPartInfoPanel } from "@/components/CobaltPartInfoPanel";
+import { CobaltTirePanel } from "@/components/CobaltTirePanel";
 import { CobaltRegulationSummary } from "@/components/CobaltRegulationSummary";
 import { COBALT_PART_INFO } from "@/data/cobaltPartInfo";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -227,7 +228,9 @@ function ModelDetailPage() {
 
           <AnimatePresence mode="wait">
             {activePart ? (
-              model.slug === "cobalt-15l" && COBALT_PART_INFO[activePart.id] ? (
+              model.slug === "cobalt-15l" && activePart.id === "tires" ? (
+                <CobaltTirePanel key="tires" brandAccent={brand.accent} />
+              ) : model.slug === "cobalt-15l" && COBALT_PART_INFO[activePart.id] ? (
                 <CobaltPartInfoPanel
                   key={activePart.id}
                   part={activePart}
