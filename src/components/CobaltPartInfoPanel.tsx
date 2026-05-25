@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { CarPart } from "@/data/carParts";
-import { COBALT_PART_INFO, type CobaltIntervalChip, type CobaltPartInfo } from "@/data/cobaltPartInfo";
+import { COBALT_PART_INFO, type CobaltPartInfo } from "@/data/cobaltPartInfo";
 
 
 interface Props {
