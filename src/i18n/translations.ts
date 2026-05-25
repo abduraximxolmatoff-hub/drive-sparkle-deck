@@ -339,6 +339,8 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.section.replacement": "Almashtirish",
     "cobalt.section.heavy": "Og‘ir foydalanish tavsiyalari",
     "cobalt.section.warnings": "Ogohlantiruvchi belgilar",
+    "cobalt.section.tips": "Foydali maslahatlar",
+
     "cobalt.summary.inspection": "Tekshirish interval",
     "cobalt.summary.replacement": "Almashtirish interval",
     "cobalt.legendCompact": "I = Tekshirish · R = Almashtirish",
@@ -362,6 +364,8 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.section.replacement": "Замена",
     "cobalt.section.heavy": "Тяжёлые условия — рекомендации",
     "cobalt.section.warnings": "Тревожные признаки",
+    "cobalt.section.tips": "Полезные советы",
+
     "cobalt.summary.inspection": "Интервал проверки",
     "cobalt.summary.replacement": "Интервал замены",
     "cobalt.legendCompact": "I = Проверка · R = Замена",
@@ -385,6 +389,8 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.section.replacement": "Replacement",
     "cobalt.section.heavy": "Heavy usage recommendation",
     "cobalt.section.warnings": "Warning signs",
+    "cobalt.section.tips": "Useful tips",
+
     "cobalt.summary.inspection": "Inspection interval",
     "cobalt.summary.replacement": "Replacement interval",
     "cobalt.legendCompact": "I = Inspect · R = Replace",
