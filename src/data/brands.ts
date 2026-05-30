@@ -45,11 +45,8 @@ export type PartImageMap = Partial<Record<string, string>>;
 
 /** Marker overlay coordinates per part id (percentages of viewer area). */
 export interface PartMarker {
-  /** 0-100 horizontal percentage */
   x: number;
-  /** 0-100 vertical percentage */
   y: number;
-  /** marker diameter as a percentage of viewer width */
   size: number;
 }
 
@@ -59,16 +56,11 @@ export interface CarModel {
   slug: string;
   name: string;
   image: string;
-  /** Translation key for tagline, e.g. "tagline.compactSedan" */
   taglineKey?: string;
   legacySlugs?: string[];
-  /** Optional high-res image per part id (tires, engine, ...). */
   partImages?: PartImageMap;
-  /** Optional marker positions per part id when shown on the main image. */
   markers?: PartMarkerMap;
-  /** Optional ordered list of real 360° spin frames. When empty, simulated CSS 360 is used. */
   images360?: string[];
-  /** Force simulated CSS 360 even if frames are present. Defaults to true when images360 is empty. */
   useSimulated360?: boolean;
 }
 
@@ -83,30 +75,45 @@ export interface Brand {
 
 /** Default marker positions used when a model doesn't override them. */
 export const DEFAULT_MARKERS: PartMarkerMap = {
-  tires: { x: 22, y: 78, size: 18 },
-  windows: { x: 48, y: 32, size: 26 },
-  oil: { x: 22, y: 42, size: 18 },
-  engine: { x: 22, y: 44, size: 22 },
-  battery: { x: 26, y: 44, size: 16 },
-  brakes: { x: 22, y: 76, size: 18 },
-  headlights: { x: 12, y: 56, size: 16 },
-  cooling: { x: 18, y: 50, size: 18 },
-  airfilter: { x: 30, y: 44, size: 16 },
-  suspension: { x: 24, y: 80, size: 20 },
+  tires:        { x: 22, y: 78, size: 18 },
+  windows:      { x: 48, y: 32, size: 26 },
+  oil:          { x: 22, y: 42, size: 18 },
+  engine:       { x: 22, y: 44, size: 22 },
+  battery:      { x: 26, y: 44, size: 16 },
+  brakes:       { x: 22, y: 76, size: 18 },
+  headlights:   { x: 12, y: 56, size: 16 },
+  cooling:      { x: 18, y: 50, size: 18 },
+  airfilter:    { x: 30, y: 44, size: 16 },
+  suspension:   { x: 24, y: 80, size: 20 },
+  // yangi qismlar
+  fuel_filter:  { x: 35, y: 55, size: 16 },
+  cabin_filter: { x: 50, y: 38, size: 16 },
+  spark_plugs:  { x: 28, y: 46, size: 15 },
+  brake_fluid:  { x: 20, y: 70, size: 15 },
+  transmission: { x: 45, y: 68, size: 18 },
+  steering:     { x: 42, y: 36, size: 16 },
+  exhaust:      { x: 60, y: 72, size: 18 },
 };
 
 const cobaltPartImages: PartImageMap = {
-  tires: cobaltTires,
-  oil: cobaltEngineOil,
-  engine: cobaltEngine,
-  battery: cobaltBattery,
-  windows: cobaltWindows,
-  headlights: cobaltHeadlights,
-  brakes: cobaltBrakes,
-  cooling: cobaltCooling,
-  // airfilter image generation failed — fall back to engine bay
-  airfilter: cobaltEngine,
-  suspension: cobaltSuspension,
+  tires:        cobaltTires,
+  oil:          cobaltEngineOil,
+  engine:       cobaltEngine,
+  battery:      cobaltBattery,
+  windows:      cobaltWindows,
+  headlights:   cobaltHeadlights,
+  brakes:       cobaltBrakes,
+  cooling:      cobaltCooling,
+  airfilter:    cobaltEngine,
+  suspension:   cobaltSuspension,
+  // yangi qismlar — mavjud rasmlardan foydalaniladi
+  fuel_filter:  cobaltEngine,
+  cabin_filter: cobaltEngine,
+  spark_plugs:  cobaltEngine,
+  brake_fluid:  cobaltBrakes,
+  transmission: cobaltSuspension,
+  steering:     cobaltSuspension,
+  exhaust:      cobaltEngine,
 };
 
 export const brands: Brand[] = [
@@ -226,18 +233,10 @@ export const getBrand = (slug: string) => brands.find((b) => b.slug === slug);
 
 export const getBrandModel = (brandSlug: string, modelSlug: string) => {
   const brand = getBrand(brandSlug);
-
-  if (!brand) {
-    return null;
-  }
-
+  if (!brand) return null;
   const model = brand.models.find(
     (entry) => entry.slug === modelSlug || entry.legacySlugs?.includes(modelSlug),
   );
-
-  if (!model) {
-    return null;
-  }
-
+  if (!model) return null;
   return { brand, model };
 };
