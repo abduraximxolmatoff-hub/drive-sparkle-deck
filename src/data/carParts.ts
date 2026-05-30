@@ -219,4 +219,4 @@ export const CAR_PARTS: CarPart[] = [
     icon: "🔩",
     name: { uz: "Transmissiya moyi", ru: "Трансмиссионное масло", en: "Transmission Fluid" },
     subtitle: { uz: "Uzatmalar qutisi", ru: "Коробка передач", en: "Gearbox fluid" },
-    title: { uz: "Transmissiya moyi", ru: "Трансмиссионн
+    title: { uz: "Transmissiya moyi", ru: "Трансмиссионное масло", en: "Transmission fluid" },
