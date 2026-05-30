@@ -575,6 +575,856 @@ export const COBALT_PART_INFO: Record<string, CobaltPartInfo> = {
     summaryReplacement: T("Amortizator 60–80 000 km · qismlar holat bo'yicha.", "Амортизаторы 60–80 000 км · детали по состоянию.", "Shocks 60–80,000 km · parts by condition."),
     badges: ["inspect", "safety"],
   },
+
+  // ═══════════════════════════════════════════════════════════════
+  // YANGI QISMLAR — Cobalt reglamentidan
+  // ═══════════════════════════════════════════════════════════════
+
+  fuel_filter: {
+    partId: "fuel_filter",
+    title: T("Yonilg'i filtri", "Топливный фильтр", "Fuel filter"),
+    function: T(
+      "Yonilg'i filtri dvigatelga kirayotgan yoqilg'idan ifloslantiruvchi zarrachalarni tozalab, injektorlar va nasos umrini uzaytiradi.",
+      "Топливный фильтр очищает топливо от загрязнений перед двигателем, продлевая жизнь форсунок и насоса.",
+      "The fuel filter removes contaminants from fuel before it reaches the engine, protecting injectors and the fuel pump.",
+    ),
+    intervals: [
+      {
+        label: T("Tekshirish", "Проверка", "Inspection"),
+        value: T("Har 10 000 km", "Каждые 10 000 км", "Every 10,000 km"),
+        tone: "accent",
+      },
+      {
+        label: T("Almashtirish", "Замена", "Replacement"),
+        value: T("Har 20 000 km", "Каждые 20 000 км", "Every 20,000 km"),
+        tone: "warn",
+      },
+    ],
+    inspection: TL(
+      [
+        "Reglament bo'yicha har 10 000 km da tekshiriladi.",
+        "Yonilg'i shlang va ulanishlari bilan birga ko'zdan kechiriladi.",
+        "Siqilish va sizish belgilariga e'tibor bering.",
+        "Yoqilg'i sifati filtning xizmat muddatiga bevosita ta'sir qiladi.",
+      ],
+      [
+        "По регламенту проверяется каждые 10 000 км.",
+        "Осматривается вместе с топливными шлангами и соединениями.",
+        "Обратите внимание на признаки засорения и утечек.",
+        "Качество топлива напрямую влияет на срок службы фильтра.",
+      ],
+      [
+        "Per regulation inspected every 10,000 km.",
+        "Inspected together with fuel hoses and connections.",
+        "Watch for signs of clogging and leaks.",
+        "Fuel quality directly affects filter lifespan.",
+      ],
+    ),
+    replacement: TL(
+      [
+        "Reglament bo'yicha har 20 000 km da almashtiriladi.",
+        "Og'ir sharoitda (sifatsiz yoqilg'i, chang) oldinroq almashtiring.",
+        "Tiqilish belgilari paydo bo'lsa kechiktirmang.",
+        "Yonilg'i nasos va injektorlarni himoya qilish uchun o'z vaqtida almashtiring.",
+      ],
+      [
+        "По регламенту замена каждые 20 000 км.",
+        "В тяжёлых условиях (плохое топливо, пыль) — раньше.",
+        "При признаках засорения — не откладывайте.",
+        "Своевременная замена защищает насос и форсунки.",
+      ],
+      [
+        "Per regulation replacement every 20,000 km.",
+        "In tough conditions (poor fuel, dust) — replace earlier.",
+        "If signs of clogging appear — do not delay.",
+        "Timely replacement protects the fuel pump and injectors.",
+      ],
+    ),
+    heavyUsage: TL(
+      [
+        "Sifatsiz yoqilg'i quyilganda filtr tezroq ifloslangan.",
+        "Uzoq masofali safarlar va changli yo'llarda tez-tez tekshiring.",
+        "AZS sifatiga e'tibor bering — filtning umri shunga bog'liq.",
+      ],
+      [
+        "При некачественном топливе фильтр загрязняется быстрее.",
+        "На дальних поездках и пыльных дорогах — чаще проверка.",
+        "Следите за качеством АЗС — от этого зависит ресурс фильтра.",
+      ],
+      [
+        "Poor fuel quality clogs the filter faster.",
+        "On long trips and dusty roads — check more often.",
+        "Pay attention to fuel station quality — it affects filter life.",
+      ],
+    ),
+    warnings: TL(
+      [
+        "Dvigatel quvvatining pasayishi.",
+        "Beqaror salt yurish.",
+        "Tezlanishda tutilish.",
+        "Yoqilg'i sarfining oshishi.",
+        "Dvigatelni ishga tushirish qiyinlashadi.",
+      ],
+      [
+        "Потеря мощности двигателя.",
+        "Нестабильный холостой ход.",
+        "Провалы при ускорении.",
+        "Рост расхода топлива.",
+        "Затруднённый запуск двигателя.",
+      ],
+      [
+        "Engine power loss.",
+        "Unstable idle.",
+        "Hesitation during acceleration.",
+        "Increased fuel consumption.",
+        "Difficulty starting the engine.",
+      ],
+    ),
+    usefulTips: TL(
+      [
+        "Sifatli AZS dan yoqilg'i quyish filtr umrini uzaytiradi.",
+        "Filtni o'z vaqtida almashtirish yoqilg'i nasosini ham himoya qiladi.",
+        "Yonilg'i shlanglari bilan birga tekshirish tavsiya etiladi.",
+      ],
+      [
+        "Топливо с качественных АЗС продлевает ресурс фильтра.",
+        "Своевременная замена защищает и топливный насос.",
+        "Рекомендуется проверять вместе с топливными шлангами.",
+      ],
+      [
+        "Quality fuel stations extend the filter's life.",
+        "Timely replacement also protects the fuel pump.",
+        "Recommended to inspect together with fuel hoses.",
+      ],
+    ),
+    summaryInspection: T("Har 10 000 km da.", "Каждые 10 000 км.", "Every 10,000 km."),
+    summaryReplacement: T("Har 20 000 km da.", "Каждые 20 000 км.", "Every 20,000 km."),
+    badges: ["inspect", "replace"],
+  },
+
+  cabin_filter: {
+    partId: "cabin_filter",
+    title: T("Salon havo filtri", "Салонный фильтр воздуха", "Cabin air filter"),
+    function: T(
+      "Salon havo filtri (konditsioner filtri) salonga kiradigan havoni chang, pollen va iflosliklardan tozalaydi, haydovchi va yo'lovchilar sog'lig'ini himoya qiladi.",
+      "Салонный фильтр воздуха (фильтр кондиционера) очищает воздух в салоне от пыли, пыльцы и загрязнений, защищая здоровье водителя и пассажиров.",
+      "The cabin air filter (AC filter) cleans the air inside the cabin from dust, pollen and pollutants, protecting the health of driver and passengers.",
+    ),
+    intervals: [
+      {
+        label: T("Tekshirish", "Проверка", "Inspection"),
+        value: T("Har 10 000 km", "Каждые 10 000 км", "Every 10,000 km"),
+        tone: "accent",
+      },
+      {
+        label: T("Almashtirish", "Замена", "Replacement"),
+        value: T("Har 20 000 km / yiliga", "Каждые 20 000 км / раз в год", "Every 20,000 km / yearly"),
+        tone: "warn",
+      },
+    ],
+    inspection: TL(
+      [
+        "Reglament bo'yicha har 10 000 km da tekshiriladi.",
+        "Konditsioner samaradorligi pasaysa filtrni tekshiring.",
+        "Salondan yoqimsiz hid kelsa almashtirish vaqti kelgan.",
+        "Changli sharoitda tez-tez tekshirish zarur.",
+      ],
+      [
+        "По регламенту проверяется каждые 10 000 км.",
+        "При снижении эффективности кондиционера — проверьте фильтр.",
+        "Неприятный запах в салоне — признак загрязнённого фильтра.",
+        "В пыльных условиях — чаще проверка.",
+      ],
+      [
+        "Per regulation inspected every 10,000 km.",
+        "Check the filter if AC efficiency decreases.",
+        "Unpleasant smell in the cabin means the filter needs attention.",
+        "In dusty conditions inspect more often.",
+      ],
+    ),
+    replacement: TL(
+      [
+        "Har 20 000 km da yoki yiliga bir marta almashtiriladi.",
+        "Og'ir sharoitda (changli yo'llar, shahar) oldinroq almashtiring.",
+        "Almashtirish odatda asbobsiz, oson bajariladigan ish.",
+        "Yangi filtr konditsioner va isitish samaradorligini oshiradi.",
+      ],
+      [
+        "Замена каждые 20 000 км или раз в год.",
+        "В тяжёлых условиях (пыль, город) — раньше.",
+        "Замена обычно простая — без инструментов.",
+        "Новый фильтр повышает эффективность кондиционера и обогрева.",
+      ],
+      [
+        "Replace every 20,000 km or once a year.",
+        "In tough conditions (dust, city) — replace earlier.",
+        "Replacement is usually simple — often without tools.",
+        "A new filter improves AC and heating efficiency.",
+      ],
+    ),
+    heavyUsage: TL(
+      [
+        "Changli yo'llar, qurilish hududlari va shahar muhitida tez-tez almashtiring.",
+        "Bahorda pollen mavsumida filtni yangilash tavsiya etiladi.",
+      ],
+      [
+        "Пыльные дороги, стройки и городская среда — меняйте чаще.",
+        "Весной в сезон пыльцы — рекомендуется обновить фильтр.",
+      ],
+      [
+        "Dusty roads, construction zones and urban environment — replace more often.",
+        "In spring pollen season — a fresh filter is recommended.",
+      ],
+    ),
+    warnings: TL(
+      [
+        "Salondan yoqimsiz yoki kuchli hid.",
+        "Konditsioner yoki isitish samaradorligi pasaydi.",
+        "Shisha tezda bug'lanadi.",
+        "Haydovchi va yo'lovchilarda nafas olish noqulayligi.",
+      ],
+      [
+        "Неприятный или резкий запах в салоне.",
+        "Снижение эффективности кондиционера или обогрева.",
+        "Стёкла быстро запотевают.",
+        "Дискомфорт при дыхании у водителя и пассажиров.",
+      ],
+      [
+        "Unpleasant or strong smell in the cabin.",
+        "Reduced AC or heating efficiency.",
+        "Windows fog up quickly.",
+        "Driver and passengers feel discomfort while breathing.",
+      ],
+    ),
+    usefulTips: TL(
+      [
+        "Bahorda almashtirishni odat qiling — pollen mavsumidan oldin.",
+        "Iflos filtr konditsioner kompressorini ham yuklab qo'yadi.",
+        "O'zi almashtirish mumkin — YouTube da ko'rsatmalar bor.",
+      ],
+      [
+        "Возьмите за привычку менять весной — перед сезоном пыльцы.",
+        "Грязный фильтр нагружает компрессор кондиционера.",
+        "Можно заменить самостоятельно — инструкции есть на YouTube.",
+      ],
+      [
+        "Make it a habit to replace in spring — before pollen season.",
+        "A dirty filter also strains the AC compressor.",
+        "Can be replaced by yourself — instructions available on YouTube.",
+      ],
+    ),
+    summaryInspection: T("Har 10 000 km da.", "Каждые 10 000 км.", "Every 10,000 km."),
+    summaryReplacement: T("Har 20 000 km yoki yiliga.", "Каждые 20 000 км или раз в год.", "Every 20,000 km or yearly."),
+    badges: ["inspect", "replace"],
+  },
+
+  spark_plugs: {
+    partId: "spark_plugs",
+    title: T("O't oldirish svechalari", "Свечи зажигания", "Spark plugs"),
+    function: T(
+      "O't oldirish svechalari yoqilg'i-havo aralashmasini alangalantiradi va dvigatelning muammosiz ishlashini ta'minlaydi.",
+      "Свечи зажигания воспламеняют топливно-воздушную смесь и обеспечивают бесперебойную работу двигателя.",
+      "Spark plugs ignite the fuel-air mixture and ensure smooth engine operation.",
+    ),
+    intervals: [
+      {
+        label: T("Tekshirish / Almashtirish", "Проверка / Замена", "Check / Replace"),
+        value: T("Har 25 000 km", "Каждые 25 000 км", "Every 25,000 km"),
+        tone: "accent",
+      },
+      {
+        label: T("Og'ir sharoit", "Тяжёлые условия", "Heavy usage"),
+        value: T("15 000 km / 1 yil", "15 000 км / 1 год", "15,000 km / 1 year"),
+        tone: "warn",
+      },
+    ],
+    inspection: TL(
+      [
+        "Reglament bo'yicha har 25 000 km da tekshiriladi va almashtiriladi.",
+        "Dvigatel beqaror ishlasa yoki quvvat yo'qolsa svechalarni tekshiring.",
+        "Svecha rangi dvigatel holati haqida ko'p ma'lumot beradi.",
+        "Elektrod yeyilishi yoki tuzlanishi — almashtirish belgisi.",
+      ],
+      [
+        "По регламенту проверяются и заменяются каждые 25 000 км.",
+        "При нестабильной работе или потере мощности — проверьте свечи.",
+        "Цвет свечи много говорит о состоянии двигателя.",
+        "Износ электрода или нагар — признак замены.",
+      ],
+      [
+        "Per regulation inspected and replaced every 25,000 km.",
+        "Check spark plugs if engine runs rough or loses power.",
+        "Spark plug color tells a lot about engine condition.",
+        "Worn electrode or heavy deposits — time to replace.",
+      ],
+    ),
+    replacement: TL(
+      [
+        "Normal sharoitda har 25 000 km da almashtiriladi.",
+        "Og'ir sharoitda (chang, qisqa safarlar, issiq) — har 15 000 km yoki 1 yilda.",
+        "Faqat ishlab chiqaruvchi tavsiya qilgan svecha turini ishlating.",
+        "Barcha svechalarni bir vaqtda almashtiring.",
+      ],
+      [
+        "В нормальных условиях — каждые 25 000 км.",
+        "В тяжёлых условиях (пыль, короткие поездки, жара) — каждые 15 000 км или 1 год.",
+        "Используйте только рекомендованный производителем тип свечей.",
+        "Меняйте все свечи одновременно.",
+      ],
+      [
+        "Normal conditions: every 25,000 km.",
+        "Heavy usage (dust, short trips, heat) — every 15,000 km or 1 year.",
+        "Only use the manufacturer-recommended spark plug type.",
+        "Replace all spark plugs at the same time.",
+      ],
+    ),
+    heavyUsage: TL(
+      [
+        "Qisqa masofalarda tez-tez yurish svechalarni tez ifloslantiradi.",
+        "Shahar tirbandligi va uzoq salt ishlash svecha umrini qisqartiradi.",
+        "Og'ir sharoitda yillik almashtirish tavsiya etiladi.",
+      ],
+      [
+        "Частые короткие поездки быстро загрязняют свечи.",
+        "Городские пробки и длительный холостой ход сокращают ресурс.",
+        "В тяжёлых условиях — ежегодная замена.",
+      ],
+      [
+        "Frequent short trips quickly foul spark plugs.",
+        "City traffic and long idling shorten plug life.",
+        "In heavy usage conditions — annual replacement recommended.",
+      ],
+    ),
+    warnings: TL(
+      [
+        "Dvigatel beqaror ishlaydi (\"titrash\").",
+        "Start qiyinlashadi.",
+        "Quvvat yo'qolishi.",
+        "Yoqilg'i sarfining oshishi.",
+        "Check Engine chirog'i.",
+        "Tezlanishda tutilish.",
+      ],
+      [
+        "Нестабильная работа двигателя (\"троит\").",
+        "Затруднённый пуск.",
+        "Потеря мощности.",
+        "Рост расхода топлива.",
+        "Индикатор Check Engine.",
+        "Провалы при разгоне.",
+      ],
+      [
+        "Engine misfires or runs rough.",
+        "Difficulty starting.",
+        "Power loss.",
+        "Increased fuel consumption.",
+        "Check Engine light on.",
+        "Hesitation during acceleration.",
+      ],
+    ),
+    usefulTips: TL(
+      [
+        "Svechalarni har doim to'plam bilan almashtiring.",
+        "Noto'g'ri svecha turi dvigatelga zarar yetkazishi mumkin.",
+        "Svecha rangini ko'rib dvigatel holatini baholash mumkin: kulrang — normal, qora — boy aralashma yoki moy.",
+      ],
+      [
+        "Свечи меняйте всегда комплектом.",
+        "Неправильный тип свечи может навредить двигателю.",
+        "Цвет свечи = состояние двигателя: серый — норма, чёрный — богатая смесь или масло.",
+      ],
+      [
+        "Always replace spark plugs as a complete set.",
+        "Wrong plug type can damage the engine.",
+        "Plug color = engine health: grey — normal, black — rich mixture or oil.",
+      ],
+    ),
+    summaryInspection: T("Har 25 000 km da.", "Каждые 25 000 км.", "Every 25,000 km."),
+    summaryReplacement: T("25 000 km · og'irda 15 000 km / 1 yil.", "25 000 км · в тяжёлых 15 000 км / 1 год.", "25,000 km · heavy usage 15,000 km / 1 year."),
+    badges: ["inspect", "replace", "heavy"],
+  },
+
+  brake_fluid: {
+    partId: "brake_fluid",
+    title: T("Tormoz suyuqligi", "Тормозная жидкость", "Brake fluid"),
+    function: T(
+      "Tormoz suyuqligi pedal bosimini tormoz mexanizmlariga uzatadi va ilashish muftasini boshqaradi. Bu xavfsizlik tizimining asosiy elementi.",
+      "Тормозная жидкость передаёт давление педали на тормозные механизмы и управляет сцеплением. Ключевой элемент системы безопасности.",
+      "Brake fluid transmits pedal pressure to the brake mechanisms and controls the clutch. A key element of the safety system.",
+    ),
+    intervals: [
+      {
+        label: T("Tekshirish", "Проверка", "Inspection"),
+        value: T("Har 10 000 km", "Каждые 10 000 км", "Every 10,000 km"),
+        tone: "accent",
+      },
+      {
+        label: T("Almashtirish", "Замена", "Replacement"),
+        value: T("Har 32 500 km / 2 yil", "Каждые 32 500 км / 2 года", "Every 32,500 km / 2 years"),
+        tone: "warn",
+      },
+    ],
+    inspection: TL(
+      [
+        "Reglament bo'yicha har 10 000 km da tekshiriladi.",
+        "Suyuqlik darajasi min va max belgilari orasida bo'lishi kerak.",
+        "Rang va tiniqligini tekshiring — qoraygan bo'lsa almashtiring.",
+        "Ilashish muftasi (suyuqlik bilan boshqariladigan) ham bir vaqtda tekshiriladi.",
+        "Tormoz pedalining bo'sh yurishi tekshirilishi shart.",
+      ],
+      [
+        "По регламенту проверяется каждые 10 000 км.",
+        "Уровень жидкости — между min и max.",
+        "Проверяйте цвет и прозрачность — при потемнении заменить.",
+        "Сцепление (гидравлическое) проверяется одновременно.",
+        "Свободный ход педали тормоза — обязательная проверка.",
+      ],
+      [
+        "Per regulation inspected every 10,000 km.",
+        "Fluid level must be between min and max marks.",
+        "Check color and clarity — replace if darkened.",
+        "Hydraulic clutch is also checked at the same time.",
+        "Brake pedal free play must be checked.",
+      ],
+    ),
+    replacement: TL(
+      [
+        "Reglament bo'yicha har 32 500 km yoki 2 yilda almashtiriladi.",
+        "Og'ir sharoitda (tez-tez tormoz berish, tog' yo'llari) oldinroq almashtiring.",
+        "Suyuqlik qoraygan, loyqalangan yoki daraja tez pasaysa — darhol almashtiring.",
+        "Faqat tavsiya etilgan tormoz suyuqligidan foydalaning (DOT spetsifikatsiya).",
+      ],
+      [
+        "По регламенту замена каждые 32 500 км или 2 года.",
+        "В тяжёлых условиях (частое торможение, горы) — раньше.",
+        "При потемнении, помутнении или частом падении уровня — сразу.",
+        "Используйте только рекомендованную жидкость (спецификация DOT).",
+      ],
+      [
+        "Per regulation replacement every 32,500 km or 2 years.",
+        "In tough conditions (frequent braking, mountain roads) — replace earlier.",
+        "If darkened, cloudy or level drops frequently — replace immediately.",
+        "Only use recommended brake fluid (DOT specification).",
+      ],
+    ),
+    heavyUsage: TL(
+      [
+        "Tog' yo'llari va shahar tirbandligida tez-tez tormoz suyuqligini tekshiring.",
+        "Intensiv tormoz berishda suyuqlik qizib ketishi mumkin — sifatiga e'tibor bering.",
+      ],
+      [
+        "На горных дорогах и в городских пробках — чаще проверяйте.",
+        "При интенсивном торможении жидкость может перегреться — следите за качеством.",
+      ],
+      [
+        "On mountain roads and in city traffic — check more often.",
+        "Heavy braking can overheat the fluid — pay attention to quality.",
+      ],
+    ),
+    warnings: TL(
+      [
+        "Tormoz pedali yumshoq yoki \"botib\" ketadi.",
+        "Tormozlash masofasi uzaydi.",
+        "Tormoz suyuqligi darajasi tushadi.",
+        "Tormoz ogohlantirish chirog'i yonadi.",
+        "Mashina ostida tormoz suyuqligi sizib chiqadi.",
+      ],
+      [
+        "Мягкая или \"проваливающаяся\" педаль тормоза.",
+        "Увеличение тормозного пути.",
+        "Падение уровня тормозной жидкости.",
+        "Индикатор тормозов горит.",
+        "Утечка жидкости под машиной.",
+      ],
+      [
+        "Soft or sinking brake pedal.",
+        "Increased braking distance.",
+        "Brake fluid level drops.",
+        "Brake warning light is on.",
+        "Fluid leak under the vehicle.",
+      ],
+    ),
+    usefulTips: TL(
+      [
+        "Tormoz suyuqligi namlikni yutadi — shuning uchun vaqti-vaqtida almashtirish zarur.",
+        "Past sifatli yoki noto'g'ri suyuqlik tormoz tizimini shikastlaydi.",
+        "Tormoz muammolari — bevosita xavfsizlik masalasi, kechiktirmang.",
+      ],
+      [
+        "Тормозная жидкость поглощает влагу — поэтому требует периодической замены.",
+        "Неправильная или низкокачественная жидкость повреждает тормозную систему.",
+        "Проблемы с тормозами — вопрос безопасности, не откладывайте.",
+      ],
+      [
+        "Brake fluid absorbs moisture — that is why periodic replacement is necessary.",
+        "Wrong or low-quality fluid damages the brake system.",
+        "Brake issues are a safety matter — do not delay.",
+      ],
+    ),
+    summaryInspection: T("Har 10 000 km da.", "Каждые 10 000 км.", "Every 10,000 km."),
+    summaryReplacement: T("Har 32 500 km yoki 2 yilda.", "Каждые 32 500 км или 2 года.", "Every 32,500 km or 2 years."),
+    badges: ["inspect", "replace", "safety"],
+  },
+
+  transmission: {
+    partId: "transmission",
+    title: T("Transmissiya moyi", "Трансмиссионное масло", "Transmission fluid"),
+    function: T(
+      "Transmissiya moyi uzatmalar qutisi va mexanik uzatma qismlarini moylaydi, sovutadi va yeyilishdan himoya qiladi.",
+      "Трансмиссионное масло смазывает, охлаждает и защищает от износа детали коробки передач.",
+      "Transmission fluid lubricates, cools and protects gearbox components from wear.",
+    ),
+    intervals: [
+      {
+        label: T("Mexanik KPP", "Механическая КПП", "Manual gearbox"),
+        value: T("Har servisda tekshirish", "Проверка на каждом ТО", "Check every service"),
+        tone: "accent",
+      },
+      {
+        label: T("Avtomat KPP", "Автоматическая КПП", "Automatic gearbox"),
+        value: T("~105 000 km", "~105 000 км", "~105,000 km"),
+        tone: "warn",
+      },
+    ],
+    inspection: TL(
+      [
+        "Mexanik uzatma qutisi moyi har texnik xizmatda tekshiriladi.",
+        "Suyuqlik darajasi va rangini tekshiring.",
+        "Sizish belgilarini ko'zdan kechiring.",
+        "Avtomat uzatma qutisi moyi reglament bo'yicha ~105 000 km da almashtiriladi.",
+      ],
+      [
+        "Масло МКПП проверяется на каждом ТО.",
+        "Проверяйте уровень и цвет жидкости.",
+        "Осматривайте на признаки утечек.",
+        "Масло АКПП по регламенту меняется ~каждые 105 000 км.",
+      ],
+      [
+        "Manual gearbox oil checked at every service.",
+        "Check fluid level and color.",
+        "Inspect for signs of leaks.",
+        "Automatic transmission fluid replaced per regulation at ~105,000 km.",
+      ],
+    ),
+    replacement: TL(
+      [
+        "Avtomat KPP: normal sharoitda har 140 000 km da almashtiring.",
+        "Og'ir sharoitda: har 70 000 km da almashtirish tavsiya etiladi.",
+        "Mexanik KPP: sizish yoki holat yomonlashganda almashtiring.",
+        "Faqat tavsiya etilgan suyuqlik turini ishlating.",
+      ],
+      [
+        "АКПП: в нормальных условиях — каждые 140 000 км.",
+        "В тяжёлых условиях: каждые 70 000 км.",
+        "МКПП: при утечке или ухудшении состояния — замена.",
+        "Используйте только рекомендованный тип жидкости.",
+      ],
+      [
+        "Automatic: normal conditions — every 140,000 km.",
+        "Heavy conditions: every 70,000 km.",
+        "Manual: replace on leaks or when condition deteriorates.",
+        "Only use the recommended fluid type.",
+      ],
+    ),
+    heavyUsage: TL(
+      [
+        "Og'ir yuk, tog' yo'llari va tirbandlik uzatma qutisiga yuklanishni oshiradi.",
+        "Bu sharoitlarda avtomat uzatma moyini oldinroq almashtiring.",
+      ],
+      [
+        "Тяжёлый груз, горы и пробки повышают нагрузку на коробку.",
+        "В таких условиях меняйте масло АКПП раньше срока.",
+      ],
+      [
+        "Heavy loads, mountain roads and traffic increase gearbox stress.",
+        "In these conditions replace automatic transmission fluid earlier.",
+      ],
+    ),
+    warnings: TL(
+      [
+        "Uzatmalar qotib qoladi yoki shiqillaydi.",
+        "Sirpanish his etiladi.",
+        "Mashina ostida moy izi.",
+        "Avtomat uzatma sekin javob beradi.",
+        "G'alati ovoz yoki titrash.",
+      ],
+      [
+        "Передачи не включаются или скрежет.",
+        "Пробуксовка.",
+        "Масляные пятна под машиной.",
+        "Медленный отклик АКПП.",
+        "Необычный звук или вибрация.",
+      ],
+      [
+        "Gears won't engage or grind.",
+        "Slipping sensation.",
+        "Oil spots under the vehicle.",
+        "Slow automatic transmission response.",
+        "Unusual noise or vibration.",
+      ],
+    ),
+    usefulTips: TL(
+      [
+        "Avtomat uzatmali mashinalarda to'g'ri suyuqlik turi juda muhim.",
+        "Transmissiya muammolari erta aniqlansa, qimmat ta'mirdan qutilasiz.",
+        "Suyuqlik rangi: qizg'ish — normal, qoraygan yoki kuygan hid — almashtiring.",
+      ],
+      [
+        "Для автомата правильный тип жидкости критически важен.",
+        "Ранняя диагностика трансмиссии спасёт от дорогого ремонта.",
+        "Цвет: красноватый — норма, тёмный или запах гари — замена.",
+      ],
+      [
+        "For automatics the correct fluid type is critical.",
+        "Early detection of transmission issues saves costly repairs.",
+        "Fluid color: reddish — normal; dark or burnt smell — replace.",
+      ],
+    ),
+    summaryInspection: T("MКPP: har servisda · АКPP: reglament bo'yicha.", "МКПП: на каждом ТО · АКПП: по регламенту.", "MT: every service · AT: per regulation."),
+    summaryReplacement: T("АКPP: ~105 000 km · og'irda 70 000 km.", "АКПП: ~105 000 км · в тяжёлых 70 000 км.", "AT: ~105,000 km · heavy 70,000 km."),
+    badges: ["inspect", "replace", "heavy"],
+  },
+
+  steering: {
+    partId: "steering",
+    title: T("Rul mexanizmi", "Рулевой механизм", "Steering system"),
+    function: T(
+      "Rul mexanizmi haydovchining boshqaruvini g'ildiraklarga uzatadi va avtomobilning to'g'ri harakatini ta'minlaydi.",
+      "Рулевой механизм передаёт управление водителя на колёса и обеспечивает правильное движение автомобиля.",
+      "The steering system transfers the driver's input to the wheels and ensures correct vehicle direction.",
+    ),
+    intervals: [
+      {
+        label: T("Tekshirish", "Проверка", "Inspection"),
+        value: T("Har servisda", "На каждом ТО", "Every service"),
+        tone: "accent",
+      },
+      {
+        label: T("Burchaklar (alignment)", "Углы установки", "Wheel alignment"),
+        value: T("Har 20 000 km", "Каждые 20 000 км", "Every 20,000 km"),
+      },
+    ],
+    inspection: TL(
+      [
+        "Rul g'ildiragi va mexanizmi har texnik xizmatda tekshiriladi.",
+        "Rul gidrokuchaytirgichi suyuqligi, naylari va ulanishlari tekshiriladi.",
+        "G'ildirak burchaklari har 20 000 km yoki rul o'zgarganda tekshiriladi.",
+        "Xavfsizlik tasmalari va kuzovga mahkamlash to'qalari ham tekshiriladi.",
+        "Rul bo'sh yurishi (lyuft) normadan oshmasligi kerak.",
+      ],
+      [
+        "Рулевое колесо и механизм — на каждом ТО.",
+        "ГУР: жидкость, трубки и соединения — проверка.",
+        "Углы колёс — каждые 20 000 км или при изменении руля.",
+        "Ремни безопасности и крепёжные узлы кузова — проверка.",
+        "Люфт рулевого колеса не должен превышать норму.",
+      ],
+      [
+        "Steering wheel and mechanism — every service.",
+        "Power steering fluid, tubes and connections — inspect.",
+        "Wheel angles — every 20,000 km or when steering changes.",
+        "Seatbelts and body mounting nodes — inspect.",
+        "Steering wheel play must not exceed normal limits.",
+      ],
+    ),
+    replacement: TL(
+      [
+        "Gidrokuchaytiruvchi suyuqligi holat yomonlashganda almashtiriladi.",
+        "Shikastlangan nay, ulanish yoki reyk — darhol almashtiring.",
+        "Rul suyuqligi rangini tekshiring — loyqalangan bo'lsa almashtiring.",
+      ],
+      [
+        "Жидкость ГУР меняется при ухудшении состояния.",
+        "Повреждённая трубка, соединение или рейка — немедленная замена.",
+        "Проверяйте цвет жидкости ГУР — при помутнении заменить.",
+      ],
+      [
+        "Power steering fluid is replaced when condition deteriorates.",
+        "Damaged tube, connection or rack — replace immediately.",
+        "Check power steering fluid color — replace if cloudy.",
+      ],
+    ),
+    heavyUsage: TL(
+      [
+        "Yomon yo'l, chuqurlar va keskin burilishlar rul mexanizmini tez yeyintiradi.",
+        "Kuchli zarba yoki avariyadan keyin burchaklarni albatta tekshiring.",
+      ],
+      [
+        "Плохие дороги, ямы и резкие повороты быстро изнашивают механизм.",
+        "После сильного удара или аварии — обязательно проверьте углы.",
+      ],
+      [
+        "Bad roads, potholes and sharp turns wear the steering mechanism faster.",
+        "After a strong impact or accident — always check alignment.",
+      ],
+    ),
+    warnings: TL(
+      [
+        "Rul bir tomonga tortadi.",
+        "Rul bo'sh his qilinadi (lyuft oshgan).",
+        "Burishda g'alati ovoz.",
+        "Rul og'irlashadi.",
+        "Gidrokuchaytiruvchi suyuqligi kamayadi.",
+        "Notekis shina yeyilishi.",
+      ],
+      [
+        "Руль тянет в одну сторону.",
+        "Увеличенный люфт руля.",
+        "Посторонний звук при повороте.",
+        "Тяжёлый руль.",
+        "Падение уровня жидкости ГУР.",
+        "Неравномерный износ шин.",
+      ],
+      [
+        "Steering pulls to one side.",
+        "Increased steering play.",
+        "Strange noise when turning.",
+        "Heavy steering wheel.",
+        "Power steering fluid level drops.",
+        "Uneven tire wear.",
+      ],
+    ),
+    usefulTips: TL(
+      [
+        "G'ildirak burchaklari noto'g'ri bo'lsa shina tez yeyiladi.",
+        "Rul muammosi sezilsa kechiktirmang — bu xavfsizlik masalasi.",
+        "Kuchli zarba yoki avariyadan keyin servisga boring.",
+      ],
+      [
+        "Неправильные углы — шины быстро изнашиваются.",
+        "Проблемы с рулём — не откладывайте, это вопрос безопасности.",
+        "После удара или ДТП — в сервис.",
+      ],
+      [
+        "Wrong wheel angles cause rapid tire wear.",
+        "Steering problems — do not delay, it is a safety issue.",
+        "After an impact or accident — visit a service center.",
+      ],
+    ),
+    summaryInspection: T("Har servisda + burchaklar har 20 000 km.", "На каждом ТО + углы каждые 20 000 км.", "Every service + alignment every 20,000 km."),
+    summaryReplacement: T("Holat bo'yicha · shikastlanganda darhol.", "По состоянию · при повреждении — сразу.", "By condition · on damage — immediately."),
+    badges: ["inspect", "safety"],
+  },
+
+  exhaust: {
+    partId: "exhaust",
+    title: T("Chiqindi gaz tizimi", "Выхлопная система", "Exhaust system"),
+    function: T(
+      "Chiqindi gaz tizimi yonish gazlarini dvigateldan tashqariga chiqaradi, shovqinni kamaytiradi va zararli gazlarni filtrlaydi.",
+      "Выхлопная система выводит газы сгорания из двигателя, снижает шум и фильтрует вредные выбросы.",
+      "The exhaust system removes combustion gases from the engine, reduces noise and filters harmful emissions.",
+    ),
+    intervals: [
+      {
+        label: T("Tekshirish", "Проверка", "Inspection"),
+        value: T("Har servisda", "На каждом ТО", "Every service"),
+        tone: "accent",
+      },
+      {
+        label: T("PCV / EVAP tizimi", "Система PCV/EVAP", "PCV/EVAP system"),
+        value: T("Muntazam", "Регулярно", "Regularly"),
+      },
+    ],
+    inspection: TL(
+      [
+        "Ishlangan gazlarni chiqarish tizimi va uning mahkamlanishi har servisda tekshiriladi.",
+        "PCV tizimi (karter ventilyatsiyasi) muntazam tekshiriladi.",
+        "EVAP bachok tizimi (yoqilg'i bug'larini tutib qolish) nazorat qilinadi.",
+        "Gaz taqsimlash mexanizmi yuritma zanjiri ham tekshiriladi.",
+        "Egzoz trubasi va ulanishlaridan gaz sizishi bo'lmasligi kerak.",
+      ],
+      [
+        "Система выпуска и крепёж — на каждом ТО.",
+        "Система PCV (вентиляция картера) — регулярно.",
+        "Система EVAP (улавливание паров) — контроль.",
+        "Цепь привода ГРМ — также проверяется.",
+        "Трубки выхлопа и соединения не должны пропускать газы.",
+      ],
+      [
+        "Exhaust system and its mounting — every service.",
+        "PCV system (crankcase ventilation) — regularly.",
+        "EVAP system (fuel vapor capture) — monitored.",
+        "Timing chain drive — also inspected.",
+        "Exhaust pipes and connections must not leak gases.",
+      ],
+    ),
+    replacement: TL(
+      [
+        "Korroziya, sizish yoki shikastlanganda tezda almashtiring.",
+        "Katalitik konvertor eskirganda yoki shikastlanganda almashtiring.",
+        "PCV va EVAP komponentlari holat bo'yicha almashtiriladi.",
+      ],
+      [
+        "При коррозии, утечке или повреждении — срочная замена.",
+        "Катализатор — при износе или повреждении.",
+        "Компоненты PCV и EVAP — по состоянию.",
+      ],
+      [
+        "On corrosion, leaks or damage — replace urgently.",
+        "Catalytic converter — when worn or damaged.",
+        "PCV and EVAP components — by condition.",
+      ],
+    ),
+    heavyUsage: TL(
+      [
+        "Tuzli yo'llar va namlik korroziyani tezlashtiradi.",
+        "Qisqa safarlar katalitik konvertorni to'liq isitmaydi — tez eskiradi.",
+      ],
+      [
+        "Солёные дороги и влажность ускоряют коррозию.",
+        "Короткие поездки не разогревают катализатор — он быстрее изнашивается.",
+      ],
+      [
+        "Salty roads and humidity accelerate corrosion.",
+        "Short trips do not fully heat the catalytic converter — it wears faster.",
+      ],
+    ),
+    warnings: TL(
+      [
+        "Baland yoki g'alati egzoz shovqini.",
+        "Egzoz hidi salonga kiradi.",
+        "Mashina ostidan taqillash.",
+        "Qora yoki oq tutun.",
+        "Check Engine chirog'i (katalitik konvertor).",
+        "Yoqilg'i sarfining oshishi.",
+      ],
+      [
+        "Громкий или необычный звук выхлопа.",
+        "Запах выхлопа в салоне.",
+        "Дребезжание под машиной.",
+        "Чёрный или белый дым.",
+        "Индикатор Check Engine (катализатор).",
+        "Рост расхода топлива.",
+      ],
+      [
+        "Loud or unusual exhaust noise.",
+        "Exhaust smell inside cabin.",
+        "Rattling under the vehicle.",
+        "Black or white smoke.",
+        "Check Engine light (catalytic converter).",
+        "Increased fuel consumption.",
+      ],
+    ),
+    usefulTips: TL(
+      [
+        "Qisqa safarlardan so'ng vaqti-vaqtida uzoqroq yuring — katalitikni tozalaydi.",
+        "Egzoz hidi salonga kirsa darhol servisga boring — bu jiddiy xavf.",
+        "Korroziyaga qarshi emal bilan egzoz trubalarini himoya qilish mumkin.",
+      ],
+      [
+        "После коротких поездок иногда проезжайте дольше — очищает катализатор.",
+        "Запах выхлопа в салоне — немедленно в сервис, это серьёзная опасность.",
+        "Трубы можно защитить антикоррозийным составом.",
+      ],
+      [
+        "After short trips occasionally drive longer — it cleans the catalytic converter.",
+        "Exhaust smell inside the cabin — go to service immediately, it is a serious hazard.",
+        "Exhaust pipes can be protected with anti-corrosion coating.",
+      ],
+    ),
+    summaryInspection: T("Har servisda.", "На каждом ТО.", "Every service."),
+    summaryReplacement: T("Korroziya / sizishda — darhol.", "При коррозии/утечке — сразу.", "On corrosion/leaks — immediately."),
+    badges: ["inspect", "safety"],
+  },
 };
 
 /**
@@ -583,30 +1433,6 @@ export const COBALT_PART_INFO: Record<string, CobaltPartInfo> = {
  * for future expansion (extra cards, tooltips, expanded schedule, etc.).
  */
 export const COBALT_FUTURE_PART_INFO: Record<string, CobaltPartInfo> = {
-  fuelFilter: {
-    partId: "fuelFilter",
-    title: T("Yoqilg'i filtri", "Топливный фильтр", "Fuel filter"),
-    function: T(
-      "Yoqilg'i filtri yoqilg'idan ifloslantiruvchi zarrachalarni tozalaydi va dvigatelni himoya qiladi.",
-      "Топливный фильтр очищает топливо от загрязнений и защищает двигатель.",
-      "The fuel filter removes contaminants from fuel and protects the engine.",
-    ),
-    inspection: TL(
-      ["Reglament bo'yicha tekshiring.", "Yoqilg'i sifati filtrning xizmat muddatiga ta'sir qiladi."],
-      ["Проверка по регламенту.", "Качество топлива влияет на срок службы фильтра."],
-      ["Inspect per regulation.", "Fuel quality affects filter lifespan."],
-    ),
-    replacement: TL(
-      ["Reglament bo'yicha almashtiring.", "Sifatsiz yoqilg'idan keyin oldinroq almashtirish kerak bo'lishi mumkin."],
-      ["Замена по регламенту.", "После некачественного топлива возможна досрочная замена."],
-      ["Replace per regulation.", "Poor fuel quality may require earlier replacement."],
-    ),
-    heavyUsage: TL(["Sifatsiz yoqilg'i quyilganda tez-tez tekshiring."], ["При плохом топливе — чаще проверка."], ["Inspect more often after poor-quality fuel."]),
-    warnings: TL(["Quvvat yo'qolishi.", "Beqaror salt yurish.", "Yoqilg'i tizimida bosim pasayishi."], ["Потеря мощности.", "Неустойчивый холостой ход.", "Падение давления в топливной системе."], ["Power loss.", "Unstable idle.", "Fuel pressure drop."]),
-    summaryInspection: T("Reglament bo'yicha.", "По регламенту.", "Per regulation."),
-    summaryReplacement: T("Reglament bo'yicha.", "По регламенту.", "Per regulation."),
-    badges: ["inspect", "replace"],
-  },
   fuelHoses: {
     partId: "fuelHoses",
     title: T("Yoqilg'i shlang va ulanishlari", "Топливные шланги и соединения", "Fuel hoses and connections"),
@@ -622,22 +1448,6 @@ export const COBALT_FUTURE_PART_INFO: Record<string, CobaltPartInfo> = {
     summaryInspection: T("Har servisda.", "На каждом ТО.", "Every service."),
     summaryReplacement: T("Sizish/yoriqlarda — darhol.", "При утечках/трещинах — сразу.", "On leaks/cracks — immediately."),
     badges: ["inspect", "replace", "safety"],
-  },
-  exhaust: {
-    partId: "exhaust",
-    title: T("Chiqaruv tizimi", "Выхлопная система", "Exhaust system"),
-    function: T(
-      "Chiqaruv tizimi yonish gazlarini xavfsiz chiqarib yuboradi va shovqinni kamaytiradi.",
-      "Выхлопная система безопасно отводит газы сгорания и снижает шум.",
-      "The exhaust system safely removes combustion gases and reduces noise.",
-    ),
-    inspection: TL(["Mahkamlashni tekshiring.", "Sizish va korroziyani tekshiring.", "Shovqin oshishini nazorat qiling."], ["Проверка креплений.", "Проверка утечек и коррозии.", "Контроль роста шума."], ["Inspect mounting.", "Check for leaks and corrosion.", "Watch for increasing noise."]),
-    replacement: TL(["Korroziya, sizish yoki shikastlanganda almashtiring."], ["При коррозии, утечке или повреждении — замена."], ["Replace on corrosion, leaks or damage."]),
-    heavyUsage: TL(["Tuzli yo'llar va namlik korroziyani tezlashtiradi."], ["Соль и влажность ускоряют коррозию."], ["Salt and humidity accelerate corrosion."]),
-    warnings: TL(["Baland shovqin.", "Egzoz hidi salonda.", "Mashina ostidan tovush."], ["Громкий шум.", "Запах выхлопа в салоне.", "Звон под машиной."], ["Loud noise.", "Exhaust smell inside the cabin.", "Rattling under the vehicle."]),
-    summaryInspection: T("Har servisda.", "На каждом ТО.", "Every service."),
-    summaryReplacement: T("Korroziya/sizishda.", "При коррозии/утечке.", "On corrosion/leaks."),
-    badges: ["inspect", "safety"],
   },
   evap: {
     partId: "evap",
@@ -671,26 +1481,6 @@ export const COBALT_FUTURE_PART_INFO: Record<string, CobaltPartInfo> = {
     summaryReplacement: T("Holat bo'yicha.", "По состоянию.", "By condition."),
     badges: ["inspect"],
   },
-  transmissionOil: {
-    partId: "transmissionOil",
-    title: T("Transmissiya moyi", "Трансмиссионное масло", "Transmission oil"),
-    function: T(
-      "Transmissiya moyi uzatma qutisi qismlarini moylaydi va sovutadi.",
-      "Трансмиссионное масло смазывает и охлаждает детали коробки передач.",
-      "Transmission oil lubricates and cools gearbox components.",
-    ),
-    inspection: TL(
-      ["Mexanik uzatma moyi: reglament bo'yicha tekshiring.", "Avtomat uzatma moyi: reglamentda taxminan 105 000 km belgilangan."],
-      ["МКПП: проверка по регламенту.", "АКПП: в регламенте указано ~105 000 км."],
-      ["MT oil: inspect per regulation.", "AT oil: regulation notes ~105,000 km."],
-    ),
-    replacement: TL(["Og'ir foydalanishda oldinroq xizmat ko'rsatish talab etilishi mumkin."], ["В тяжёлых условиях возможна досрочная замена."], ["Heavy usage may require earlier service."]),
-    heavyUsage: TL(["Og'ir yuk, tirbandlik va tog' yo'llari moy yuklamasini oshiradi."], ["Груз, пробки и горы повышают нагрузку на масло."], ["Heavy loads, traffic and mountains increase oil stress."]),
-    warnings: TL(["Uzatmalar tutilib qoladi.", "Shovqin.", "Sekin javob."], ["Толчки при переключении.", "Шум.", "Замедленный отклик."], ["Gear shifts hesitate.", "Noise.", "Slow response."]),
-    summaryInspection: T("Reglament bo'yicha.", "По регламенту.", "Per regulation."),
-    summaryReplacement: T("AKPP ~105 000 km · og'irda oldinroq.", "АКПП ~105 000 км · в тяжёлых раньше.", "AT ~105,000 km · earlier in heavy usage."),
-    badges: ["inspect", "replace"],
-  },
   seatBelts: {
     partId: "seatBelts",
     title: T("Xavfsizlik kamarlari va qulflari", "Ремни безопасности и замки", "Seat belts and locks"),
@@ -705,22 +1495,6 @@ export const COBALT_FUTURE_PART_INFO: Record<string, CobaltPartInfo> = {
     warnings: TL(["Kamar tortilmaydi.", "Qulf yopilmaydi.", "Lenta yirtilgan."], ["Ремень не втягивается.", "Замок не защёлкивается.", "Лента порвана."], ["Belt does not retract.", "Lock does not engage.", "Webbing torn."]),
     summaryInspection: T("Har servisda.", "На каждом ТО.", "Every service."),
     summaryReplacement: T("Shikastlanganda darhol.", "При повреждении — сразу.", "On damage — immediately."),
-    badges: ["inspect", "safety"],
-  },
-  fuelTank: {
-    partId: "fuelTank",
-    title: T("Yoqilg'i baki", "Топливный бак", "Fuel tank"),
-    function: T(
-      "Yoqilg'i baki yoqilg'ini xavfsiz saqlash uchun mo'ljallangan.",
-      "Топливный бак предназначен для безопасного хранения топлива.",
-      "The fuel tank stores fuel safely.",
-    ),
-    inspection: TL(["Reglament yoki ifloslanish belgilari bo'lganda tekshiring/tozalang."], ["Проверка/чистка по регламенту или при признаках загрязнения."], ["Inspect/clean per regulation or on contamination signs."]),
-    replacement: TL(["Shikastlanganda yoki tuzatib bo'lmas korroziyada almashtiring."], ["При повреждении или неустранимой коррозии — замена."], ["Replace on damage or irreparable corrosion."]),
-    heavyUsage: TL(["Sifatsiz yoqilg'i tank ichida cho'kma qoldiradi."], ["Некачественное топливо оставляет осадок в баке."], ["Poor fuel leaves sediment inside the tank."]),
-    warnings: TL(["Yoqilg'i sizishi.", "Yoqilg'i hidi.", "Tankdagi cho'kma."], ["Утечка топлива.", "Запах топлива.", "Осадок в баке."], ["Fuel leak.", "Fuel smell.", "Sediment in the tank."]),
-    summaryInspection: T("Talab bo'yicha.", "По требованию.", "When required."),
-    summaryReplacement: T("Shikast yoki korroziyada.", "При повреждении/коррозии.", "On damage or corrosion."),
     badges: ["inspect", "safety"],
   },
 };
