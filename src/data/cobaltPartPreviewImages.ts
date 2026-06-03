@@ -1,11 +1,11 @@
 import airFilterCylinder from "@/assets/maintenance-previews/air-filter-cylinder.jpg";
-import brakeFluidAsset from "@/assets/maintenance-previews/brake-fluid.png.asset.json";
-import cabinFilterAsset from "@/assets/maintenance-previews/cabin-filter.png.asset.json";
+import brakeFluidAsset from "@/assets/maintenance-previews/brake-fluid.asset.json";
+import cabinFilterAsset from "@/assets/maintenance-previews/cabin-filter.asset.json";
 import exhaustSystem from "@/assets/maintenance-previews/exhaust-system.jpg";
-import fuelFilterAsset from "@/assets/maintenance-previews/fuel-filter.png.asset.json";
-import sparkPlugAsset from "@/assets/maintenance-previews/spark-plug.png.asset.json";
-import steeringMechanismAsset from "@/assets/maintenance-previews/steering-mechanism.png.asset.json";
-import transmissionOilAsset from "@/assets/maintenance-previews/transmission-oil.png.asset.json";
+import fuelFilterAsset from "@/assets/maintenance-previews/fuel-filter.asset.json";
+import sparkPlugAsset from "@/assets/maintenance-previews/spark-plug.asset.json";
+import steeringMechanismAsset from "@/assets/maintenance-previews/steering-mechanism.asset.json";
+import transmissionOilAsset from "@/assets/maintenance-previews/transmission-oil.asset.json";
 import cobaltSuspension from "@/assets/parts/cobalt/suspension.jpg";
 
 export const COBALT_PART_PREVIEW_IMAGES: Record<string, string> = {
