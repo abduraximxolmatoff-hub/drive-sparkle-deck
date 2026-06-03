@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { CobaltSectionPreview } from "@/components/CobaltSectionPreview";
+import tiresImage from "@/assets/parts/cobalt/tires.jpg";
+
 
 interface Props {
   brandAccent: string;
@@ -241,6 +244,12 @@ export function CobaltTirePanel({ brandAccent }: Props) {
       transition={{ duration: 0.5 }}
       className="mt-5 space-y-4"
     >
+      <CobaltSectionPreview
+        imageSrc={tiresImage}
+        title={ts(T.funcTitle, L)}
+        brandAccent={brandAccent}
+      />
+
       {/* Header banner */}
       <div
         className="overflow-hidden rounded-2xl border p-5 backdrop-blur-md sm:p-6"

@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { useLanguage } from "@/i18n/LanguageContext";
+import { CobaltSectionPreview } from "@/components/CobaltSectionPreview";
 import type { CarPart } from "@/data/carParts";
 import { COBALT_PART_INFO, type CobaltPartInfo } from "@/data/cobaltPartInfo";
-
+import { COBALT_PART_PREVIEW_IMAGES } from "@/data/cobaltPartPreviewImages";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface Props {
   part: CarPart;
@@ -21,10 +22,19 @@ function Badge({
   const styles: Record<typeof kind, { bg: string; fg: string; border: string }> = {
     inspect: { bg: `${accent}1f`, fg: accent, border: `${accent}55` },
     replace: { bg: accent, fg: "oklch(0.13 0.01 250)", border: accent },
-    heavy: { bg: "rgba(239,68,68,0.12)", fg: "rgb(248,113,113)", border: "rgba(239,68,68,0.4)" },
-    safety: { bg: "rgba(250,204,21,0.12)", fg: "rgb(250,204,21)", border: "rgba(250,204,21,0.4)" },
+    heavy: {
+      bg: "rgba(239,68,68,0.12)",
+      fg: "rgb(248,113,113)",
+      border: "rgba(239,68,68,0.4)",
+    },
+    safety: {
+      bg: "rgba(250,204,21,0.12)",
+      fg: "rgb(250,204,21)",
+      border: "rgba(250,204,21,0.4)",
+    },
   };
   const s = styles[kind];
+
   return (
     <span
       className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
@@ -60,13 +70,13 @@ function Section({
 function BulletList({ items, accent }: { items: string[]; accent: string }) {
   return (
     <ul className="space-y-1.5 text-xs leading-relaxed text-foreground/90">
-      {items.map((b, i) => (
-        <li key={i} className="flex gap-2">
+      {items.map((item, index) => (
+        <li key={index} className="flex gap-2">
           <span
             className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <span>{b}</span>
+          <span>{item}</span>
         </li>
       ))}
     </ul>
@@ -96,7 +106,12 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
       className="mt-5 overflow-hidden rounded-2xl border border-border bg-card-gradient p-5 shadow-card backdrop-blur-md sm:p-6"
       style={{ borderColor: `${brandAccent}40` }}
     >
-      {/* Header */}
+      <CobaltSectionPreview
+        imageSrc={COBALT_PART_PREVIEW_IMAGES[part.id]}
+        title={info.title[lang]}
+        brandAccent={brandAccent}
+      />
+
       <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <span
@@ -112,11 +127,10 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
             >
               Chevrolet Cobalt 1.5L
             </p>
-            <h3 className="font-display text-xl font-semibold sm:text-2xl">
-              {info.title[lang]}
-            </h3>
+            <h3 className="font-display text-xl font-semibold sm:text-2xl">{info.title[lang]}</h3>
           </div>
         </div>
+
         <div className="flex flex-col items-end gap-1.5">
           <div className="flex flex-wrap items-center gap-1.5">
             <span
@@ -129,10 +143,11 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
             >
               {t("cobalt.regulationBased")}
             </span>
-            {info.badges.map((b) => (
-              <Badge key={b} kind={b} accent={brandAccent} label={badgeLabels[b]} />
+            {info.badges.map((badge) => (
+              <Badge key={badge} kind={badge} accent={brandAccent} label={badgeLabels[badge]} />
             ))}
           </div>
+
           <span
             className="rounded-md px-1.5 py-0.5 text-[10px] text-muted-foreground"
             style={{ background: `${brandAccent}0d` }}
@@ -143,15 +158,11 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
         </div>
       </div>
 
-      {/* Function */}
-      <p className="mb-4 text-sm leading-relaxed text-foreground/85">
-        {info.function[lang]}
-      </p>
+      <p className="mb-4 text-sm leading-relaxed text-foreground/85">{info.function[lang]}</p>
 
-      {/* Interval chips */}
       {info.intervals && info.intervals.length > 0 && (
         <div className="mb-4 flex flex-wrap gap-2">
-          {info.intervals.map((chip, i) => {
+          {info.intervals.map((chip, index) => {
             const tone = chip.tone ?? "default";
             const toneStyles: Record<string, { bg: string; fg: string; border: string }> = {
               default: {
@@ -172,9 +183,10 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
               },
             };
             const s = toneStyles[tone];
+
             return (
               <div
-                key={i}
+                key={index}
                 className="flex items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] backdrop-blur-sm"
                 style={{ background: s.bg, borderColor: s.border }}
               >
@@ -190,7 +202,6 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
         </div>
       )}
 
-      {/* Sections grid */}
       <div className="grid gap-3 md:grid-cols-2">
         <Section title={t("cobalt.section.inspection")} accent={brandAccent}>
           <BulletList items={info.inspection[lang]} accent={brandAccent} />
@@ -213,8 +224,6 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
         )}
       </div>
 
-
-      {/* Summary */}
       <div
         className="mt-4 grid gap-2 rounded-xl border p-4 sm:grid-cols-2"
         style={{
