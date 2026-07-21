@@ -406,8 +406,14 @@ const cobalt: Record<Lang, Dict> = {
   },
 };
 
+const chev: Record<Lang, Dict> = {
+  uz: { "chev.generalRecommendation": "Umumiy tavsiya" },
+  ru: { "chev.generalRecommendation": "Общая рекомендация" },
+  en: { "chev.generalRecommendation": "General recommendation" },
+};
+
 for (const l of LANGS)
-  Object.assign(translations[l], extra[l], schedule[l], more[l], cobalt[l]);
+  Object.assign(translations[l], extra[l], schedule[l], more[l], cobalt[l], chev[l]);
 
 
 
