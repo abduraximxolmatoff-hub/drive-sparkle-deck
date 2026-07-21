@@ -1,13 +1,19 @@
 import { motion } from "framer-motion";
 import { CobaltSectionPreview } from "@/components/CobaltSectionPreview";
 import type { CarPart } from "@/data/carParts";
-import { COBALT_PART_INFO, type CobaltPartInfo } from "@/data/cobaltPartInfo";
+import type { CobaltPartInfo } from "@/data/cobaltPartInfo";
 import { COBALT_PART_PREVIEW_IMAGES } from "@/data/cobaltPartPreviewImages";
+import { getChevPartInfo } from "@/data/chevPartContent";
+import { getChevModelSpec } from "@/data/chevModelSpecs";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 interface Props {
   part: CarPart;
   brandAccent: string;
+  /** Full display name shown in the panel header (e.g. "Chevrolet Tracker"). */
+  modelName: string;
+  /** Slug of the currently-selected model — used to resolve per-model content. */
+  modelSlug: string;
 }
 
 function Badge({
