@@ -327,7 +327,7 @@ function ModelDetailPage() {
             )}
           </AnimatePresence>
 
-          {model.slug !== "cobalt-15l" && (
+          {brand.slug !== "chevrolet" && (
             <MaintenanceSchedulePlaceholder brandAccent={brand.accent} />
           )}
         </div>
