@@ -1,13 +1,19 @@
 import { motion } from "framer-motion";
 import { CobaltSectionPreview } from "@/components/CobaltSectionPreview";
 import type { CarPart } from "@/data/carParts";
-import { COBALT_PART_INFO, type CobaltPartInfo } from "@/data/cobaltPartInfo";
+import type { CobaltPartInfo } from "@/data/cobaltPartInfo";
 import { COBALT_PART_PREVIEW_IMAGES } from "@/data/cobaltPartPreviewImages";
+import { getChevPartInfo } from "@/data/chevPartContent";
+import { getChevModelSpec } from "@/data/chevModelSpecs";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 interface Props {
   part: CarPart;
   brandAccent: string;
+  /** Full display name shown in the panel header (e.g. "Chevrolet Tracker"). */
+  modelName: string;
+  /** Slug of the currently-selected model — used to resolve per-model content. */
+  modelSlug: string;
 }
 
 function Badge({
@@ -83,9 +89,11 @@ function BulletList({ items, accent }: { items: string[]; accent: string }) {
   );
 }
 
-export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
+export function CobaltPartInfoPanel({ part, brandAccent, modelName, modelSlug }: Props) {
   const { t, lang } = useLanguage();
-  const info: CobaltPartInfo | undefined = COBALT_PART_INFO[part.id];
+  const info: CobaltPartInfo | undefined = getChevPartInfo(modelSlug, part.id);
+  const spec = getChevModelSpec(modelSlug);
+  const isRegulationBased = Boolean(spec?.regulationBased);
 
   if (!info) return null;
 
@@ -96,9 +104,14 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
     safety: t("cobalt.badge.safety"),
   };
 
+  // Skip the supplemental preview image when the interactive viewer above
+  // already shows the same part visual (tires / windows / etc.) — this fixes
+  // the "same image twice" bug on the Cobalt page.
+  const previewSrc = COBALT_PART_PREVIEW_IMAGES[part.id];
+
   return (
     <motion.div
-      key={part.id}
+      key={`${modelSlug}-${part.id}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
@@ -106,11 +119,7 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
       className="mt-5 overflow-hidden rounded-2xl border border-border bg-card-gradient p-5 shadow-card backdrop-blur-md sm:p-6"
       style={{ borderColor: `${brandAccent}40` }}
     >
-      <CobaltSectionPreview
-        imageSrc={COBALT_PART_PREVIEW_IMAGES[part.id]}
-        title={info.title[lang]}
-        brandAccent={brandAccent}
-      />
+      <CobaltSectionPreview imageSrc={previewSrc} title={info.title[lang]} brandAccent={brandAccent} />
 
       <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -125,7 +134,7 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
               className="text-[10px] font-semibold uppercase tracking-[0.3em]"
               style={{ color: brandAccent }}
             >
-              Chevrolet Cobalt 1.5L
+              {modelName}
             </p>
             <h3 className="font-display text-xl font-semibold sm:text-2xl">{info.title[lang]}</h3>
           </div>
@@ -141,7 +150,7 @@ export function CobaltPartInfoPanel({ part, brandAccent }: Props) {
                 borderColor: `${brandAccent}55`,
               }}
             >
-              {t("cobalt.regulationBased")}
+              {isRegulationBased ? t("cobalt.regulationBased") : t("chev.generalRecommendation")}
             </span>
             {info.badges.map((badge) => (
               <Badge key={badge} kind={badge} accent={brandAccent} label={badgeLabels[badge]} />

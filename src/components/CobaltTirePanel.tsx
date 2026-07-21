@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { CobaltSectionPreview } from "@/components/CobaltSectionPreview";
-import tiresImage from "@/assets/parts/cobalt/tires.jpg";
+import { getChevModelSpec } from "@/data/chevModelSpecs";
 
 
 interface Props {
   brandAccent: string;
+  modelName: string;
+  modelSlug: string;
 }
 
 type Lang = "uz" | "ru" | "en";
@@ -224,9 +225,19 @@ function TreadBar({
   );
 }
 
-export function CobaltTirePanel({ brandAccent }: Props) {
+export function CobaltTirePanel({ brandAccent, modelName, modelSlug }: Props) {
   const { lang } = useLanguage();
   const L = lang as Lang;
+  const spec = getChevModelSpec(modelSlug);
+  const isRegulationBased = Boolean(spec?.regulationBased);
+  const label = isRegulationBased
+    ? ts(T.regulationBased, L)
+    : { uz: "Umumiy tavsiya", ru: "Общая рекомендация", en: "General recommendation" }[L];
+
+  const frontPsi = spec?.tire.frontPsi ?? "32–33 PSI";
+  const rearPsi = spec?.tire.rearPsi ?? "30–32 PSI";
+  const loadedPsi = spec?.tire.loadedPsi ?? "34–35 PSI";
+  const replacementKm = spec?.tire.replacementKm ?? "40,000–50,000 km";
 
   const timeline = [
     { km: "0", label: { uz: "Yangi shina", ru: "Новая шина", en: "New tire" }[L] },
@@ -237,19 +248,13 @@ export function CobaltTirePanel({ brandAccent }: Props) {
 
   return (
     <motion.div
-      key="cobalt-tire"
+      key={`tire-${modelSlug}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.5 }}
       className="mt-5 space-y-4"
     >
-      <CobaltSectionPreview
-        imageSrc={tiresImage}
-        title={ts(T.funcTitle, L)}
-        brandAccent={brandAccent}
-      />
-
       {/* Header banner */}
       <div
         className="overflow-hidden rounded-2xl border p-5 backdrop-blur-md sm:p-6"
@@ -263,7 +268,7 @@ export function CobaltTirePanel({ brandAccent }: Props) {
           className="text-[10px] font-semibold uppercase tracking-[0.3em]"
           style={{ color: brandAccent }}
         >
-          Chevrolet Cobalt 1.5L · {ts(T.regulationBased, L)}
+          {modelName} · {label}
         </p>
         <h3 className="mt-1 font-display text-2xl font-bold sm:text-3xl">
           🛞 {ts(T.funcTitle, L)}
@@ -285,14 +290,14 @@ export function CobaltTirePanel({ brandAccent }: Props) {
       <div className="grid gap-4 md:grid-cols-2">
         <Card accent={brandAccent} icon="🎛️" title={ts(T.pressureTitle, L)} glow>
           <div className="space-y-2">
-            <PressureRow label={ts(T.front, L)} value="32–33 PSI" accent={brandAccent} />
-            <PressureRow label={ts(T.rear, L)} value="30–32 PSI" accent={brandAccent} />
-            <PressureRow label={ts(T.loaded, L)} value="34–35 PSI" accent={brandAccent} />
+            <PressureRow label={ts(T.front, L)} value={frontPsi} accent={brandAccent} />
+            <PressureRow label={ts(T.rear, L)} value={rearPsi} accent={brandAccent} />
+            <PressureRow label={ts(T.loaded, L)} value={loadedPsi} accent={brandAccent} />
           </div>
           <p className="mt-3 text-[11px] italic text-muted-foreground">❄ {ts(T.coldNote, L)}</p>
         </Card>
 
-        <Card accent={brandAccent} icon="📅" title={ts(T.inspectTitle, L)} badge={ts(T.regulationBased, L)}>
+        <Card accent={brandAccent} icon="📅" title={ts(T.inspectTitle, L)} badge={label}>
           <Bullets items={tl(T.inspectItems, L)} accent={brandAccent} />
         </Card>
       </div>
@@ -308,7 +313,7 @@ export function CobaltTirePanel({ brandAccent }: Props) {
             }}
           >
             <span className="text-xs text-muted-foreground">{ts(T.lifespan, L)}</span>
-            <span className="text-sm font-bold tabular-nums text-foreground">40,000–50,000 km</span>
+            <span className="text-sm font-bold tabular-nums text-foreground">{replacementKm}</span>
           </div>
           <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-destructive/90">
             {ts(T.replaceIf, L)}

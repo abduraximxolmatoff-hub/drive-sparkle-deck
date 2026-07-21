@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -8,7 +8,6 @@ import { InteractiveCarViewer } from "@/components/InteractiveCarViewer";
 import { MaintenanceSchedulePlaceholder } from "@/components/MaintenanceSchedulePlaceholder";
 import { CobaltPartInfoPanel } from "@/components/CobaltPartInfoPanel";
 import { CobaltTirePanel } from "@/components/CobaltTirePanel";
-import { COBALT_PART_INFO } from "@/data/cobaltPartInfo";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getBrandModel } from "@/data/brands";
 import { CAR_PARTS, type CarPart } from "@/data/carParts";
@@ -96,6 +95,13 @@ function ModelDetailPage() {
   const { brand, model } = Route.useLoaderData();
   const [activePart, setActivePart] = useState<CarPart | null>(null);
   const { t, lang } = useLanguage();
+
+  // Reset selected part whenever the model changes so state from a previous
+  // model (zoom, marker, part content) never leaks across pages.
+  useEffect(() => {
+    setActivePart(null);
+  }, [model.slug]);
+
 
   return (
     <main key={lang} className="relative min-h-screen overflow-hidden animate-in fade-in duration-300">
@@ -226,13 +232,20 @@ function ModelDetailPage() {
 
           <AnimatePresence mode="wait">
             {activePart ? (
-              model.slug === "cobalt-15l" && activePart.id === "tires" ? (
-                <CobaltTirePanel key="tires" brandAccent={brand.accent} />
-              ) : model.slug === "cobalt-15l" && COBALT_PART_INFO[activePart.id] ? (
+              brand.slug === "chevrolet" && activePart.id === "tires" ? (
+                <CobaltTirePanel
+                  key={`tires-${model.slug}`}
+                  brandAccent={brand.accent}
+                  modelName={model.name}
+                  modelSlug={model.slug}
+                />
+              ) : brand.slug === "chevrolet" ? (
                 <CobaltPartInfoPanel
-                  key={activePart.id}
+                  key={`${model.slug}-${activePart.id}`}
                   part={activePart}
                   brandAccent={brand.accent}
+                  modelName={model.name}
+                  modelSlug={model.slug}
                 />
               ) : (
                 <motion.div
@@ -314,7 +327,7 @@ function ModelDetailPage() {
             )}
           </AnimatePresence>
 
-          {model.slug !== "cobalt-15l" && (
+          {brand.slug !== "chevrolet" && (
             <MaintenanceSchedulePlaceholder brandAccent={brand.accent} />
           )}
         </div>
