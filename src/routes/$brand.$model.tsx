@@ -226,13 +226,20 @@ function ModelDetailPage() {
 
           <AnimatePresence mode="wait">
             {activePart ? (
-              model.slug === "cobalt-15l" && activePart.id === "tires" ? (
-                <CobaltTirePanel key="tires" brandAccent={brand.accent} />
-              ) : model.slug === "cobalt-15l" && COBALT_PART_INFO[activePart.id] ? (
+              brand.slug === "chevrolet" && activePart.id === "tires" ? (
+                <CobaltTirePanel
+                  key={`tires-${model.slug}`}
+                  brandAccent={brand.accent}
+                  modelName={model.name}
+                  modelSlug={model.slug}
+                />
+              ) : brand.slug === "chevrolet" ? (
                 <CobaltPartInfoPanel
-                  key={activePart.id}
+                  key={`${model.slug}-${activePart.id}`}
                   part={activePart}
                   brandAccent={brand.accent}
+                  modelName={model.name}
+                  modelSlug={model.slug}
                 />
               ) : (
                 <motion.div
