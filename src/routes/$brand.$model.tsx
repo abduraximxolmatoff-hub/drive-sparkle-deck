@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -8,7 +8,6 @@ import { InteractiveCarViewer } from "@/components/InteractiveCarViewer";
 import { MaintenanceSchedulePlaceholder } from "@/components/MaintenanceSchedulePlaceholder";
 import { CobaltPartInfoPanel } from "@/components/CobaltPartInfoPanel";
 import { CobaltTirePanel } from "@/components/CobaltTirePanel";
-import { COBALT_PART_INFO } from "@/data/cobaltPartInfo";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getBrandModel } from "@/data/brands";
 import { CAR_PARTS, type CarPart } from "@/data/carParts";
