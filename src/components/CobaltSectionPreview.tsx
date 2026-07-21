@@ -6,6 +6,11 @@ interface Props {
   brandAccent: string;
 }
 
+/**
+ * Optional supplemental image card shown at the top of a part-info panel.
+ * Renders nothing when no image is provided — panels that would duplicate
+ * the interactive viewer above should pass `imageSrc={undefined}`.
+ */
 export function CobaltSectionPreview({ imageSrc, title, brandAccent }: Props) {
   if (!imageSrc) return null;
 
@@ -23,7 +28,7 @@ export function CobaltSectionPreview({ imageSrc, title, brandAccent }: Props) {
       <img
         src={imageSrc}
         alt={title}
-        className="relative z-0 h-[260px] w-full object-cover sm:h-[300px] lg:h-[340px]"
+        className="relative z-0 h-[220px] w-full object-cover sm:h-[260px] lg:h-[300px]"
         loading="lazy"
       />
     </motion.div>
