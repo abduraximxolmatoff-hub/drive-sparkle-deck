@@ -96,6 +96,13 @@ function ModelDetailPage() {
   const [activePart, setActivePart] = useState<CarPart | null>(null);
   const { t, lang } = useLanguage();
 
+  // Reset selected part whenever the model changes so state from a previous
+  // model (zoom, marker, part content) never leaks across pages.
+  useEffect(() => {
+    setActivePart(null);
+  }, [model.slug]);
+
+
   return (
     <main key={lang} className="relative min-h-screen overflow-hidden animate-in fade-in duration-300">
       <AnimatedBackground />
