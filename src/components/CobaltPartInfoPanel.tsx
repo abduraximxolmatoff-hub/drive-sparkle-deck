@@ -119,7 +119,11 @@ export function CobaltPartInfoPanel({ part, brandAccent, modelName, modelSlug }:
       className="mt-5 overflow-hidden rounded-2xl border border-border bg-card-gradient p-5 shadow-card backdrop-blur-md sm:p-6"
       style={{ borderColor: `${brandAccent}40` }}
     >
-      <CobaltSectionPreview imageSrc={previewSrc} title={info.title[lang]} brandAccent={brandAccent} />
+      <CobaltSectionPreview
+        imageSrc={previewSrc}
+        title={info.title[lang]}
+        brandAccent={brandAccent}
+      />
 
       <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-3">

@@ -77,7 +77,7 @@ export function InteractiveCarViewer({
   // Marker for the selected part — only show on the main image (when no dedicated partImage).
   const marker =
     selectedPartId && !usingPartImage
-      ? model.markers?.[selectedPartId] ?? DEFAULT_MARKERS[selectedPartId]
+      ? (model.markers?.[selectedPartId] ?? DEFAULT_MARKERS[selectedPartId])
       : null;
 
   const showsControls = !selectedPartId;

@@ -12,8 +12,7 @@ interface Props {
 }
 
 function ActionCell({ action, accent }: { action: Action; accent: string }) {
-  if (action === "—")
-    return <span className="text-foreground/20">·</span>;
+  if (action === "—") return <span className="text-foreground/20">·</span>;
 
   const isReplace = action === "R";
   return (
@@ -104,16 +103,11 @@ export function ServiceSchedule({ brandAccent }: Props) {
                 <td className="sticky left-0 z-10 bg-background/80 px-4 py-2.5 text-left text-[12px] font-medium text-foreground/90 backdrop-blur-md">
                   <div>{t(item.labelKey)}</div>
                   {item.notes && (
-                    <div className="text-[10px] text-muted-foreground">
-                      {item.notes}
-                    </div>
+                    <div className="text-[10px] text-muted-foreground">{item.notes}</div>
                   )}
                 </td>
                 {item.actions.map((action, i) => (
-                  <td
-                    key={i}
-                    className="border-l border-border/30 px-1.5 py-2.5 text-center"
-                  >
+                  <td key={i} className="border-l border-border/30 px-1.5 py-2.5 text-center">
                     <ActionCell action={action} accent={brandAccent} />
                   </td>
                 ))}

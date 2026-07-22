@@ -48,48 +48,52 @@ export const Route = createFileRoute("/$brand/$model")({
     ],
   }),
   component: ModelDetailPage,
-  errorComponent: ({ error, reset }) => {
-    const router = useRouter();
-
-    return (
-      <div className="flex min-h-screen items-center justify-center p-6 text-center">
-        <div>
-          <p className="text-destructive">{error.message}</p>
-          <button
-            className="mt-4 rounded-md bg-primary px-4 py-2 text-primary-foreground"
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  },
-  notFoundComponent: () => {
-    const { brand } = Route.useParams();
-
-    return (
-      <div className="flex min-h-screen items-center justify-center p-6 text-center">
-        <div>
-          <h1 className="font-display text-3xl">Model not found</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Information for the selected model is not available yet.
-          </p>
-          <Link
-            to="/brand/$slug"
-            params={{ slug: brand }}
-            className="mt-4 inline-block text-primary underline"
-          >
-            Back to models
-          </Link>
-        </div>
-      </div>
-    );
-  },
+  errorComponent: ModelDetailErrorComponent,
+  notFoundComponent: ModelDetailNotFoundComponent,
 });
+
+function ModelDetailErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+  const router = useRouter();
+
+  return (
+    <div className="flex min-h-screen items-center justify-center p-6 text-center">
+      <div>
+        <p className="text-destructive">{error.message}</p>
+        <button
+          className="mt-4 rounded-md bg-primary px-4 py-2 text-primary-foreground"
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+        >
+          Retry
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ModelDetailNotFoundComponent() {
+  const { brand } = Route.useParams();
+
+  return (
+    <div className="flex min-h-screen items-center justify-center p-6 text-center">
+      <div>
+        <h1 className="font-display text-3xl">Model not found</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Information for the selected model is not available yet.
+        </p>
+        <Link
+          to="/brand/$slug"
+          params={{ slug: brand }}
+          className="mt-4 inline-block text-primary underline"
+        >
+          Back to models
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 function ModelDetailPage() {
   const { brand, model } = Route.useLoaderData();
@@ -102,9 +106,11 @@ function ModelDetailPage() {
     setActivePart(null);
   }, [model.slug]);
 
-
   return (
-    <main key={lang} className="relative min-h-screen overflow-hidden animate-in fade-in duration-300">
+    <main
+      key={lang}
+      className="relative min-h-screen overflow-hidden animate-in fade-in duration-300"
+    >
       <AnimatedBackground />
 
       <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 pt-6 sm:px-6 sm:pt-8">
@@ -212,8 +218,12 @@ function ModelDetailPage() {
                       {part.icon}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-display text-sm font-semibold">{part.name[lang]}</p>
-                      <p className="truncate text-[11px] text-muted-foreground">{part.subtitle[lang]}</p>
+                      <p className="truncate font-display text-sm font-semibold">
+                        {part.name[lang]}
+                      </p>
+                      <p className="truncate text-[11px] text-muted-foreground">
+                        {part.subtitle[lang]}
+                      </p>
                     </div>
                   </button>
                 </motion.li>

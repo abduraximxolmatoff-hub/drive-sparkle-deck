@@ -23,7 +23,8 @@ export const translations: Record<Lang, Dict> = {
     "model.information": "Ma’lumot",
     "model.resetView": "Asl ko‘rinish",
     "model.interactiveView": "Interaktiv model ko‘rinishi",
-    "model.hint": "Chap paneldan qism tanlang — avtomobil tasviri shu hududga yaqinlashadi va foydali servis ma’lumoti ochiladi.",
+    "model.hint":
+      "Chap paneldan qism tanlang — avtomobil tasviri shu hududga yaqinlashadi va foydali servis ma’lumoti ochiladi.",
     "model.notFound": "Model topilmadi",
     "model.notFoundDesc": "Tanlangan model uchun ma’lumot hozircha mavjud emas.",
     "viewer.360": "360° ko‘rinish",
@@ -72,7 +73,8 @@ export const translations: Record<Lang, Dict> = {
     "model.information": "Информация",
     "model.resetView": "Сбросить вид",
     "model.interactiveView": "Интерактивный вид модели",
-    "model.hint": "Выберите часть слева — изображение приблизится к ней, и появится полезная сервисная информация.",
+    "model.hint":
+      "Выберите часть слева — изображение приблизится к ней, и появится полезная сервисная информация.",
     "model.notFound": "Модель не найдена",
     "model.notFoundDesc": "Информация для выбранной модели пока недоступна.",
     "viewer.360": "360° обзор",
@@ -121,7 +123,8 @@ export const translations: Record<Lang, Dict> = {
     "model.information": "Information",
     "model.resetView": "Reset view",
     "model.interactiveView": "Interactive model view",
-    "model.hint": "Select a part from the left panel — the car image will zoom in and useful service info will appear.",
+    "model.hint":
+      "Select a part from the left panel — the car image will zoom in and useful service info will appear.",
     "model.notFound": "Model not found",
     "model.notFoundDesc": "Information for the selected model is not available yet.",
     "viewer.360": "360° View",
@@ -187,8 +190,7 @@ const extra: Record<Lang, Dict> = {
     "service.subtitle": "Интервалы обслуживания и уход за автомобилем.",
     "profile.guest": "Гость-водитель",
     "profile.demoAccount": "Демо-аккаунт",
-    "profile.goal":
-      "AutoINFO помогает лучше понимать автомобиль и вовремя обслуживать его.",
+    "profile.goal": "AutoINFO помогает лучше понимать автомобиль и вовремя обслуживать его.",
     "profile.reminders": "Сервисные напоминания",
     "profile.myCars": "Мои автомобили",
     "profile.noFavorites": "Избранных моделей пока нет.",
@@ -210,8 +212,7 @@ const extra: Record<Lang, Dict> = {
     "service.subtitle": "Service intervals and part-care guidance.",
     "profile.guest": "Guest Driver",
     "profile.demoAccount": "Demo account",
-    "profile.goal":
-      "AutoINFO helps you understand your car better and maintain it on time.",
+    "profile.goal": "AutoINFO helps you understand your car better and maintain it on time.",
     "profile.reminders": "Maintenance reminders",
     "profile.myCars": "My cars",
     "profile.noFavorites": "No favorite models yet.",
@@ -372,8 +373,7 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.legendTooltip": "I — проверка/регулировка, R — замена",
     "cobalt.reg.title": "Регламент ТО — кратко",
     "cobalt.reg.iTitle": "I — Проверка",
-    "cobalt.reg.iDesc":
-      "Контроль, регулировка, очистка, подтяжка, смазка или доливка жидкостей.",
+    "cobalt.reg.iDesc": "Контроль, регулировка, очистка, подтяжка, смазка или доливка жидкостей.",
     "cobalt.reg.rTitle": "R — Замена",
     "cobalt.reg.rDesc": "Компонент необходимо заменить на новый.",
     "cobalt.reg.view": "Показать полный регламент",
@@ -397,8 +397,7 @@ const cobalt: Record<Lang, Dict> = {
     "cobalt.legendTooltip": "I — inspect/adjust, R — replace",
     "cobalt.reg.title": "Maintenance regulation — summary",
     "cobalt.reg.iTitle": "I — Inspect",
-    "cobalt.reg.iDesc":
-      "Check, adjust, clean, tighten, lubricate or top up fluids as needed.",
+    "cobalt.reg.iDesc": "Check, adjust, clean, tighten, lubricate or top up fluids as needed.",
     "cobalt.reg.rTitle": "R — Replace",
     "cobalt.reg.rDesc": "The component must be replaced with a new one.",
     "cobalt.reg.view": "View full regulation",
@@ -414,6 +413,3 @@ const chev: Record<Lang, Dict> = {
 
 for (const l of LANGS)
   Object.assign(translations[l], extra[l], schedule[l], more[l], cobalt[l], chev[l]);
-
-
-

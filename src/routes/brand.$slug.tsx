@@ -37,26 +37,32 @@ export const Route = createFileRoute("/brand/$slug")({
     ],
   }),
   component: BrandPage,
-  errorComponent: ({ error, reset }) => {
-    const router = useRouter();
-    return (
-      <div className="flex min-h-screen items-center justify-center p-6 text-center">
-        <div>
-          <p className="text-destructive">{error.message}</p>
-          <button
-            className="mt-4 rounded-md bg-primary px-4 py-2 text-primary-foreground"
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-          >
-            Retry
-          </button>
-        </div>
+  errorComponent: BrandPageErrorComponent,
+  notFoundComponent: BrandPageNotFoundComponent,
+});
+
+function BrandPageErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+  const router = useRouter();
+  return (
+    <div className="flex min-h-screen items-center justify-center p-6 text-center">
+      <div>
+        <p className="text-destructive">{error.message}</p>
+        <button
+          className="mt-4 rounded-md bg-primary px-4 py-2 text-primary-foreground"
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+        >
+          Retry
+        </button>
       </div>
-    );
-  },
-  notFoundComponent: () => (
+    </div>
+  );
+}
+
+function BrandPageNotFoundComponent() {
+  return (
     <div className="flex min-h-screen items-center justify-center p-6 text-center">
       <div>
         <h1 className="font-display text-3xl">Brand not found</h1>
@@ -65,8 +71,8 @@ export const Route = createFileRoute("/brand/$slug")({
         </Link>
       </div>
     </div>
-  ),
-});
+  );
+}
 
 function BrandPage() {
   const { brand } = Route.useLoaderData() as { brand: Brand };
@@ -143,9 +149,7 @@ function BrandPage() {
           <h1 className="font-display text-4xl font-bold tracking-tight md:text-5xl">
             {brand.name}
           </h1>
-          <p className="text-sm uppercase tracking-[0.3em] text-primary/80">
-            {brand.tagline}
-          </p>
+          <p className="text-sm uppercase tracking-[0.3em] text-primary/80">{brand.tagline}</p>
         </motion.div>
       </section>
 
@@ -178,7 +182,7 @@ function BrandPage() {
                   width={800}
                   height={512}
                   loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div
                   className="absolute inset-0 opacity-60"
@@ -191,13 +195,11 @@ function BrandPage() {
                 <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                   {brand.name}
                 </span>
-                <h2 className="font-display text-2xl font-semibold md:text-3xl">
-                  {model.name}
-                </h2>
+                <h2 className="font-display text-2xl font-semibold md:text-3xl">{model.name}</h2>
                 {model.taglineKey && (
                   <p className="text-sm text-muted-foreground">{t(model.taglineKey)}</p>
                 )}
-                 <span className="mt-2 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                <span className="mt-2 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary opacity-0 transition-opacity group-hover:opacity-100">
                   {t("brand.exploreParts")}
                 </span>
               </div>

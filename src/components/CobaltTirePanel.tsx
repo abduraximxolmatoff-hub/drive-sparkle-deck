@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getChevModelSpec } from "@/data/chevModelSpecs";
 
-
 interface Props {
   brandAccent: string;
   modelName: string;
@@ -17,12 +16,37 @@ const T = {
   // Function card
   funcTitle: { uz: "Shina vazifasi", ru: "Назначение шин", en: "Tire Function" } as Tri,
   funcItems: {
-    uz: ["Yo'l ushlash", "Avtomobil barqarorligi", "Tormoz samaradorligi", "Boshqaruv aniqligi", "Yurish qulayligi", "Harakat xavfsizligi"],
-    ru: ["Сцепление с дорогой", "Стабильность автомобиля", "Эффективность торможения", "Точность управления", "Комфорт движения", "Безопасность"],
-    en: ["Road grip", "Vehicle stability", "Braking performance", "Steering control", "Driving comfort", "Safety during movement"],
+    uz: [
+      "Yo'l ushlash",
+      "Avtomobil barqarorligi",
+      "Tormoz samaradorligi",
+      "Boshqaruv aniqligi",
+      "Yurish qulayligi",
+      "Harakat xavfsizligi",
+    ],
+    ru: [
+      "Сцепление с дорогой",
+      "Стабильность автомобиля",
+      "Эффективность торможения",
+      "Точность управления",
+      "Комфорт движения",
+      "Безопасность",
+    ],
+    en: [
+      "Road grip",
+      "Vehicle stability",
+      "Braking performance",
+      "Steering control",
+      "Driving comfort",
+      "Safety during movement",
+    ],
   } as Record<Lang, string[]>,
   // Pressure
-  pressureTitle: { uz: "Tavsiya etilgan bosim", ru: "Рекомендуемое давление", en: "Recommended Pressure" } as Tri,
+  pressureTitle: {
+    uz: "Tavsiya etilgan bosim",
+    ru: "Рекомендуемое давление",
+    en: "Recommended Pressure",
+  } as Tri,
   front: { uz: "Old shinalar", ru: "Передние шины", en: "Front Tires" } as Tri,
   rear: { uz: "Orqa shinalar", ru: "Задние шины", en: "Rear Tires" } as Tri,
   loaded: { uz: "Yuklangan holatda", ru: "С полной загрузкой", en: "Loaded Vehicle" } as Tri,
@@ -32,7 +56,11 @@ const T = {
     en: "Always check tire pressure when tires are cold.",
   } as Tri,
   // Inspection
-  inspectTitle: { uz: "Tekshirish oralig'i", ru: "Интервалы проверки", en: "Inspection Interval" } as Tri,
+  inspectTitle: {
+    uz: "Tekshirish oralig'i",
+    ru: "Интервалы проверки",
+    en: "Inspection Interval",
+  } as Tri,
   inspectItems: {
     uz: [
       "Shina bosimi → har oyda tekshirish",
@@ -57,26 +85,83 @@ const T = {
     ],
   } as Record<Lang, string[]>,
   // Replacement
-  replaceTitle: { uz: "Almashtirish tavsiyasi", ru: "Рекомендация по замене", en: "Replacement Recommendation" } as Tri,
-  lifespan: { uz: "O'rtacha xizmat muddati", ru: "Средний срок службы", en: "Average lifespan" } as Tri,
-  replaceIf: { uz: "Darhol almashtiring agar:", ru: "Немедленно заменить если:", en: "Replace immediately if:" } as Tri,
+  replaceTitle: {
+    uz: "Almashtirish tavsiyasi",
+    ru: "Рекомендация по замене",
+    en: "Replacement Recommendation",
+  } as Tri,
+  lifespan: {
+    uz: "O'rtacha xizmat muddati",
+    ru: "Средний срок службы",
+    en: "Average lifespan",
+  } as Tri,
+  replaceIf: {
+    uz: "Darhol almashtiring agar:",
+    ru: "Немедленно заменить если:",
+    en: "Replace immediately if:",
+  } as Tri,
   replaceItems: {
-    uz: ["Protektor chuqurligi past", "Yoriqlar paydo bo'lsa", "Yon devor shikastlangan", "Notekis yeyilish", "Shina silkinishi", "Bosim tez-tez tushadi"],
-    ru: ["Малая глубина протектора", "Появились трещины", "Повреждение боковины", "Неравномерный износ", "Вибрация шины", "Частая потеря давления"],
-    en: ["Tread depth becomes low", "Cracks appear", "Sidewall damage exists", "Uneven wear appears", "Tire vibration occurs", "Frequent pressure loss"],
+    uz: [
+      "Protektor chuqurligi past",
+      "Yoriqlar paydo bo'lsa",
+      "Yon devor shikastlangan",
+      "Notekis yeyilish",
+      "Shina silkinishi",
+      "Bosim tez-tez tushadi",
+    ],
+    ru: [
+      "Малая глубина протектора",
+      "Появились трещины",
+      "Повреждение боковины",
+      "Неравномерный износ",
+      "Вибрация шины",
+      "Частая потеря давления",
+    ],
+    en: [
+      "Tread depth becomes low",
+      "Cracks appear",
+      "Sidewall damage exists",
+      "Uneven wear appears",
+      "Tire vibration occurs",
+      "Frequent pressure loss",
+    ],
   } as Record<Lang, string[]>,
   // Tread
-  treadTitle: { uz: "Minimal protektor chuqurligi", ru: "Минимальная глубина протектора", en: "Minimum Safe Tread Depth" } as Tri,
+  treadTitle: {
+    uz: "Minimal protektor chuqurligi",
+    ru: "Минимальная глубина протектора",
+    en: "Minimum Safe Tread Depth",
+  } as Tri,
   treadGood: { uz: "Yaxshi", ru: "Хорошо", en: "Good" } as Tri,
   treadWarn: { uz: "Diqqat", ru: "Внимание", en: "Warning" } as Tri,
   treadCrit: { uz: "Kritik", ru: "Критично", en: "Critical" } as Tri,
-  treadGoodDesc: { uz: "6–8 mm — yaxshi holat", ru: "6–8 мм — хорошее состояние", en: "6–8 mm — good condition" } as Tri,
-  treadWarnDesc: { uz: "3–4 mm — ushlash kamayadi", ru: "3–4 мм — снижено сцепление", en: "3–4 mm — reduced grip" } as Tri,
-  treadCritDesc: { uz: "1.6 mm dan past — zudlik bilan almashtirish", ru: "Ниже 1.6 мм — немедленная замена", en: "Below 1.6 mm — immediate replacement" } as Tri,
+  treadGoodDesc: {
+    uz: "6–8 mm — yaxshi holat",
+    ru: "6–8 мм — хорошее состояние",
+    en: "6–8 mm — good condition",
+  } as Tri,
+  treadWarnDesc: {
+    uz: "3–4 mm — ushlash kamayadi",
+    ru: "3–4 мм — снижено сцепление",
+    en: "3–4 mm — reduced grip",
+  } as Tri,
+  treadCritDesc: {
+    uz: "1.6 mm dan past — zudlik bilan almashtirish",
+    ru: "Ниже 1.6 мм — немедленная замена",
+    en: "Below 1.6 mm — immediate replacement",
+  } as Tri,
   // Timeline
-  timelineTitle: { uz: "Xizmat ko'rsatish vaqt jadvali", ru: "График обслуживания", en: "Service Timeline" } as Tri,
+  timelineTitle: {
+    uz: "Xizmat ko'rsatish vaqt jadvali",
+    ru: "График обслуживания",
+    en: "Service Timeline",
+  } as Tri,
   // Tips
-  tipsTitle: { uz: "Tezkor xavfsizlik maslahatlari", ru: "Краткие советы по безопасности", en: "Quick Safety Tips" } as Tri,
+  tipsTitle: {
+    uz: "Tezkor xavfsizlik maslahatlari",
+    ru: "Краткие советы по безопасности",
+    en: "Quick Safety Tips",
+  } as Tri,
   tips: {
     uz: [
       "Past bosim yoqilg'i sarfini oshiradi",
@@ -101,11 +186,36 @@ const T = {
     ],
   } as Record<Lang, string[]>,
   // Warnings
-  warnTitle: { uz: "Ogohlantirish belgilari", ru: "Предупреждающие признаки", en: "Warning Signs" } as Tri,
+  warnTitle: {
+    uz: "Ogohlantirish belgilari",
+    ru: "Предупреждающие признаки",
+    en: "Warning Signs",
+  } as Tri,
   warns: {
-    uz: ["Rulning silkinishi", "Avtomobil bir tomonga tortadi", "Notekis protektor yeyilishi", "Yoriq yoki shishlar", "Bosimning tez-tez tushishi", "Kuchli yo'l shovqini"],
-    ru: ["Вибрация руля", "Авто уводит в сторону", "Неравномерный износ", "Трещины или вздутия", "Частая потеря давления", "Громкий дорожный шум"],
-    en: ["Steering vibration", "Vehicle pulls to one side", "Uneven tread wear", "Cracks or bulges", "Frequent pressure loss", "Loud road noise"],
+    uz: [
+      "Rulning silkinishi",
+      "Avtomobil bir tomonga tortadi",
+      "Notekis protektor yeyilishi",
+      "Yoriq yoki shishlar",
+      "Bosimning tez-tez tushishi",
+      "Kuchli yo'l shovqini",
+    ],
+    ru: [
+      "Вибрация руля",
+      "Авто уводит в сторону",
+      "Неравномерный износ",
+      "Трещины или вздутия",
+      "Частая потеря давления",
+      "Громкий дорожный шум",
+    ],
+    en: [
+      "Steering vibration",
+      "Vehicle pulls to one side",
+      "Uneven tread wear",
+      "Cracks or bulges",
+      "Frequent pressure loss",
+      "Loud road noise",
+    ],
   } as Record<Lang, string[]>,
 };
 
@@ -171,7 +281,10 @@ function Bullets({ items, accent }: { items: string[]; accent: string }) {
     <ul className="space-y-1.5 text-xs leading-relaxed text-foreground/90">
       {items.map((b, i) => (
         <li key={i} className="flex gap-2">
-          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: accent }} />
+          <span
+            className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
+            style={{ background: accent }}
+          />
           <span>{b}</span>
         </li>
       ))}
@@ -241,7 +354,10 @@ export function CobaltTirePanel({ brandAccent, modelName, modelSlug }: Props) {
 
   const timeline = [
     { km: "0", label: { uz: "Yangi shina", ru: "Новая шина", en: "New tire" }[L] },
-    { km: "10K", label: { uz: "Tekshir + balans", ru: "Проверка + баланс", en: "Inspection + balancing" }[L] },
+    {
+      km: "10K",
+      label: { uz: "Tekshir + balans", ru: "Проверка + баланс", en: "Inspection + balancing" }[L],
+    },
     { km: "20K", label: { uz: "Tekislash", ru: "Развал-схождение", en: "Alignment check" }[L] },
     { km: "40–50K", label: { uz: "Almashtirish", ru: "Замена", en: "Replacement" }[L] },
   ];

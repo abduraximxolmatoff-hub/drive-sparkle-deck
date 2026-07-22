@@ -29,13 +29,21 @@ function ProfilePage() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) setFavorites(JSON.parse(raw));
-    } catch {}
+    } catch (err) {
+      // localStorage may be unavailable (private mode, disabled storage, corrupt data).
+      // Favorites simply start empty in that case.
+      console.warn("Could not load favorites from storage:", err);
+    }
   }, []);
 
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
-    } catch {}
+    } catch (err) {
+      // Storage might be full or unavailable; failing silently here is acceptable
+      // since favorites are a non-critical, best-effort feature.
+      console.warn("Could not save favorites to storage:", err);
+    }
   }, [favorites]);
 
   const allModels = useMemo(
@@ -53,9 +61,7 @@ function ProfilePage() {
   const favs = allModels.filter((m) => favorites.includes(m.key));
 
   const toggleFav = (key: string) => {
-    setFavorites((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key],
-    );
+    setFavorites((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]));
   };
 
   const reminders = [
@@ -137,7 +143,11 @@ function ProfilePage() {
                   key={key}
                   className="flex items-center gap-3 rounded-xl border border-border/60 bg-background/40 p-2"
                 >
-                  <img src={model.image} alt={model.name} className="h-12 w-20 rounded-lg object-cover" />
+                  <img
+                    src={model.image}
+                    alt={model.name}
+                    className="h-12 w-20 rounded-lg object-cover"
+                  />
                   <div className="min-w-0 flex-1">
                     <Link
                       to="/$brand/$model"

@@ -18,9 +18,7 @@ export const COBALT_INTERVALS_KM = [
 ];
 
 /** Or the equivalent in months */
-export const COBALT_INTERVALS_MONTHS = [
-  3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81,
-];
+export const COBALT_INTERVALS_MONTHS = [3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81];
 
 /** Service schedule for Chevrolet Cobalt 1.5L — transcribed from the official UZ service manual. */
 export const COBALT_SCHEDULE: ScheduleItem[] = [

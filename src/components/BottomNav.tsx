@@ -27,12 +27,13 @@ export function BottomNav() {
               <Link
                 to={to}
                 className={`flex flex-col items-center gap-0.5 rounded-xl px-2 py-1.5 text-[10px] font-medium uppercase tracking-wider transition ${
-                  active
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                  active ? "text-primary" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                <Icon className={`h-5 w-5 transition ${active ? "scale-110" : ""}`} strokeWidth={active ? 2.4 : 1.8} />
+                <Icon
+                  className={`h-5 w-5 transition ${active ? "scale-110" : ""}`}
+                  strokeWidth={active ? 2.4 : 1.8}
+                />
                 <span>{label}</span>
               </Link>
             </li>
