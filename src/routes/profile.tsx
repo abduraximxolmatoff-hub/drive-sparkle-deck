@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { User, Heart, Bell, Plus, Trash2 } from "lucide-react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
@@ -8,6 +8,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { BottomNav } from "@/components/BottomNav";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { brands } from "@/data/brands";
+import { useFavorites } from "@/hooks/use-favorites";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({
@@ -19,32 +20,9 @@ export const Route = createFileRoute("/profile")({
   component: ProfilePage,
 });
 
-const STORAGE_KEY = "autoinfo.favorites";
-
 function ProfilePage() {
   const { t, lang } = useLanguage();
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setFavorites(JSON.parse(raw));
-    } catch (err) {
-      // localStorage may be unavailable (private mode, disabled storage, corrupt data).
-      // Favorites simply start empty in that case.
-      console.warn("Could not load favorites from storage:", err);
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
-    } catch (err) {
-      // Storage might be full or unavailable; failing silently here is acceptable
-      // since favorites are a non-critical, best-effort feature.
-      console.warn("Could not save favorites to storage:", err);
-    }
-  }, [favorites]);
+  const { favorites, toggleFavorite: toggleFav } = useFavorites();
 
   const allModels = useMemo(
     () =>
@@ -59,10 +37,6 @@ function ProfilePage() {
   );
 
   const favs = allModels.filter((m) => favorites.includes(m.key));
-
-  const toggleFav = (key: string) => {
-    setFavorites((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]));
-  };
 
   const reminders = [
     { key: "oil", label: t("reminder.oil"), due: "1 200 km" },

@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 
 import appCss from "../styles.css?url";
 import { LanguageProvider } from "@/i18n/LanguageContext";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -30,14 +31,14 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
+      { title: "AutoINFO — Understand Your Car. Drive Smarter." },
       {
         name: "description",
         content:
           "AutoINFO is an interactive web application for exploring car brands and their models.",
       },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
+      { name: "author", content: "AutoINFO" },
+      { property: "og:title", content: "AutoINFO" },
       {
         property: "og:description",
         content:
@@ -45,8 +46,7 @@ export const Route = createRootRoute({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
+      { name: "twitter:title", content: "AutoINFO" },
       {
         name: "twitter:description",
         content:
@@ -93,6 +93,7 @@ function RootComponent() {
   return (
     <LanguageProvider>
       <Outlet />
+      <Toaster position="top-center" richColors />
     </LanguageProvider>
   );
 }

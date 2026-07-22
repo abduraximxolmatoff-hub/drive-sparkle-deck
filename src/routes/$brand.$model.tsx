@@ -1,15 +1,19 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Heart, Share2 } from "lucide-react";
+import { toast } from "sonner";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { InteractiveCarViewer } from "@/components/InteractiveCarViewer";
-import { MaintenanceSchedulePlaceholder } from "@/components/MaintenanceSchedulePlaceholder";
+import { VehicleMaintenanceOverview } from "@/components/VehicleMaintenanceOverview";
 import { CobaltPartInfoPanel } from "@/components/CobaltPartInfoPanel";
 import { CobaltTirePanel } from "@/components/CobaltTirePanel";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useFavorites } from "@/hooks/use-favorites";
 import { getBrandModel } from "@/data/brands";
+import { getChevModelSpec } from "@/data/chevModelSpecs";
 import { CAR_PARTS, type CarPart } from "@/data/carParts";
 
 export const Route = createFileRoute("/$brand/$model")({
@@ -99,6 +103,27 @@ function ModelDetailPage() {
   const { brand, model } = Route.useLoaderData();
   const [activePart, setActivePart] = useState<CarPart | null>(null);
   const { t, lang } = useLanguage();
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const favoriteKey = `${brand.slug}/${model.slug}`;
+  const favorited = isFavorite(favoriteKey);
+  const spec = getChevModelSpec(model.slug);
+
+  const shareText = {
+    uz: "Havola nusxalandi",
+    ru: "Ссылка скопирована",
+    en: "Link copied",
+  }[lang];
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success(shareText);
+    } catch {
+      toast.error(
+        { uz: "Nusxalab bo'lmadi", ru: "Не удалось скопировать", en: "Could not copy" }[lang],
+      );
+    }
+  };
 
   // Reset selected part whenever the model changes so state from a previous
   // model (zoom, marker, part content) never leaks across pages.
@@ -156,11 +181,39 @@ function ModelDetailPage() {
               {model.taglineKey ? t(model.taglineKey) : brand.tagline}
             </motion.p>
           </div>
-          <img
-            src={brand.logo}
-            alt={`${brand.name} logo`}
-            className="hidden h-14 w-14 object-contain sm:block"
-          />
+          <div className="flex shrink-0 items-center gap-2">
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+              onClick={() => toggleFavorite(favoriteKey)}
+              aria-pressed={favorited}
+              aria-label="Favorite"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card-gradient backdrop-blur-md transition-transform hover:scale-105"
+              style={favorited ? { borderColor: `${brand.accent}aa` } : undefined}
+            >
+              <Heart
+                className="h-4 w-4 transition-colors"
+                style={{ color: favorited ? brand.accent : undefined }}
+                fill={favorited ? brand.accent : "none"}
+              />
+            </motion.button>
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.34 }}
+              onClick={handleShare}
+              aria-label="Share"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card-gradient backdrop-blur-md transition-transform hover:scale-105"
+            >
+              <Share2 className="h-4 w-4" />
+            </motion.button>
+            <img
+              src={brand.logo}
+              alt={`${brand.name} logo`}
+              className="hidden h-14 w-14 object-contain sm:block"
+            />
+          </div>
         </div>
       </section>
 
@@ -242,14 +295,14 @@ function ModelDetailPage() {
 
           <AnimatePresence mode="wait">
             {activePart ? (
-              brand.slug === "chevrolet" && activePart.id === "tires" ? (
+              activePart.id === "tires" ? (
                 <CobaltTirePanel
                   key={`tires-${model.slug}`}
                   brandAccent={brand.accent}
                   modelName={model.name}
                   modelSlug={model.slug}
                 />
-              ) : brand.slug === "chevrolet" ? (
+              ) : (
                 <CobaltPartInfoPanel
                   key={`${model.slug}-${activePart.id}`}
                   part={activePart}
@@ -257,72 +310,6 @@ function ModelDetailPage() {
                   modelName={model.name}
                   modelSlug={model.slug}
                 />
-              ) : (
-                <motion.div
-                  key={activePart.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4 }}
-                  className="mt-5 overflow-hidden rounded-2xl border border-border bg-card-gradient p-5 shadow-card backdrop-blur-md sm:p-6"
-                  style={{ borderColor: `${brand.accent}40` }}
-                >
-                  <div className="mb-3 flex items-center gap-3">
-                    <span
-                      className="flex h-10 w-10 items-center justify-center rounded-lg text-xl"
-                      style={{
-                        background: `linear-gradient(135deg, ${brand.accent}44, transparent)`,
-                      }}
-                    >
-                      {activePart.icon}
-                    </span>
-                    <div>
-                      <h3 className="font-display text-xl font-semibold sm:text-2xl">
-                        {activePart.title[lang]}
-                      </h3>
-                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                        {activePart.name[lang]}
-                      </p>
-                    </div>
-                  </div>
-
-                  <ul className="space-y-2 text-sm leading-relaxed text-foreground/90">
-                    {activePart.bullets[lang].map((bullet, index) => (
-                      <motion.li
-                        key={index}
-                        initial={{ opacity: 0, x: -8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.1 + index * 0.05 }}
-                        className="flex gap-2"
-                      >
-                        <span
-                          className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
-                          style={{ background: brand.accent }}
-                        />
-                        <span>{bullet}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-
-                  {activePart.seasonal && (
-                    <div className="mt-5 grid gap-2 sm:grid-cols-3">
-                      {activePart.seasonal.map((season) => (
-                        <div
-                          key={season.labelKey}
-                          className="rounded-lg border border-border/60 bg-background/40 p-3"
-                        >
-                          <p
-                            className="text-[10px] font-semibold uppercase tracking-wider"
-                            style={{ color: brand.accent }}
-                          >
-                            {t(season.labelKey)}
-                          </p>
-                          <p className="mt-1 text-xs text-muted-foreground">{season.text[lang]}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
               )
             ) : (
               <motion.div
@@ -330,16 +317,30 @@ function ModelDetailPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="mt-5 rounded-2xl border border-dashed border-border bg-card-gradient/50 p-5 text-center text-sm text-muted-foreground backdrop-blur-md"
+                className="mt-5 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border bg-card-gradient/50 p-8 text-center backdrop-blur-md"
               >
-                {t("model.hint")}
+                <motion.span
+                  animate={{ x: [0, -6, 0] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex h-12 w-12 items-center justify-center rounded-full text-2xl"
+                  style={{
+                    background: `linear-gradient(135deg, ${brand.accent}33, transparent)`,
+                    color: brand.accent,
+                  }}
+                  aria-hidden
+                >
+                  ←
+                </motion.span>
+                <p className="max-w-xs text-sm text-muted-foreground">{t("model.hint")}</p>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {brand.slug !== "chevrolet" && (
-            <MaintenanceSchedulePlaceholder brandAccent={brand.accent} />
-          )}
+          <VehicleMaintenanceOverview
+            brandAccent={brand.accent}
+            bodyType={spec?.bodyType ?? "midsize-sedan"}
+            regulationBased={Boolean(spec?.regulationBased)}
+          />
         </div>
       </section>
     </main>
