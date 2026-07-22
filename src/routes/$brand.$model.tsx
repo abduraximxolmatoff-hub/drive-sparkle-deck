@@ -13,7 +13,7 @@ import { CobaltTirePanel } from "@/components/CobaltTirePanel";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useFavorites } from "@/hooks/use-favorites";
 import { getBrandModel } from "@/data/brands";
-import { getChevModelSpec } from "@/data/chevModelSpecs";
+import { getChevModelSpec, getBodyTypeLabel, type BodyType } from "@/data/chevModelSpecs";
 import { getPartIcon } from "@/data/partIcons";
 import { CAR_PARTS, type CarPart } from "@/data/carParts";
 
@@ -103,6 +103,7 @@ function ModelDetailNotFoundComponent() {
 function ModelDetailPage() {
   const { brand, model } = Route.useLoaderData();
   const [activePart, setActivePart] = useState<CarPart | null>(null);
+  const [activeTab, setActiveTab] = useState<"overview" | "technical" | "service">("overview");
   const { t, lang } = useLanguage();
   const { isFavorite, toggleFavorite } = useFavorites();
   const favoriteKey = `${brand.slug}/${model.slug}`;
@@ -218,136 +219,285 @@ function ModelDetailPage() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto grid max-w-7xl gap-6 px-4 pb-32 sm:px-6 lg:grid-cols-[320px_1fr] lg:gap-8">
-        <aside className="order-2 lg:order-1">
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-              {t("model.parts")}
-            </h2>
-            {activePart && (
+      {/* Tab bar: Umumiy / Texnik / Servis */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="inline-flex rounded-full border border-border bg-card-gradient p-1 backdrop-blur-md">
+          {(
+            [
+              { id: "overview", label: t("model.tab.overview") },
+              { id: "technical", label: t("model.tab.technical") },
+              { id: "service", label: t("model.tab.service") },
+            ] as const
+          ).map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
               <button
-                onClick={() => setActivePart(null)}
-                className="text-[10px] uppercase tracking-wider text-primary hover:underline"
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors sm:text-sm ${
+                  isActive
+                    ? "text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
-                {t("model.resetView")}
+                {isActive && (
+                  <motion.span
+                    layoutId="model-tab-pill"
+                    className="absolute inset-0 rounded-full"
+                    style={{ background: brand.accent }}
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{tab.label}</span>
               </button>
-            )}
-          </div>
+            );
+          })}
+        </div>
+      </div>
 
-          <ul className="grid grid-cols-2 gap-2 sm:grid-cols-2 lg:grid-cols-1">
-            {CAR_PARTS.map((part, index) => {
-              const isActive = activePart?.id === part.id;
-
-              return (
-                <motion.li
-                  key={part.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.35 + index * 0.06, duration: 0.45 }}
+      {activeTab === "technical" ? (
+        <section className="relative z-10 mx-auto grid max-w-7xl gap-6 px-4 pb-32 pt-6 sm:px-6 lg:grid-cols-[320px_1fr] lg:gap-8">
+          <aside className="order-2 lg:order-1">
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+                {t("model.parts")}
+              </h2>
+              {activePart && (
+                <button
+                  onClick={() => setActivePart(null)}
+                  className="text-[10px] uppercase tracking-wider text-primary hover:underline"
                 >
-                  <button
-                    onClick={() => setActivePart(isActive ? null : part)}
-                    aria-pressed={isActive}
-                    className={`group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-3 text-left backdrop-blur-md transition-all duration-300 ${
-                      isActive
-                        ? "border-primary/60 bg-card-gradient shadow-glow"
-                        : "border-border bg-card-gradient hover:scale-[1.01] hover:border-primary/40"
-                    }`}
-                    style={
-                      isActive
-                        ? {
-                            boxShadow: `0 0 40px -10px ${brand.accent}80`,
-                            borderColor: `${brand.accent}aa`,
-                          }
-                        : undefined
-                    }
-                  >
-                    <span
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-transform group-hover:scale-110"
-                      style={{
-                        background: `linear-gradient(135deg, ${brand.accent}33, transparent)`,
-                        color: brand.accent,
-                      }}
-                      aria-hidden
-                    >
-                      {(() => {
-                        const PartIcon = getPartIcon(part.id);
-                        return <PartIcon className="h-5 w-5" strokeWidth={2} />;
-                      })()}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate font-display text-sm font-semibold">
-                        {part.name[lang]}
-                      </p>
-                      <p className="truncate text-[11px] text-muted-foreground">
-                        {part.subtitle[lang]}
-                      </p>
-                    </div>
-                  </button>
-                </motion.li>
-              );
-            })}
-          </ul>
-        </aside>
+                  {t("model.resetView")}
+                </button>
+              )}
+            </div>
 
-        <div className="order-1 lg:order-2">
+            <ul className="grid grid-cols-2 gap-2 sm:grid-cols-2 lg:grid-cols-1">
+              {CAR_PARTS.map((part, index) => {
+                const isActive = activePart?.id === part.id;
+
+                return (
+                  <motion.li
+                    key={part.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 + index * 0.04, duration: 0.4 }}
+                  >
+                    <button
+                      onClick={() => setActivePart(isActive ? null : part)}
+                      aria-pressed={isActive}
+                      className={`group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-3 text-left backdrop-blur-md transition-all duration-300 ${
+                        isActive
+                          ? "border-primary/60 bg-card-gradient shadow-glow"
+                          : "border-border bg-card-gradient hover:scale-[1.01] hover:border-primary/40"
+                      }`}
+                      style={
+                        isActive
+                          ? {
+                              boxShadow: `0 0 40px -10px ${brand.accent}80`,
+                              borderColor: `${brand.accent}aa`,
+                            }
+                          : undefined
+                      }
+                    >
+                      <span
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-transform group-hover:scale-110"
+                        style={{
+                          background: `linear-gradient(135deg, ${brand.accent}33, transparent)`,
+                          color: brand.accent,
+                        }}
+                        aria-hidden
+                      >
+                        {(() => {
+                          const PartIcon = getPartIcon(part.id);
+                          return <PartIcon className="h-5 w-5" strokeWidth={2} />;
+                        })()}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate font-display text-sm font-semibold">
+                          {part.name[lang]}
+                        </p>
+                        <p className="truncate text-[11px] text-muted-foreground">
+                          {part.subtitle[lang]}
+                        </p>
+                      </div>
+                    </button>
+                  </motion.li>
+                );
+              })}
+            </ul>
+          </aside>
+
+          <div className="order-1 lg:order-2">
+            <InteractiveCarViewer
+              model={model}
+              brandAccent={brand.accent}
+              selectedPartId={activePart?.id ?? null}
+              onResetView={() => setActivePart(null)}
+            />
+
+            <AnimatePresence mode="wait">
+              {activePart ? (
+                activePart.id === "tires" ? (
+                  <CobaltTirePanel
+                    key={`tires-${model.slug}`}
+                    brandAccent={brand.accent}
+                    modelName={model.name}
+                    modelSlug={model.slug}
+                  />
+                ) : (
+                  <CobaltPartInfoPanel
+                    key={`${model.slug}-${activePart.id}`}
+                    part={activePart}
+                    brandAccent={brand.accent}
+                    modelName={model.name}
+                    modelSlug={model.slug}
+                  />
+                )
+              ) : (
+                <motion.div
+                  key="hint"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="mt-5 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border bg-card-gradient/50 p-8 text-center backdrop-blur-md"
+                >
+                  <motion.span
+                    animate={{ x: [0, -6, 0] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                    className="flex h-12 w-12 items-center justify-center rounded-full text-2xl"
+                    style={{
+                      background: `linear-gradient(135deg, ${brand.accent}33, transparent)`,
+                      color: brand.accent,
+                    }}
+                    aria-hidden
+                  >
+                    ←
+                  </motion.span>
+                  <p className="max-w-xs text-sm text-muted-foreground">{t("model.hint")}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </section>
+      ) : (
+        <section className="relative z-10 mx-auto max-w-4xl px-4 pb-32 pt-6 sm:px-6">
           <InteractiveCarViewer
             model={model}
             brandAccent={brand.accent}
-            selectedPartId={activePart?.id ?? null}
-            onResetView={() => setActivePart(null)}
+            selectedPartId={null}
+            onResetView={() => {}}
           />
 
           <AnimatePresence mode="wait">
-            {activePart ? (
-              activePart.id === "tires" ? (
-                <CobaltTirePanel
-                  key={`tires-${model.slug}`}
+            {activeTab === "overview" ? (
+              <motion.div
+                key="overview"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35 }}
+              >
+                <ModelQuickFacts
                   brandAccent={brand.accent}
-                  modelName={model.name}
-                  modelSlug={model.slug}
+                  bodyType={spec?.bodyType ?? "midsize-sedan"}
+                  regulationBased={Boolean(spec?.regulationBased)}
+                  tire={spec?.tire}
+                  onExploreParts={() => setActiveTab("technical")}
                 />
-              ) : (
-                <CobaltPartInfoPanel
-                  key={`${model.slug}-${activePart.id}`}
-                  part={activePart}
-                  brandAccent={brand.accent}
-                  modelName={model.name}
-                  modelSlug={model.slug}
-                />
-              )
+              </motion.div>
             ) : (
               <motion.div
-                key="hint"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                key="service"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="mt-5 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border bg-card-gradient/50 p-8 text-center backdrop-blur-md"
+                transition={{ duration: 0.35 }}
               >
-                <motion.span
-                  animate={{ x: [0, -6, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex h-12 w-12 items-center justify-center rounded-full text-2xl"
-                  style={{
-                    background: `linear-gradient(135deg, ${brand.accent}33, transparent)`,
-                    color: brand.accent,
-                  }}
-                  aria-hidden
-                >
-                  ←
-                </motion.span>
-                <p className="max-w-xs text-sm text-muted-foreground">{t("model.hint")}</p>
+                <VehicleMaintenanceOverview
+                  brandAccent={brand.accent}
+                  bodyType={spec?.bodyType ?? "midsize-sedan"}
+                  regulationBased={Boolean(spec?.regulationBased)}
+                />
               </motion.div>
             )}
           </AnimatePresence>
-
-          <VehicleMaintenanceOverview
-            brandAccent={brand.accent}
-            bodyType={spec?.bodyType ?? "midsize-sedan"}
-            regulationBased={Boolean(spec?.regulationBased)}
-          />
-        </div>
-      </section>
+        </section>
+      )}
     </main>
+  );
+}
+
+function ModelQuickFacts({
+  brandAccent,
+  bodyType,
+  regulationBased,
+  tire,
+  onExploreParts,
+}: {
+  brandAccent: string;
+  bodyType: BodyType;
+  regulationBased: boolean;
+  tire?: { frontPsi: string; rearPsi: string; replacementKm: string };
+  onExploreParts: () => void;
+}) {
+  const { t, lang } = useLanguage();
+
+  const facts = [
+    { label: t("model.facts.bodyType"), value: getBodyTypeLabel(bodyType, lang) },
+    {
+      label: t("model.facts.tirePressure"),
+      value: tire ? `${tire.frontPsi} / ${tire.rearPsi}` : "—",
+    },
+    { label: t("model.facts.tireLife"), value: tire?.replacementKm ?? "—" },
+    { label: t("model.facts.partsTracked"), value: `${CAR_PARTS.length}` },
+  ];
+
+  return (
+    <div className="mt-6 space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 className="font-display text-xl font-semibold sm:text-2xl">{t("model.facts.title")}</h2>
+        <span
+          className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
+          style={{
+            background: `${brandAccent}1a`,
+            color: brandAccent,
+            borderColor: `${brandAccent}55`,
+          }}
+        >
+          {regulationBased ? t("cobalt.regulationBased") : t("chev.generalRecommendation")}
+        </span>
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {facts.map((fact, i) => (
+          <motion.div
+            key={fact.label}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 + i * 0.06 }}
+            className="rounded-xl border border-border/70 bg-card-gradient p-4 backdrop-blur-sm"
+          >
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              {fact.label}
+            </p>
+            <p
+              className="mt-1.5 font-display text-base font-semibold"
+              style={{ color: brandAccent }}
+            >
+              {fact.value}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      <button
+        onClick={onExploreParts}
+        className="mt-2 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition hover:scale-[1.02]"
+        style={{ borderColor: `${brandAccent}66`, color: brandAccent }}
+      >
+        {t("model.facts.explorePartsCta")} →
+      </button>
+    </div>
   );
 }
