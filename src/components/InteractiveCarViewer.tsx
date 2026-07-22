@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Pause, Play } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { DEFAULT_MARKERS, type CarModel } from "@/data/brands";
 
@@ -12,9 +13,14 @@ interface InteractiveCarViewerProps {
   onResetView?: () => void;
 }
 
-const MAX_YAW = 180; // degrees of horizontal rotation each direction
-const MAX_PITCH = 18; // degrees of vertical tilt each direction
-const STEP = 30; // degrees per arrow click
+// Rotation is deliberately capped well below 90° — beyond that a single flat
+// photo would show its mirrored "backface" instead of a real rear view,
+// which reads as broken rather than 3D. Staying inside a showroom-turntable
+// range keeps the illusion convincing while still feeling interactive.
+const MAX_YAW = 42; // degrees of horizontal rotation each direction
+const MAX_PITCH = 14; // degrees of vertical tilt each direction
+const STEP = 14; // degrees per arrow click
+const AUTO_ROTATE_SPEED = 0.35; // degrees per animation frame tick
 
 export function InteractiveCarViewer({
   model,
@@ -26,8 +32,11 @@ export function InteractiveCarViewer({
   const [yaw, setYaw] = useState(0);
   const [pitch, setPitch] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [autoRotate, setAutoRotate] = useState(true);
   const dragRef = useRef<{ x: number; y: number; yaw: number; pitch: number } | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const directionRef = useRef(1);
 
   // Reset rotation whenever a part is selected (so the user sees the correct view).
   useEffect(() => {
@@ -40,12 +49,37 @@ export function InteractiveCarViewer({
   const clampYaw = (v: number) => Math.max(-MAX_YAW, Math.min(MAX_YAW, v));
   const clampPitch = (v: number) => Math.max(-MAX_PITCH, Math.min(MAX_PITCH, v));
 
+  // Gentle back-and-forth "showroom turntable" auto-rotation when idle.
+  useEffect(() => {
+    if (!autoRotate || isDragging || selectedPartId) return;
+
+    const tick = () => {
+      setYaw((prev) => {
+        let next = prev + AUTO_ROTATE_SPEED * directionRef.current;
+        if (next >= MAX_YAW) {
+          next = MAX_YAW;
+          directionRef.current = -1;
+        } else if (next <= -MAX_YAW) {
+          next = -MAX_YAW;
+          directionRef.current = 1;
+        }
+        return next;
+      });
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [autoRotate, isDragging, selectedPartId]);
+
   const handlePointerDown = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
       if (selectedPartId) return; // disable drag while zoomed into a part
       (e.target as Element).setPointerCapture?.(e.pointerId);
       dragRef.current = { x: e.clientX, y: e.clientY, yaw, pitch };
       setIsDragging(true);
+      setAutoRotate(false);
     },
     [yaw, pitch, selectedPartId],
   );
@@ -54,8 +88,8 @@ export function InteractiveCarViewer({
     if (!dragRef.current) return;
     const dx = e.clientX - dragRef.current.x;
     const dy = e.clientY - dragRef.current.y;
-    setYaw(clampYaw(dragRef.current.yaw + dx * 0.5));
-    setPitch(clampPitch(dragRef.current.pitch - dy * 0.2));
+    setYaw(clampYaw(dragRef.current.yaw + dx * 0.35));
+    setPitch(clampPitch(dragRef.current.pitch - dy * 0.15));
   }, []);
 
   const handlePointerUp = useCallback(() => {
@@ -82,6 +116,10 @@ export function InteractiveCarViewer({
 
   const showsControls = !selectedPartId;
 
+  // Normalized -1..1 progress across the turntable range, used to drive the
+  // floor shadow and light-sheen so they track the rotation convincingly.
+  const yawProgress = yaw / MAX_YAW;
+
   return (
     <div
       className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl border border-border bg-card-gradient shadow-card backdrop-blur-md"
@@ -96,6 +134,19 @@ export function InteractiveCarViewer({
           background: `radial-gradient(ellipse at 70% 50%, ${brandAccent}22, transparent 60%)`,
         }}
       />
+
+      {/* Floor contact shadow — scales/skews with yaw to sell depth */}
+      {!selectedPartId && (
+        <motion.div
+          className="pointer-events-none absolute bottom-[12%] left-1/2 h-[8%] w-[55%] -translate-x-1/2 rounded-[50%] bg-black/50 blur-xl"
+          animate={{
+            scaleX: 1 - Math.abs(yawProgress) * 0.22,
+            x: yawProgress * 14,
+            opacity: 0.45 - Math.abs(pitch) / MAX_PITCH / 8,
+          }}
+          transition={{ type: "spring", stiffness: 120, damping: 20 }}
+        />
+      )}
 
       {/* Drag surface + 3D transformed image */}
       <div
@@ -132,7 +183,11 @@ export function InteractiveCarViewer({
                   ? { rotateX: 0, rotateY: 0, scale: usingPartImage ? 1 : 1.6 }
                   : { rotateX: pitch, rotateY: yaw, scale: 1 }
               }
-              transition={{ type: "spring", stiffness: 120, damping: 18 }}
+              transition={
+                isDragging
+                  ? { type: "tween", duration: 0 }
+                  : { type: "spring", stiffness: 120, damping: 18 }
+              }
               style={{
                 transformOrigin:
                   selectedPartId && !usingPartImage && marker
@@ -140,6 +195,21 @@ export function InteractiveCarViewer({
                     : "center",
               }}
             />
+
+            {/* Light sheen sweep — a soft diagonal highlight that slides across
+                the body as it "turns", faking a specular reflection. */}
+            {!selectedPartId && (
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.16) 50%, transparent 65%)",
+                  backgroundSize: "250% 100%",
+                  backgroundPositionX: `${50 - yawProgress * 40}%`,
+                  mixBlendMode: "screen",
+                }}
+              />
+            )}
           </motion.div>
         </AnimatePresence>
 
@@ -200,19 +270,33 @@ export function InteractiveCarViewer({
         </AnimatePresence>
       </div>
 
-      {/* 360° badge */}
+      {/* 360° badge + auto-rotate toggle */}
       {showsControls && (
-        <div
-          className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider backdrop-blur-md sm:left-4 sm:top-4"
-          style={{ color: brandAccent, borderColor: `${brandAccent}66` }}
-        >
-          <span className="text-[11px]">⟳</span>
-          <span>{t("viewer.360")}</span>
+        <div className="absolute left-3 top-3 flex items-center gap-1.5 sm:left-4 sm:top-4">
+          <div
+            className="pointer-events-none flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider backdrop-blur-md"
+            style={{ color: brandAccent, borderColor: `${brandAccent}66` }}
+          >
+            <span className="text-[11px]">⟳</span>
+            <span>{t("viewer.360")}</span>
+          </div>
+          <button
+            onClick={() => setAutoRotate((v) => !v)}
+            aria-label={autoRotate ? t("viewer.pause") : t("viewer.play")}
+            className="flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background/60 backdrop-blur-md transition hover:bg-background/90"
+            style={{ color: brandAccent, borderColor: `${brandAccent}66` }}
+          >
+            {autoRotate ? (
+              <Pause className="h-3 w-3" strokeWidth={2.5} />
+            ) : (
+              <Play className="h-3 w-3" strokeWidth={2.5} />
+            )}
+          </button>
         </div>
       )}
 
       {/* Drag hint */}
-      {showsControls && yaw === 0 && pitch === 0 && (
+      {showsControls && !isDragging && yaw === 0 && pitch === 0 && (
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.7 }}
@@ -226,8 +310,20 @@ export function InteractiveCarViewer({
       {/* Arrow controls */}
       {showsControls && (
         <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-border bg-background/60 p-1 backdrop-blur-md sm:bottom-4">
-          <ArrowBtn label="↑" onClick={() => setPitch((p) => clampPitch(p + STEP / 3))} />
-          <ArrowBtn label="←" onClick={() => setYaw((y) => clampYaw(y - STEP))} />
+          <ArrowBtn
+            label="↑"
+            onClick={() => {
+              setAutoRotate(false);
+              setPitch((p) => clampPitch(p + STEP / 3));
+            }}
+          />
+          <ArrowBtn
+            label="←"
+            onClick={() => {
+              setAutoRotate(false);
+              setYaw((y) => clampYaw(y - STEP));
+            }}
+          />
           <button
             onClick={reset}
             className="rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-foreground/80 transition hover:bg-foreground/10"
@@ -235,8 +331,20 @@ export function InteractiveCarViewer({
           >
             ⟲
           </button>
-          <ArrowBtn label="→" onClick={() => setYaw((y) => clampYaw(y + STEP))} />
-          <ArrowBtn label="↓" onClick={() => setPitch((p) => clampPitch(p - STEP / 3))} />
+          <ArrowBtn
+            label="→"
+            onClick={() => {
+              setAutoRotate(false);
+              setYaw((y) => clampYaw(y + STEP));
+            }}
+          />
+          <ArrowBtn
+            label="↓"
+            onClick={() => {
+              setAutoRotate(false);
+              setPitch((p) => clampPitch(p - STEP / 3));
+            }}
+          />
         </div>
       )}
 

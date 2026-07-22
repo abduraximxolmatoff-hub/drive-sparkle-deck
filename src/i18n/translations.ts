@@ -11,6 +11,7 @@ export const translations: Record<Lang, Dict> = {
     "home.subtitle": "Avtomobilingizni tushuning. Aqlli haydang.",
     "home.exploreCars": "Mashinalarni ko‘rish",
     "home.modelsCount": "Modellar",
+    "home.brandsCount": "Brend",
     "home.footer": "AutoINFO. Kelajakni hayda.",
 
     "brand.backToBrands": "Brendlarga qaytish",
@@ -31,6 +32,8 @@ export const translations: Record<Lang, Dict> = {
     "viewer.dragHint": "Aylantirish uchun suring",
     "viewer.reset": "Ko‘rinishni tiklash",
     "viewer.zoomedTo": "Yaqinlashtirildi",
+    "viewer.pause": "Aylanishni to'xtatish",
+    "viewer.play": "Avto-aylanish",
 
     "season.winter": "Qish",
     "season.summer": "Yoz",
@@ -61,6 +64,7 @@ export const translations: Record<Lang, Dict> = {
     "home.subtitle": "Понимай свой автомобиль. Управляй умно.",
     "home.exploreCars": "Смотреть автомобили",
     "home.modelsCount": "Моделей",
+    "home.brandsCount": "Брендов",
     "home.footer": "AutoINFO. Веди в будущее.",
 
     "brand.backToBrands": "Назад к брендам",
@@ -81,6 +85,8 @@ export const translations: Record<Lang, Dict> = {
     "viewer.dragHint": "Проведите, чтобы повернуть",
     "viewer.reset": "Сбросить вид",
     "viewer.zoomedTo": "Приближено к",
+    "viewer.pause": "Остановить вращение",
+    "viewer.play": "Авто-вращение",
 
     "season.winter": "Зима",
     "season.summer": "Лето",
@@ -111,6 +117,7 @@ export const translations: Record<Lang, Dict> = {
     "home.subtitle": "Understand Your Car. Drive Smarter.",
     "home.exploreCars": "Explore Cars",
     "home.modelsCount": "Models",
+    "home.brandsCount": "Brands",
     "home.footer": "AutoINFO. Drive the future.",
 
     "brand.backToBrands": "Back to brands",
@@ -131,6 +138,8 @@ export const translations: Record<Lang, Dict> = {
     "viewer.dragHint": "Drag to rotate",
     "viewer.reset": "Reset view",
     "viewer.zoomedTo": "Zoomed to",
+    "viewer.pause": "Pause rotation",
+    "viewer.play": "Auto-rotate",
 
     "season.winter": "Winter",
     "season.summer": "Summer",

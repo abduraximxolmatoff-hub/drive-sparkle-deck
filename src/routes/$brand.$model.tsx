@@ -14,6 +14,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { useFavorites } from "@/hooks/use-favorites";
 import { getBrandModel } from "@/data/brands";
 import { getChevModelSpec } from "@/data/chevModelSpecs";
+import { getPartIcon } from "@/data/partIcons";
 import { CAR_PARTS, type CarPart } from "@/data/carParts";
 
 export const Route = createFileRoute("/$brand/$model")({
@@ -262,13 +263,17 @@ function ModelDetailPage() {
                     }
                   >
                     <span
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-lg transition-transform group-hover:scale-110"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-transform group-hover:scale-110"
                       style={{
                         background: `linear-gradient(135deg, ${brand.accent}33, transparent)`,
+                        color: brand.accent,
                       }}
                       aria-hidden
                     >
-                      {part.icon}
+                      {(() => {
+                        const PartIcon = getPartIcon(part.id);
+                        return <PartIcon className="h-5 w-5" strokeWidth={2} />;
+                      })()}
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-display text-sm font-semibold">

@@ -5,6 +5,7 @@ import type { CobaltPartInfo } from "@/data/cobaltPartInfo";
 import { COBALT_PART_PREVIEW_IMAGES } from "@/data/cobaltPartPreviewImages";
 import { getChevPartInfo } from "@/data/chevPartContent";
 import { getChevModelSpec } from "@/data/chevModelSpecs";
+import { getPartIcon } from "@/data/partIcons";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 interface Props {
@@ -94,6 +95,7 @@ export function CobaltPartInfoPanel({ part, brandAccent, modelName, modelSlug }:
   const info: CobaltPartInfo | undefined = getChevPartInfo(modelSlug, part.id);
   const spec = getChevModelSpec(modelSlug);
   const isRegulationBased = Boolean(spec?.regulationBased);
+  const PartIcon = getPartIcon(part.id);
 
   if (!info) return null;
 
@@ -128,10 +130,13 @@ export function CobaltPartInfoPanel({ part, brandAccent, modelName, modelSlug }:
       <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <span
-            className="flex h-11 w-11 items-center justify-center rounded-lg text-2xl"
-            style={{ background: `linear-gradient(135deg, ${brandAccent}44, transparent)` }}
+            className="flex h-11 w-11 items-center justify-center rounded-lg"
+            style={{
+              background: `linear-gradient(135deg, ${brandAccent}44, transparent)`,
+              color: brandAccent,
+            }}
           >
-            {part.icon}
+            <PartIcon className="h-5 w-5" strokeWidth={2} />
           </span>
           <div>
             <p

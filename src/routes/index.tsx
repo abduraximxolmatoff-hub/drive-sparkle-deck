@@ -37,6 +37,15 @@ function HomePage() {
       </header>
 
       <section className="relative z-10 mx-auto max-w-3xl px-4 pb-6 pt-6 text-center sm:px-6 sm:pt-10">
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card-gradient px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground backdrop-blur-md"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+          {brands.length} {t("home.brandsCount")} ·{" "}
+          {brands.reduce((n, b) => n + b.models.length, 0)} {t("home.modelsCount")}
+        </motion.div>
         <AutoInfoLogo />
         <motion.p
           initial={{ opacity: 0, y: 8 }}

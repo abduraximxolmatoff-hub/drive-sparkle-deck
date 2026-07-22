@@ -1,4 +1,14 @@
 import { motion } from "framer-motion";
+import {
+  Disc3,
+  SlidersHorizontal,
+  CalendarClock,
+  RefreshCw,
+  Ruler,
+  Route,
+  Lightbulb,
+  TriangleAlert,
+} from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getChevModelSpec } from "@/data/chevModelSpecs";
 
@@ -231,7 +241,7 @@ function Card({
   glow = false,
 }: {
   accent: string;
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   badge?: string;
   children: React.ReactNode;
@@ -255,8 +265,11 @@ function Card({
       <div className="mb-3 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2.5">
           <span
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-lg"
-            style={{ background: `linear-gradient(135deg, ${accent}44, transparent)` }}
+            className="flex h-9 w-9 items-center justify-center rounded-lg"
+            style={{
+              background: `linear-gradient(135deg, ${accent}44, transparent)`,
+              color: accent,
+            }}
           >
             {icon}
           </span>
@@ -386,8 +399,9 @@ export function CobaltTirePanel({ brandAccent, modelName, modelSlug }: Props) {
         >
           {modelName} · {label}
         </p>
-        <h3 className="mt-1 font-display text-2xl font-bold sm:text-3xl">
-          🛞 {ts(T.funcTitle, L)}
+        <h3 className="mt-1 flex items-center gap-2 font-display text-2xl font-bold sm:text-3xl">
+          <Disc3 className="h-6 w-6 shrink-0" strokeWidth={2} style={{ color: brandAccent }} />
+          {ts(T.funcTitle, L)}
         </h3>
         <ul className="mt-3 flex flex-wrap gap-1.5">
           {tl(T.funcItems, L).map((it) => (
@@ -404,7 +418,12 @@ export function CobaltTirePanel({ brandAccent, modelName, modelSlug }: Props) {
 
       {/* Top grid: pressure + inspection */}
       <div className="grid gap-4 md:grid-cols-2">
-        <Card accent={brandAccent} icon="🎛️" title={ts(T.pressureTitle, L)} glow>
+        <Card
+          accent={brandAccent}
+          icon={<SlidersHorizontal className="h-4 w-4" strokeWidth={2} />}
+          title={ts(T.pressureTitle, L)}
+          glow
+        >
           <div className="space-y-2">
             <PressureRow label={ts(T.front, L)} value={frontPsi} accent={brandAccent} />
             <PressureRow label={ts(T.rear, L)} value={rearPsi} accent={brandAccent} />
@@ -413,14 +432,23 @@ export function CobaltTirePanel({ brandAccent, modelName, modelSlug }: Props) {
           <p className="mt-3 text-[11px] italic text-muted-foreground">❄ {ts(T.coldNote, L)}</p>
         </Card>
 
-        <Card accent={brandAccent} icon="📅" title={ts(T.inspectTitle, L)} badge={label}>
+        <Card
+          accent={brandAccent}
+          icon={<CalendarClock className="h-4 w-4" strokeWidth={2} />}
+          title={ts(T.inspectTitle, L)}
+          badge={label}
+        >
           <Bullets items={tl(T.inspectItems, L)} accent={brandAccent} />
         </Card>
       </div>
 
       {/* Replacement + Tread */}
       <div className="grid gap-4 md:grid-cols-2">
-        <Card accent={brandAccent} icon="♻️" title={ts(T.replaceTitle, L)}>
+        <Card
+          accent={brandAccent}
+          icon={<RefreshCw className="h-4 w-4" strokeWidth={2} />}
+          title={ts(T.replaceTitle, L)}
+        >
           <div
             className="mb-3 flex items-center justify-between rounded-lg border px-3 py-2"
             style={{
@@ -437,7 +465,11 @@ export function CobaltTirePanel({ brandAccent, modelName, modelSlug }: Props) {
           <Bullets items={tl(T.replaceItems, L)} accent="rgb(248,113,113)" />
         </Card>
 
-        <Card accent={brandAccent} icon="📏" title={ts(T.treadTitle, L)}>
+        <Card
+          accent={brandAccent}
+          icon={<Ruler className="h-4 w-4" strokeWidth={2} />}
+          title={ts(T.treadTitle, L)}
+        >
           <div className="space-y-3">
             <TreadBar
               label={ts(T.treadGood, L)}
@@ -462,7 +494,11 @@ export function CobaltTirePanel({ brandAccent, modelName, modelSlug }: Props) {
       </div>
 
       {/* Service Timeline */}
-      <Card accent={brandAccent} icon="🛣️" title={ts(T.timelineTitle, L)}>
+      <Card
+        accent={brandAccent}
+        icon={<Route className="h-4 w-4" strokeWidth={2} />}
+        title={ts(T.timelineTitle, L)}
+      >
         <div className="relative pt-6">
           <div
             className="absolute left-2 right-2 top-9 h-[2px] rounded-full"
@@ -503,7 +539,11 @@ export function CobaltTirePanel({ brandAccent, modelName, modelSlug }: Props) {
 
       {/* Tips + Warnings */}
       <div className="grid gap-4 md:grid-cols-2">
-        <Card accent={brandAccent} icon="💡" title={ts(T.tipsTitle, L)}>
+        <Card
+          accent={brandAccent}
+          icon={<Lightbulb className="h-4 w-4" strokeWidth={2} />}
+          title={ts(T.tipsTitle, L)}
+        >
           <ul className="grid gap-1.5">
             {tl(T.tips, L).map((tip, i) => (
               <motion.li
@@ -513,14 +553,18 @@ export function CobaltTirePanel({ brandAccent, modelName, modelSlug }: Props) {
                 transition={{ delay: 0.1 + i * 0.05 }}
                 className="flex items-start gap-2 rounded-lg border border-border/50 bg-background/30 px-2.5 py-1.5 text-[11px] leading-snug text-foreground/90"
               >
-                <span>💡</span>
+                <Lightbulb className="h-4 w-4 shrink-0" strokeWidth={2} />
                 <span>{tip}</span>
               </motion.li>
             ))}
           </ul>
         </Card>
 
-        <Card accent="rgb(248,113,113)" icon="⚠️" title={ts(T.warnTitle, L)}>
+        <Card
+          accent="rgb(248,113,113)"
+          icon={<TriangleAlert className="h-4 w-4" strokeWidth={2} />}
+          title={ts(T.warnTitle, L)}
+        >
           <ul className="grid gap-1.5 sm:grid-cols-2">
             {tl(T.warns, L).map((w, i) => (
               <motion.li
