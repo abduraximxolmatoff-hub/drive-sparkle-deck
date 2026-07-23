@@ -193,6 +193,7 @@ export function InteractiveCarViewer({
                   selectedPartId && !usingPartImage && marker
                     ? `${marker.x}% ${marker.y}%`
                     : "center",
+                filter: "contrast(1.08) brightness(1.03) saturate(1.05)",
               }}
             />
 

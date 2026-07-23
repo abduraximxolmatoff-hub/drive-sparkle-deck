@@ -183,6 +183,7 @@ function BrandPage() {
                   height={512}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  style={{ filter: "contrast(1.08) brightness(1.03) saturate(1.05)" }}
                 />
                 <div
                   className="absolute inset-0 opacity-60"
@@ -190,6 +191,7 @@ function BrandPage() {
                     background: `linear-gradient(90deg, transparent 40%, ${brand.accent}22)`,
                   }}
                 />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/50 to-transparent" />
               </div>
               <div className="flex flex-1 flex-col items-start gap-2 p-6 sm:items-end sm:p-8 sm:text-right">
                 <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">

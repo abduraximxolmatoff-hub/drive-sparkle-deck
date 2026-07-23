@@ -73,20 +73,50 @@ export function BrandShowcaseCard({ brand, index }: Props) {
           </p>
         </div>
 
-        {/* Cycling car image */}
+        {/* Cycling car image, presented on a consistent "showroom stage" so
+            every brand's photo — whatever its original style — reads with
+            the same floor glow / reflection / color grading. */}
         <div className="relative z-10 ml-2 h-full w-1/2 shrink-0 sm:w-[55%]">
+          {/* Floor spotlight */}
+          <div
+            className="pointer-events-none absolute inset-x-[8%] bottom-2 h-3 rounded-[50%] blur-md"
+            style={{ background: `${brand.accent}55` }}
+          />
           <AnimatePresence mode="wait">
-            <motion.img
+            <motion.div
               key={current.slug}
-              src={current.image}
-              alt={current.name}
               initial={{ opacity: 0, x: 60, scale: 0.95 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: -30, scale: 0.95 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 h-full w-full object-contain object-right drop-shadow-[0_12px_30px_rgba(0,0,0,0.55)]"
-              draggable={false}
-            />
+              className="absolute inset-0"
+            >
+              <img
+                src={current.image}
+                alt={current.name}
+                className="h-full w-full object-contain object-right"
+                style={{
+                  filter:
+                    "contrast(1.08) brightness(1.03) saturate(1.05) drop-shadow(0 14px 22px rgba(0,0,0,0.6))",
+                }}
+                draggable={false}
+              />
+              {/* Mirrored reflection, faded out — sells a consistent glossy
+                  showroom floor under every car regardless of source photo. */}
+              <img
+                src={current.image}
+                alt=""
+                aria-hidden
+                className="absolute inset-0 h-full w-full object-contain object-right opacity-25"
+                style={{
+                  transform: "scaleY(-1) translateY(2px)",
+                  filter: "contrast(1.08) brightness(1.03) saturate(1.05) blur(1.5px)",
+                  maskImage: "linear-gradient(to bottom, black, transparent 45%)",
+                  WebkitMaskImage: "linear-gradient(to bottom, black, transparent 45%)",
+                }}
+                draggable={false}
+              />
+            </motion.div>
           </AnimatePresence>
         </div>
       </Link>
