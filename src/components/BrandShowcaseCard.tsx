@@ -76,8 +76,15 @@ export function BrandShowcaseCard({ brand, index }: Props) {
         {/* Cycling car image, presented on a consistent "showroom stage" so
             every brand's photo — whatever its original style — reads with
             the same floor glow / reflection / color grading. */}
-        <div className="relative z-10 ml-2 h-full w-1/2 shrink-0 sm:w-[55%]">
-          {/* Floor spotlight */}
+        <div
+          className="relative z-10 ml-2 h-full w-1/2 shrink-0 sm:w-[55%]"
+          style={{ perspective: "900px" }}
+        >
+          {/* Studio turntable ring + floor spotlight */}
+          <div
+            className="pointer-events-none absolute inset-x-[10%] bottom-3 h-8 rounded-[50%] border opacity-40"
+            style={{ borderColor: `${brand.accent}55` }}
+          />
           <div
             className="pointer-events-none absolute inset-x-[8%] bottom-2 h-3 rounded-[50%] blur-md"
             style={{ background: `${brand.accent}55` }}
@@ -90,11 +97,12 @@ export function BrandShowcaseCard({ brand, index }: Props) {
               exit={{ opacity: 0, x: -30, scale: 0.95 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0"
+              style={{ transformStyle: "preserve-3d" }}
             >
               <img
                 src={current.image}
                 alt={current.name}
-                className="h-full w-full object-contain object-right"
+                className="h-full w-full object-contain object-right transition-transform duration-700 ease-out group-hover:-rotate-1 group-hover:scale-[1.04]"
                 style={{
                   filter:
                     "contrast(1.08) brightness(1.03) saturate(1.05) drop-shadow(0 14px 22px rgba(0,0,0,0.6))",
@@ -107,7 +115,7 @@ export function BrandShowcaseCard({ brand, index }: Props) {
                 src={current.image}
                 alt=""
                 aria-hidden
-                className="absolute inset-0 h-full w-full object-contain object-right opacity-25"
+                className="absolute inset-0 h-full w-full object-contain object-right opacity-25 transition-transform duration-700 ease-out group-hover:-rotate-1 group-hover:scale-[1.04]"
                 style={{
                   transform: "scaleY(-1) translateY(2px)",
                   filter: "contrast(1.08) brightness(1.03) saturate(1.05) blur(1.5px)",

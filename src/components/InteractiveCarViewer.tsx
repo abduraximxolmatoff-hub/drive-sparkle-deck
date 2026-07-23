@@ -135,17 +135,30 @@ export function InteractiveCarViewer({
         }}
       />
 
-      {/* Floor contact shadow — scales/skews with yaw to sell depth */}
+      {/* Floor contact shadow + studio turntable ring — scales/skews with yaw
+          to sell depth, matching the same "showroom stage" motif used on
+          the homepage brand cards. */}
       {!selectedPartId && (
-        <motion.div
-          className="pointer-events-none absolute bottom-[12%] left-1/2 h-[8%] w-[55%] -translate-x-1/2 rounded-[50%] bg-black/50 blur-xl"
-          animate={{
-            scaleX: 1 - Math.abs(yawProgress) * 0.22,
-            x: yawProgress * 14,
-            opacity: 0.45 - Math.abs(pitch) / MAX_PITCH / 8,
-          }}
-          transition={{ type: "spring", stiffness: 120, damping: 20 }}
-        />
+        <>
+          <motion.div
+            className="pointer-events-none absolute bottom-[13%] left-1/2 h-[10%] w-[46%] -translate-x-1/2 rounded-[50%] border opacity-30"
+            style={{ borderColor: `${brandAccent}55` }}
+            animate={{
+              scaleX: 1 - Math.abs(yawProgress) * 0.22,
+              x: yawProgress * 14,
+            }}
+            transition={{ type: "spring", stiffness: 120, damping: 20 }}
+          />
+          <motion.div
+            className="pointer-events-none absolute bottom-[12%] left-1/2 h-[8%] w-[55%] -translate-x-1/2 rounded-[50%] bg-black/50 blur-xl"
+            animate={{
+              scaleX: 1 - Math.abs(yawProgress) * 0.22,
+              x: yawProgress * 14,
+              opacity: 0.45 - Math.abs(pitch) / MAX_PITCH / 8,
+            }}
+            transition={{ type: "spring", stiffness: 120, damping: 20 }}
+          />
+        </>
       )}
 
       {/* Drag surface + 3D transformed image */}
