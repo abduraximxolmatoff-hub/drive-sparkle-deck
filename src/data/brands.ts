@@ -53,6 +53,11 @@ import gentraAirFilter from "@/assets/parts/gentra/airfilter.jpg";
 import gentraSuspension from "@/assets/parts/gentra/suspension.jpg";
 import gentraFuelFilter from "@/assets/parts/gentra/fuel-filter.jpg";
 import gentraCabinFilter from "@/assets/parts/gentra/cabin-filter.jpg";
+import gentraSparkPlugs from "@/assets/parts/gentra/spark-plugs.jpg";
+import gentraBrakeFluid from "@/assets/parts/gentra/brake-fluid.jpg";
+import gentraTransmission from "@/assets/parts/gentra/transmission.jpg";
+import gentraSteering from "@/assets/parts/gentra/steering.jpg";
+import gentraExhaust from "@/assets/parts/gentra/exhaust.jpg";
 
 /** Per-part high-resolution image keyed by CarPart.id */
 export type PartImageMap = Partial<Record<string, string>>;
@@ -143,11 +148,11 @@ const gentraPartImages: PartImageMap = {
   suspension: gentraSuspension,
   fuel_filter: gentraFuelFilter,
   cabin_filter: gentraCabinFilter,
-  spark_plugs: gentraEngine,
-  brake_fluid: gentraBrakes,
-  transmission: gentraSuspension,
-  steering: gentraSuspension,
-  exhaust: gentraSuspension,
+  spark_plugs: gentraSparkPlugs,
+  brake_fluid: gentraBrakeFluid,
+  transmission: gentraTransmission,
+  steering: gentraSteering,
+  exhaust: gentraExhaust,
 };
 
 export const brands: Brand[] = [
