@@ -208,6 +208,7 @@ export const brands: Brand[] = [
         image: chevGentraBanner,
         taglineKey: "tagline.citySedan",
         legacySlugs: ["gentra"],
+        partImages: gentraPartImages,
         images360: [],
         useSimulated360: true,
       },
