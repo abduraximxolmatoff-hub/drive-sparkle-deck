@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { CobaltSectionPreview } from "@/components/CobaltSectionPreview";
 import type { CarPart } from "@/data/carParts";
 import type { CobaltPartInfo } from "@/data/cobaltPartInfo";
-import { COBALT_PART_PREVIEW_IMAGES } from "@/data/cobaltPartPreviewImages";
+import { getPartPreviewImage } from "@/data/modelPartPreviewImages";
 import { getChevPartInfo } from "@/data/chevPartContent";
 import { getChevModelSpec } from "@/data/chevModelSpecs";
 import { getPartIcon } from "@/data/partIcons";
@@ -109,7 +109,7 @@ export function CobaltPartInfoPanel({ part, brandAccent, modelName, modelSlug }:
   // Skip the supplemental preview image when the interactive viewer above
   // already shows the same part visual (tires / windows / etc.) — this fixes
   // the "same image twice" bug on the Cobalt page.
-  const previewSrc = COBALT_PART_PREVIEW_IMAGES[part.id];
+  const previewSrc = getPartPreviewImage(modelSlug, part.id);
 
   return (
     <motion.div

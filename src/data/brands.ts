@@ -40,6 +40,20 @@ import cobaltBrakes from "@/assets/parts/cobalt/brakes.jpg";
 import cobaltCooling from "@/assets/parts/cobalt/cooling.jpg";
 import cobaltSuspension from "@/assets/parts/cobalt/suspension.jpg";
 
+// Gentra high-quality part images
+import gentraTires from "@/assets/parts/gentra/tires.jpg";
+import gentraWindows from "@/assets/parts/gentra/windows.jpg";
+import gentraEngineOil from "@/assets/parts/gentra/engine-oil.jpg";
+import gentraEngine from "@/assets/parts/gentra/engine.jpg";
+import gentraBattery from "@/assets/parts/gentra/battery.jpg";
+import gentraBrakes from "@/assets/parts/gentra/brakes.jpg";
+import gentraHeadlights from "@/assets/parts/gentra/headlights.jpg";
+import gentraCooling from "@/assets/parts/gentra/cooling.jpg";
+import gentraAirFilter from "@/assets/parts/gentra/airfilter.jpg";
+import gentraSuspension from "@/assets/parts/gentra/suspension.jpg";
+import gentraFuelFilter from "@/assets/parts/gentra/fuel-filter.jpg";
+import gentraCabinFilter from "@/assets/parts/gentra/cabin-filter.jpg";
+
 /** Per-part high-resolution image keyed by CarPart.id */
 export type PartImageMap = Partial<Record<string, string>>;
 
@@ -116,6 +130,26 @@ const cobaltPartImages: PartImageMap = {
   exhaust: cobaltEngine,
 };
 
+const gentraPartImages: PartImageMap = {
+  tires: gentraTires,
+  windows: gentraWindows,
+  oil: gentraEngineOil,
+  engine: gentraEngine,
+  battery: gentraBattery,
+  brakes: gentraBrakes,
+  headlights: gentraHeadlights,
+  cooling: gentraCooling,
+  airfilter: gentraAirFilter,
+  suspension: gentraSuspension,
+  fuel_filter: gentraFuelFilter,
+  cabin_filter: gentraCabinFilter,
+  spark_plugs: gentraEngine,
+  brake_fluid: gentraBrakes,
+  transmission: gentraSuspension,
+  steering: gentraSuspension,
+  exhaust: gentraSuspension,
+};
+
 export const brands: Brand[] = [
   {
     slug: "bmw",
@@ -174,6 +208,7 @@ export const brands: Brand[] = [
         image: chevGentraBanner,
         taglineKey: "tagline.citySedan",
         legacySlugs: ["gentra"],
+        partImages: gentraPartImages,
         images360: [],
         useSimulated360: true,
       },
