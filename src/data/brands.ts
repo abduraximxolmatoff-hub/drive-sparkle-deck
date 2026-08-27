@@ -59,6 +59,25 @@ import gentraTransmission from "@/assets/parts/gentra/transmission.jpg";
 import gentraSteering from "@/assets/parts/gentra/steering.jpg";
 import gentraExhaust from "@/assets/parts/gentra/exhaust.jpg";
 
+// Tracker high-quality part images
+import trackerTires from "@/assets/parts/tracker/tires.jpg";
+import trackerWindows from "@/assets/parts/tracker/windows.jpg";
+import trackerEngineOil from "@/assets/parts/tracker/engine-oil.jpg";
+import trackerEngine from "@/assets/parts/tracker/engine.jpg";
+import trackerBattery from "@/assets/parts/tracker/battery.jpg";
+import trackerBrakes from "@/assets/parts/tracker/brakes.jpg";
+import trackerHeadlights from "@/assets/parts/tracker/headlights.jpg";
+import trackerCooling from "@/assets/parts/tracker/cooling.jpg";
+import trackerAirFilter from "@/assets/parts/tracker/airfilter.jpg";
+import trackerSuspension from "@/assets/parts/tracker/suspension.jpg";
+import trackerFuelFilter from "@/assets/parts/tracker/fuel-filter.jpg";
+import trackerCabinFilter from "@/assets/parts/tracker/cabin-filter.jpg";
+import trackerSparkPlugs from "@/assets/parts/tracker/spark-plugs.jpg";
+import trackerBrakeFluid from "@/assets/parts/tracker/brake-fluid.jpg";
+import trackerTransmission from "@/assets/parts/tracker/transmission.jpg";
+import trackerSteering from "@/assets/parts/tracker/steering.jpg";
+import trackerExhaust from "@/assets/parts/tracker/exhaust.jpg";
+
 /** Per-part high-resolution image keyed by CarPart.id */
 export type PartImageMap = Partial<Record<string, string>>;
 
@@ -155,6 +174,26 @@ const gentraPartImages: PartImageMap = {
   exhaust: gentraExhaust,
 };
 
+const trackerPartImages: PartImageMap = {
+  tires: trackerTires,
+  windows: trackerWindows,
+  oil: trackerEngineOil,
+  engine: trackerEngine,
+  battery: trackerBattery,
+  brakes: trackerBrakes,
+  headlights: trackerHeadlights,
+  cooling: trackerCooling,
+  airfilter: trackerAirFilter,
+  suspension: trackerSuspension,
+  fuel_filter: trackerFuelFilter,
+  cabin_filter: trackerCabinFilter,
+  spark_plugs: trackerSparkPlugs,
+  brake_fluid: trackerBrakeFluid,
+  transmission: trackerTransmission,
+  steering: trackerSteering,
+  exhaust: trackerExhaust,
+};
+
 export const brands: Brand[] = [
   {
     slug: "bmw",
@@ -222,6 +261,7 @@ export const brands: Brand[] = [
         name: "Chevrolet Tracker",
         image: chevTrackerBanner,
         taglineKey: "tagline.compactSUV",
+        partImages: trackerPartImages,
         images360: [],
         useSimulated360: true,
       },
