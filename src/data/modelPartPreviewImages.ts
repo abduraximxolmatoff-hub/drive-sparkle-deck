@@ -2,7 +2,7 @@ import { COBALT_PART_PREVIEW_IMAGES } from "@/data/cobaltPartPreviewImages";
 
 /** Models that already ship a dedicated close-up image for every part in the
  * interactive viewer — the supplemental preview card would duplicate it. */
-const MODELS_WITH_FULL_PART_IMAGERY = new Set(["gentra-15l", "gentra", "tracker"]);
+const MODELS_WITH_FULL_PART_IMAGERY = new Set(["gentra-15l", "gentra", "tracker", "trailblazer"]);
 
 /** Supplemental preview image for a (model, part) pair, or undefined when the
  * interactive viewer above already shows a dedicated image for that part. */
