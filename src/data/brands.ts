@@ -78,6 +78,25 @@ import trackerTransmission from "@/assets/parts/tracker/transmission.jpg";
 import trackerSteering from "@/assets/parts/tracker/steering.jpg";
 import trackerExhaust from "@/assets/parts/tracker/exhaust.jpg";
 
+// Trailblazer high-quality part images
+import trailblazerTires from "@/assets/parts/trailblazer/tires.jpg";
+import trailblazerWindows from "@/assets/parts/trailblazer/windows.jpg";
+import trailblazerEngineOil from "@/assets/parts/trailblazer/engine-oil.jpg";
+import trailblazerEngine from "@/assets/parts/trailblazer/engine.jpg";
+import trailblazerBattery from "@/assets/parts/trailblazer/battery.jpg";
+import trailblazerBrakes from "@/assets/parts/trailblazer/brakes.jpg";
+import trailblazerHeadlights from "@/assets/parts/trailblazer/headlights.jpg";
+import trailblazerCooling from "@/assets/parts/trailblazer/cooling.jpg";
+import trailblazerAirFilter from "@/assets/parts/trailblazer/airfilter.jpg";
+import trailblazerSuspension from "@/assets/parts/trailblazer/suspension.jpg";
+import trailblazerFuelFilter from "@/assets/parts/trailblazer/fuel-filter.jpg";
+import trailblazerCabinFilter from "@/assets/parts/trailblazer/cabin-filter.jpg";
+import trailblazerSparkPlugs from "@/assets/parts/trailblazer/spark-plugs.jpg";
+import trailblazerBrakeFluid from "@/assets/parts/trailblazer/brake-fluid.jpg";
+import trailblazerTransmission from "@/assets/parts/trailblazer/transmission.jpg";
+import trailblazerSteering from "@/assets/parts/trailblazer/steering.jpg";
+import trailblazerExhaust from "@/assets/parts/trailblazer/exhaust.jpg";
+
 /** Per-part high-resolution image keyed by CarPart.id */
 export type PartImageMap = Partial<Record<string, string>>;
 
