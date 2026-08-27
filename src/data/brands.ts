@@ -309,6 +309,7 @@ export const brands: Brand[] = [
         name: "Chevrolet Trailblazer",
         image: chevTrailblazer,
         taglineKey: "tagline.midsizeSUV",
+        partImages: trailblazerPartImages,
         images360: [],
         useSimulated360: true,
       },
