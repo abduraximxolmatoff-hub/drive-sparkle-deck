@@ -261,6 +261,7 @@ export const brands: Brand[] = [
         name: "Chevrolet Tracker",
         image: chevTrackerBanner,
         taglineKey: "tagline.compactSUV",
+        partImages: trackerPartImages,
         images360: [],
         useSimulated360: true,
       },
