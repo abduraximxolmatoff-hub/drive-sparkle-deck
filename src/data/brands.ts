@@ -213,6 +213,26 @@ const trackerPartImages: PartImageMap = {
   exhaust: trackerExhaust,
 };
 
+const trailblazerPartImages: PartImageMap = {
+  tires: trailblazerTires,
+  windows: trailblazerWindows,
+  oil: trailblazerEngineOil,
+  engine: trailblazerEngine,
+  battery: trailblazerBattery,
+  brakes: trailblazerBrakes,
+  headlights: trailblazerHeadlights,
+  cooling: trailblazerCooling,
+  airfilter: trailblazerAirFilter,
+  suspension: trailblazerSuspension,
+  fuel_filter: trailblazerFuelFilter,
+  cabin_filter: trailblazerCabinFilter,
+  spark_plugs: trailblazerSparkPlugs,
+  brake_fluid: trailblazerBrakeFluid,
+  transmission: trailblazerTransmission,
+  steering: trailblazerSteering,
+  exhaust: trailblazerExhaust,
+};
+
 export const brands: Brand[] = [
   {
     slug: "bmw",
