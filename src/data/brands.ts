@@ -252,6 +252,26 @@ const trailblazerPartImages: PartImageMap = {
   exhaust: trailblazerExhaust,
 };
 
+const tahoePartImages: PartImageMap = {
+  tires: tahoeTires,
+  windows: tahoeWindows,
+  oil: tahoeEngineOil,
+  engine: tahoeEngine,
+  battery: tahoeBattery,
+  brakes: tahoeBrakes,
+  headlights: tahoeHeadlights,
+  cooling: tahoeCooling,
+  airfilter: tahoeAirFilter,
+  suspension: tahoeSuspension,
+  fuel_filter: tahoeFuelFilter,
+  cabin_filter: tahoeCabinFilter,
+  spark_plugs: tahoeSparkPlugs,
+  brake_fluid: tahoeBrakeFluid,
+  transmission: tahoeTransmission,
+  steering: tahoeSteering,
+  exhaust: tahoeExhaust,
+};
+
 export const brands: Brand[] = [
   {
     slug: "bmw",
@@ -337,6 +357,7 @@ export const brands: Brand[] = [
         name: "Chevrolet Tahoe",
         image: chevTahoe,
         taglineKey: "tagline.fullSizeSUV",
+        partImages: tahoePartImages,
         images360: [],
         useSimulated360: true,
       },
