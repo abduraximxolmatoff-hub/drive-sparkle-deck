@@ -97,6 +97,25 @@ import trailblazerTransmission from "@/assets/parts/trailblazer/transmission.jpg
 import trailblazerSteering from "@/assets/parts/trailblazer/steering.jpg";
 import trailblazerExhaust from "@/assets/parts/trailblazer/exhaust.jpg";
 
+// Tahoe high-quality part images
+import tahoeTires from "@/assets/parts/tahoe/tires.jpg";
+import tahoeWindows from "@/assets/parts/tahoe/windows.jpg";
+import tahoeEngineOil from "@/assets/parts/tahoe/engine-oil.jpg";
+import tahoeEngine from "@/assets/parts/tahoe/engine.jpg";
+import tahoeBattery from "@/assets/parts/tahoe/battery.jpg";
+import tahoeBrakes from "@/assets/parts/tahoe/brakes.jpg";
+import tahoeHeadlights from "@/assets/parts/tahoe/headlights.jpg";
+import tahoeCooling from "@/assets/parts/tahoe/cooling.jpg";
+import tahoeAirFilter from "@/assets/parts/tahoe/airfilter.jpg";
+import tahoeSuspension from "@/assets/parts/tahoe/suspension.jpg";
+import tahoeFuelFilter from "@/assets/parts/tahoe/fuel-filter.jpg";
+import tahoeCabinFilter from "@/assets/parts/tahoe/cabin-filter.jpg";
+import tahoeSparkPlugs from "@/assets/parts/tahoe/spark-plugs.jpg";
+import tahoeBrakeFluid from "@/assets/parts/tahoe/brake-fluid.jpg";
+import tahoeTransmission from "@/assets/parts/tahoe/transmission.jpg";
+import tahoeSteering from "@/assets/parts/tahoe/steering.jpg";
+import tahoeExhaust from "@/assets/parts/tahoe/exhaust.jpg";
+
 /** Per-part high-resolution image keyed by CarPart.id */
 export type PartImageMap = Partial<Record<string, string>>;
 
@@ -233,6 +252,26 @@ const trailblazerPartImages: PartImageMap = {
   exhaust: trailblazerExhaust,
 };
 
+const tahoePartImages: PartImageMap = {
+  tires: tahoeTires,
+  windows: tahoeWindows,
+  oil: tahoeEngineOil,
+  engine: tahoeEngine,
+  battery: tahoeBattery,
+  brakes: tahoeBrakes,
+  headlights: tahoeHeadlights,
+  cooling: tahoeCooling,
+  airfilter: tahoeAirFilter,
+  suspension: tahoeSuspension,
+  fuel_filter: tahoeFuelFilter,
+  cabin_filter: tahoeCabinFilter,
+  spark_plugs: tahoeSparkPlugs,
+  brake_fluid: tahoeBrakeFluid,
+  transmission: tahoeTransmission,
+  steering: tahoeSteering,
+  exhaust: tahoeExhaust,
+};
+
 export const brands: Brand[] = [
   {
     slug: "bmw",
@@ -318,6 +357,7 @@ export const brands: Brand[] = [
         name: "Chevrolet Tahoe",
         image: chevTahoe,
         taglineKey: "tagline.fullSizeSUV",
+        partImages: tahoePartImages,
         images360: [],
         useSimulated360: true,
       },
