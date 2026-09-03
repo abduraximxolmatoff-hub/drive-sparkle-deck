@@ -116,6 +116,26 @@ import tahoeTransmission from "@/assets/parts/tahoe/transmission.jpg";
 import tahoeSteering from "@/assets/parts/tahoe/steering.jpg";
 import tahoeExhaust from "@/assets/parts/tahoe/exhaust.jpg";
 
+// Traverse high-quality part images
+import traverseTires from "@/assets/parts/traverse/tires.jpg";
+import traverseWindows from "@/assets/parts/traverse/windows.jpg";
+import traverseEngineOil from "@/assets/parts/traverse/engine-oil.jpg";
+import traverseEngine from "@/assets/parts/traverse/engine.jpg";
+import traverseBattery from "@/assets/parts/traverse/battery.jpg";
+import traverseBrakes from "@/assets/parts/traverse/brakes.jpg";
+import traverseHeadlights from "@/assets/parts/traverse/headlights.jpg";
+import traverseCooling from "@/assets/parts/traverse/cooling.jpg";
+import traverseAirFilter from "@/assets/parts/traverse/airfilter.jpg";
+import traverseSuspension from "@/assets/parts/traverse/suspension.jpg";
+import traverseFuelFilter from "@/assets/parts/traverse/fuel-filter.jpg";
+import traverseCabinFilter from "@/assets/parts/traverse/cabin-filter.jpg";
+import traverseSparkPlugs from "@/assets/parts/traverse/spark-plugs.jpg";
+import traverseBrakeFluid from "@/assets/parts/traverse/brake-fluid.jpg";
+import traverseTransmission from "@/assets/parts/traverse/transmission.jpg";
+import traverseSteering from "@/assets/parts/traverse/steering.jpg";
+import traverseExhaust from "@/assets/parts/traverse/exhaust.jpg";
+
+
 /** Per-part high-resolution image keyed by CarPart.id */
 export type PartImageMap = Partial<Record<string, string>>;
 
@@ -272,6 +292,27 @@ const tahoePartImages: PartImageMap = {
   exhaust: tahoeExhaust,
 };
 
+const traversePartImages: PartImageMap = {
+  tires: traverseTires,
+  windows: traverseWindows,
+  oil: traverseEngineOil,
+  engine: traverseEngine,
+  battery: traverseBattery,
+  brakes: traverseBrakes,
+  headlights: traverseHeadlights,
+  cooling: traverseCooling,
+  airfilter: traverseAirFilter,
+  suspension: traverseSuspension,
+  fuel_filter: traverseFuelFilter,
+  cabin_filter: traverseCabinFilter,
+  spark_plugs: traverseSparkPlugs,
+  brake_fluid: traverseBrakeFluid,
+  transmission: traverseTransmission,
+  steering: traverseSteering,
+  exhaust: traverseExhaust,
+};
+
+
 export const brands: Brand[] = [
   {
     slug: "bmw",
@@ -366,9 +407,11 @@ export const brands: Brand[] = [
         name: "Chevrolet Traverse",
         image: chevTraverse,
         taglineKey: "tagline.largeSUV",
+        partImages: traversePartImages,
         images360: [],
         useSimulated360: true,
       },
+
       {
         slug: "equinox",
         name: "Chevrolet Equinox",
