@@ -135,6 +135,26 @@ import traverseTransmission from "@/assets/parts/traverse/transmission.jpg";
 import traverseSteering from "@/assets/parts/traverse/steering.jpg";
 import traverseExhaust from "@/assets/parts/traverse/exhaust.jpg";
 
+// Equinox high-quality part images
+import equinoxTires from "@/assets/parts/equinox/tires.jpg";
+import equinoxWindows from "@/assets/parts/equinox/windows.jpg";
+import equinoxEngineOil from "@/assets/parts/equinox/engine-oil.jpg";
+import equinoxEngine from "@/assets/parts/equinox/engine.jpg";
+import equinoxBattery from "@/assets/parts/equinox/battery.jpg";
+import equinoxBrakes from "@/assets/parts/equinox/brakes.jpg";
+import equinoxHeadlights from "@/assets/parts/equinox/headlights.jpg";
+import equinoxCooling from "@/assets/parts/equinox/cooling.jpg";
+import equinoxAirFilter from "@/assets/parts/equinox/airfilter.jpg";
+import equinoxSuspension from "@/assets/parts/equinox/suspension.jpg";
+import equinoxFuelFilter from "@/assets/parts/equinox/fuel-filter.jpg";
+import equinoxCabinFilter from "@/assets/parts/equinox/cabin-filter.jpg";
+import equinoxSparkPlugs from "@/assets/parts/equinox/spark-plugs.jpg";
+import equinoxBrakeFluid from "@/assets/parts/equinox/brake-fluid.jpg";
+import equinoxTransmission from "@/assets/parts/equinox/transmission.jpg";
+import equinoxSteering from "@/assets/parts/equinox/steering.jpg";
+import equinoxExhaust from "@/assets/parts/equinox/exhaust.jpg";
+
+
 
 /** Per-part high-resolution image keyed by CarPart.id */
 export type PartImageMap = Partial<Record<string, string>>;
