@@ -312,6 +312,26 @@ const tahoePartImages: PartImageMap = {
   exhaust: tahoeExhaust,
 };
 
+const equinoxPartImages: PartImageMap = {
+  tires: equinoxTires,
+  windows: equinoxWindows,
+  oil: equinoxEngineOil,
+  engine: equinoxEngine,
+  battery: equinoxBattery,
+  brakes: equinoxBrakes,
+  headlights: equinoxHeadlights,
+  cooling: equinoxCooling,
+  airfilter: equinoxAirFilter,
+  suspension: equinoxSuspension,
+  fuel_filter: equinoxFuelFilter,
+  cabin_filter: equinoxCabinFilter,
+  spark_plugs: equinoxSparkPlugs,
+  brake_fluid: equinoxBrakeFluid,
+  transmission: equinoxTransmission,
+  steering: equinoxSteering,
+  exhaust: equinoxExhaust,
+};
+
 const traversePartImages: PartImageMap = {
   tires: traverseTires,
   windows: traverseWindows,
@@ -437,6 +457,7 @@ export const brands: Brand[] = [
         name: "Chevrolet Equinox",
         image: chevEquinox,
         taglineKey: "tagline.compactSUV",
+        partImages: equinoxPartImages,
         images360: [],
         useSimulated360: true,
       },
