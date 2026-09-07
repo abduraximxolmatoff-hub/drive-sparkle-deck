@@ -352,6 +352,26 @@ const traversePartImages: PartImageMap = {
   exhaust: traverseExhaust,
 };
 
+const malibuPartImages: PartImageMap = {
+  tires: malibuTires,
+  windows: malibuWindows,
+  oil: malibuEngineOil,
+  engine: malibuEngine,
+  battery: malibuBattery,
+  brakes: malibuBrakes,
+  headlights: malibuHeadlights,
+  cooling: malibuCooling,
+  airfilter: malibuAirFilter,
+  suspension: malibuSuspension,
+  fuel_filter: malibuFuelFilter,
+  cabin_filter: malibuCabinFilter,
+  spark_plugs: malibuSparkPlugs,
+  brake_fluid: malibuBrakeFluid,
+  transmission: malibuTransmission,
+  steering: malibuSteering,
+  exhaust: malibuExhaust,
+};
+
 
 export const brands: Brand[] = [
   {
@@ -466,6 +486,7 @@ export const brands: Brand[] = [
         name: "Chevrolet Malibu",
         image: chevMalibu,
         taglineKey: "tagline.midsizeSedan",
+        partImages: malibuPartImages,
         images360: [],
         useSimulated360: true,
       },
