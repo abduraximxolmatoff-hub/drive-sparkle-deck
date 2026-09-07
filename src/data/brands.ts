@@ -154,6 +154,25 @@ import equinoxTransmission from "@/assets/parts/equinox/transmission.jpg";
 import equinoxSteering from "@/assets/parts/equinox/steering.jpg";
 import equinoxExhaust from "@/assets/parts/equinox/exhaust.jpg";
 
+// Malibu high-quality part images
+import malibuTires from "@/assets/parts/malibu/tires.jpg";
+import malibuWindows from "@/assets/parts/malibu/windows.jpg";
+import malibuEngineOil from "@/assets/parts/malibu/engine-oil.jpg";
+import malibuEngine from "@/assets/parts/malibu/engine.jpg";
+import malibuBattery from "@/assets/parts/malibu/battery.jpg";
+import malibuBrakes from "@/assets/parts/malibu/brakes.jpg";
+import malibuHeadlights from "@/assets/parts/malibu/headlights.jpg";
+import malibuCooling from "@/assets/parts/malibu/cooling.jpg";
+import malibuAirFilter from "@/assets/parts/malibu/airfilter.jpg";
+import malibuSuspension from "@/assets/parts/malibu/suspension.jpg";
+import malibuFuelFilter from "@/assets/parts/malibu/fuel-filter.jpg";
+import malibuCabinFilter from "@/assets/parts/malibu/cabin-filter.jpg";
+import malibuSparkPlugs from "@/assets/parts/malibu/spark-plugs.jpg";
+import malibuBrakeFluid from "@/assets/parts/malibu/brake-fluid.jpg";
+import malibuTransmission from "@/assets/parts/malibu/transmission.jpg";
+import malibuSteering from "@/assets/parts/malibu/steering.jpg";
+import malibuExhaust from "@/assets/parts/malibu/exhaust.jpg";
+
 
 
 /** Per-part high-resolution image keyed by CarPart.id */
@@ -352,6 +371,26 @@ const traversePartImages: PartImageMap = {
   exhaust: traverseExhaust,
 };
 
+const malibuPartImages: PartImageMap = {
+  tires: malibuTires,
+  windows: malibuWindows,
+  oil: malibuEngineOil,
+  engine: malibuEngine,
+  battery: malibuBattery,
+  brakes: malibuBrakes,
+  headlights: malibuHeadlights,
+  cooling: malibuCooling,
+  airfilter: malibuAirFilter,
+  suspension: malibuSuspension,
+  fuel_filter: malibuFuelFilter,
+  cabin_filter: malibuCabinFilter,
+  spark_plugs: malibuSparkPlugs,
+  brake_fluid: malibuBrakeFluid,
+  transmission: malibuTransmission,
+  steering: malibuSteering,
+  exhaust: malibuExhaust,
+};
+
 
 export const brands: Brand[] = [
   {
@@ -466,6 +505,7 @@ export const brands: Brand[] = [
         name: "Chevrolet Malibu",
         image: chevMalibu,
         taglineKey: "tagline.midsizeSedan",
+        partImages: malibuPartImages,
         images360: [],
         useSimulated360: true,
       },
