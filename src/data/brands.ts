@@ -449,6 +449,26 @@ const bmwM5PartImages: PartImageMap = {
   exhaust: bmwM5Exhaust,
 };
 
+const bmwX5PartImages: PartImageMap = {
+  tires: bmwX5Tires,
+  windows: bmwX5Windows,
+  oil: bmwX5EngineOil,
+  engine: bmwX5Engine,
+  battery: bmwX5Battery,
+  brakes: bmwX5Brakes,
+  headlights: bmwX5Headlights,
+  cooling: bmwX5Cooling,
+  airfilter: bmwX5AirFilter,
+  suspension: bmwX5Suspension,
+  fuel_filter: bmwX5FuelFilter,
+  cabin_filter: bmwX5CabinFilter,
+  spark_plugs: bmwX5SparkPlugs,
+  brake_fluid: bmwX5BrakeFluid,
+  transmission: bmwX5Transmission,
+  steering: bmwX5Steering,
+  exhaust: bmwX5Exhaust,
+};
+
 
 export const brands: Brand[] = [
   {
