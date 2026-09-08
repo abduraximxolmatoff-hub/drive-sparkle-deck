@@ -173,6 +173,25 @@ import malibuTransmission from "@/assets/parts/malibu/transmission.jpg";
 import malibuSteering from "@/assets/parts/malibu/steering.jpg";
 import malibuExhaust from "@/assets/parts/malibu/exhaust.jpg";
 
+// BMW M5 high-quality part images
+import bmwM5Tires from "@/assets/parts/bmw-m5/tires.jpg";
+import bmwM5Windows from "@/assets/parts/bmw-m5/windows.jpg";
+import bmwM5EngineOil from "@/assets/parts/bmw-m5/engine-oil.jpg";
+import bmwM5Engine from "@/assets/parts/bmw-m5/engine.jpg";
+import bmwM5Battery from "@/assets/parts/bmw-m5/battery.jpg";
+import bmwM5Brakes from "@/assets/parts/bmw-m5/brakes.jpg";
+import bmwM5Headlights from "@/assets/parts/bmw-m5/headlights.jpg";
+import bmwM5Cooling from "@/assets/parts/bmw-m5/cooling.jpg";
+import bmwM5AirFilter from "@/assets/parts/bmw-m5/airfilter.jpg";
+import bmwM5Suspension from "@/assets/parts/bmw-m5/suspension.jpg";
+import bmwM5FuelFilter from "@/assets/parts/bmw-m5/fuel-filter.jpg";
+import bmwM5CabinFilter from "@/assets/parts/bmw-m5/cabin-filter.jpg";
+import bmwM5SparkPlugs from "@/assets/parts/bmw-m5/spark-plugs.jpg";
+import bmwM5BrakeFluid from "@/assets/parts/bmw-m5/brake-fluid.jpg";
+import bmwM5Transmission from "@/assets/parts/bmw-m5/transmission.jpg";
+import bmwM5Steering from "@/assets/parts/bmw-m5/steering.jpg";
+import bmwM5Exhaust from "@/assets/parts/bmw-m5/exhaust.jpg";
+
 
 
 /** Per-part high-resolution image keyed by CarPart.id */
@@ -391,6 +410,26 @@ const malibuPartImages: PartImageMap = {
   exhaust: malibuExhaust,
 };
 
+const bmwM5PartImages: PartImageMap = {
+  tires: bmwM5Tires,
+  windows: bmwM5Windows,
+  oil: bmwM5EngineOil,
+  engine: bmwM5Engine,
+  battery: bmwM5Battery,
+  brakes: bmwM5Brakes,
+  headlights: bmwM5Headlights,
+  cooling: bmwM5Cooling,
+  airfilter: bmwM5AirFilter,
+  suspension: bmwM5Suspension,
+  fuel_filter: bmwM5FuelFilter,
+  cabin_filter: bmwM5CabinFilter,
+  spark_plugs: bmwM5SparkPlugs,
+  brake_fluid: bmwM5BrakeFluid,
+  transmission: bmwM5Transmission,
+  steering: bmwM5Steering,
+  exhaust: bmwM5Exhaust,
+};
+
 
 export const brands: Brand[] = [
   {
@@ -405,6 +444,7 @@ export const brands: Brand[] = [
         name: "BMW M5",
         image: bmwM5,
         taglineKey: "tagline.v8TwinTurbo",
+        partImages: bmwM5PartImages,
         images360: [],
         useSimulated360: true,
       },
