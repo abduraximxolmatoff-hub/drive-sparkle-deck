@@ -192,6 +192,25 @@ import bmwM5Transmission from "@/assets/parts/bmw-m5/transmission.jpg";
 import bmwM5Steering from "@/assets/parts/bmw-m5/steering.jpg";
 import bmwM5Exhaust from "@/assets/parts/bmw-m5/exhaust.jpg";
 
+// BMW X5 high-quality part images
+import bmwX5Tires from "@/assets/parts/bmw-x5/tires.jpg";
+import bmwX5Windows from "@/assets/parts/bmw-x5/windows.jpg";
+import bmwX5EngineOil from "@/assets/parts/bmw-x5/engine-oil.jpg";
+import bmwX5Engine from "@/assets/parts/bmw-x5/engine.jpg";
+import bmwX5Battery from "@/assets/parts/bmw-x5/battery.jpg";
+import bmwX5Brakes from "@/assets/parts/bmw-x5/brakes.jpg";
+import bmwX5Headlights from "@/assets/parts/bmw-x5/headlights.jpg";
+import bmwX5Cooling from "@/assets/parts/bmw-x5/cooling.jpg";
+import bmwX5AirFilter from "@/assets/parts/bmw-x5/airfilter.jpg";
+import bmwX5Suspension from "@/assets/parts/bmw-x5/suspension.jpg";
+import bmwX5FuelFilter from "@/assets/parts/bmw-x5/fuel-filter.jpg";
+import bmwX5CabinFilter from "@/assets/parts/bmw-x5/cabin-filter.jpg";
+import bmwX5SparkPlugs from "@/assets/parts/bmw-x5/spark-plugs.jpg";
+import bmwX5BrakeFluid from "@/assets/parts/bmw-x5/brake-fluid.jpg";
+import bmwX5Transmission from "@/assets/parts/bmw-x5/transmission.jpg";
+import bmwX5Steering from "@/assets/parts/bmw-x5/steering.jpg";
+import bmwX5Exhaust from "@/assets/parts/bmw-x5/exhaust.jpg";
+
 
 
 /** Per-part high-resolution image keyed by CarPart.id */
