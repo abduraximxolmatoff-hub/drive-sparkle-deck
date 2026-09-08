@@ -492,6 +492,7 @@ export const brands: Brand[] = [
         name: "BMW X5",
         image: bmwX5,
         taglineKey: "tagline.luxurySUV",
+        partImages: bmwX5PartImages,
         images360: [],
         useSimulated360: true,
       },
