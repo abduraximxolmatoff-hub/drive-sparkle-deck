@@ -488,6 +488,26 @@ const bmwX5PartImages: PartImageMap = {
   exhaust: bmwX5Exhaust,
 };
 
+const bmw7SeriesPartImages: PartImageMap = {
+  tires: bmw7Tires,
+  windows: bmw7Windows,
+  oil: bmw7EngineOil,
+  engine: bmw7Engine,
+  battery: bmw7Battery,
+  brakes: bmw7Brakes,
+  headlights: bmw7Headlights,
+  cooling: bmw7Cooling,
+  airfilter: bmw7AirFilter,
+  suspension: bmw7Suspension,
+  fuel_filter: bmw7FuelFilter,
+  cabin_filter: bmw7CabinFilter,
+  spark_plugs: bmw7SparkPlugs,
+  brake_fluid: bmw7BrakeFluid,
+  transmission: bmw7Transmission,
+  steering: bmw7Steering,
+  exhaust: bmw7Exhaust,
+};
+
 
 export const brands: Brand[] = [
   {
@@ -521,6 +541,7 @@ export const brands: Brand[] = [
         image: bmwI7,
         taglineKey: "tagline.flagshipLuxurySedan",
         legacySlugs: ["i7"],
+        partImages: bmw7SeriesPartImages,
         images360: [],
         useSimulated360: true,
       },
