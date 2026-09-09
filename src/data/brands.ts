@@ -211,6 +211,25 @@ import bmwX5Transmission from "@/assets/parts/bmw-x5/transmission.jpg";
 import bmwX5Steering from "@/assets/parts/bmw-x5/steering.jpg";
 import bmwX5Exhaust from "@/assets/parts/bmw-x5/exhaust.jpg";
 
+// BMW 7 Series high-quality part images
+import bmw7Tires from "@/assets/parts/bmw-7-series/tires.jpg";
+import bmw7Windows from "@/assets/parts/bmw-7-series/windows.jpg";
+import bmw7EngineOil from "@/assets/parts/bmw-7-series/engine-oil.jpg";
+import bmw7Engine from "@/assets/parts/bmw-7-series/engine.jpg";
+import bmw7Battery from "@/assets/parts/bmw-7-series/battery.jpg";
+import bmw7Brakes from "@/assets/parts/bmw-7-series/brakes.jpg";
+import bmw7Headlights from "@/assets/parts/bmw-7-series/headlights.jpg";
+import bmw7Cooling from "@/assets/parts/bmw-7-series/cooling.jpg";
+import bmw7AirFilter from "@/assets/parts/bmw-7-series/airfilter.jpg";
+import bmw7Suspension from "@/assets/parts/bmw-7-series/suspension.jpg";
+import bmw7FuelFilter from "@/assets/parts/bmw-7-series/fuel-filter.jpg";
+import bmw7CabinFilter from "@/assets/parts/bmw-7-series/cabin-filter.jpg";
+import bmw7SparkPlugs from "@/assets/parts/bmw-7-series/spark-plugs.jpg";
+import bmw7BrakeFluid from "@/assets/parts/bmw-7-series/brake-fluid.jpg";
+import bmw7Transmission from "@/assets/parts/bmw-7-series/transmission.jpg";
+import bmw7Steering from "@/assets/parts/bmw-7-series/steering.jpg";
+import bmw7Exhaust from "@/assets/parts/bmw-7-series/exhaust.jpg";
+
 
 
 /** Per-part high-resolution image keyed by CarPart.id */
@@ -469,6 +488,26 @@ const bmwX5PartImages: PartImageMap = {
   exhaust: bmwX5Exhaust,
 };
 
+const bmw7SeriesPartImages: PartImageMap = {
+  tires: bmw7Tires,
+  windows: bmw7Windows,
+  oil: bmw7EngineOil,
+  engine: bmw7Engine,
+  battery: bmw7Battery,
+  brakes: bmw7Brakes,
+  headlights: bmw7Headlights,
+  cooling: bmw7Cooling,
+  airfilter: bmw7AirFilter,
+  suspension: bmw7Suspension,
+  fuel_filter: bmw7FuelFilter,
+  cabin_filter: bmw7CabinFilter,
+  spark_plugs: bmw7SparkPlugs,
+  brake_fluid: bmw7BrakeFluid,
+  transmission: bmw7Transmission,
+  steering: bmw7Steering,
+  exhaust: bmw7Exhaust,
+};
+
 
 export const brands: Brand[] = [
   {
@@ -502,6 +541,7 @@ export const brands: Brand[] = [
         image: bmwI7,
         taglineKey: "tagline.flagshipLuxurySedan",
         legacySlugs: ["i7"],
+        partImages: bmw7SeriesPartImages,
         images360: [],
         useSimulated360: true,
       },
