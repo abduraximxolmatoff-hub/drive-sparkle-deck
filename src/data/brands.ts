@@ -230,6 +230,26 @@ import bmw7Transmission from "@/assets/parts/bmw-7-series/transmission.jpg";
 import bmw7Steering from "@/assets/parts/bmw-7-series/steering.jpg";
 import bmw7Exhaust from "@/assets/parts/bmw-7-series/exhaust.jpg";
 
+// Mercedes-Benz C-Class high-quality part images
+import mbCTires from "@/assets/parts/mercedes-c-class/tires.jpg";
+import mbCWindows from "@/assets/parts/mercedes-c-class/windows.jpg";
+import mbCEngineOil from "@/assets/parts/mercedes-c-class/engine-oil.jpg";
+import mbCEngine from "@/assets/parts/mercedes-c-class/engine.jpg";
+import mbCBattery from "@/assets/parts/mercedes-c-class/battery.jpg";
+import mbCBrakes from "@/assets/parts/mercedes-c-class/brakes.jpg";
+import mbCHeadlights from "@/assets/parts/mercedes-c-class/headlights.jpg";
+import mbCCooling from "@/assets/parts/mercedes-c-class/cooling.jpg";
+import mbCAirFilter from "@/assets/parts/mercedes-c-class/airfilter.jpg";
+import mbCSuspension from "@/assets/parts/mercedes-c-class/suspension.jpg";
+import mbCFuelFilter from "@/assets/parts/mercedes-c-class/fuel-filter.jpg";
+import mbCCabinFilter from "@/assets/parts/mercedes-c-class/cabin-filter.jpg";
+import mbCSparkPlugs from "@/assets/parts/mercedes-c-class/spark-plugs.jpg";
+import mbCBrakeFluid from "@/assets/parts/mercedes-c-class/brake-fluid.jpg";
+import mbCTransmission from "@/assets/parts/mercedes-c-class/transmission.jpg";
+import mbCSteering from "@/assets/parts/mercedes-c-class/steering.jpg";
+import mbCExhaust from "@/assets/parts/mercedes-c-class/exhaust.jpg";
+
+
 
 
 /** Per-part high-resolution image keyed by CarPart.id */
@@ -508,6 +528,27 @@ const bmw7SeriesPartImages: PartImageMap = {
   exhaust: bmw7Exhaust,
 };
 
+const mbCClassPartImages: PartImageMap = {
+  tires: mbCTires,
+  windows: mbCWindows,
+  oil: mbCEngineOil,
+  engine: mbCEngine,
+  battery: mbCBattery,
+  brakes: mbCBrakes,
+  headlights: mbCHeadlights,
+  cooling: mbCCooling,
+  airfilter: mbCAirFilter,
+  suspension: mbCSuspension,
+  fuel_filter: mbCFuelFilter,
+  cabin_filter: mbCCabinFilter,
+  spark_plugs: mbCSparkPlugs,
+  brake_fluid: mbCBrakeFluid,
+  transmission: mbCTransmission,
+  steering: mbCSteering,
+  exhaust: mbCExhaust,
+};
+
+
 
 export const brands: Brand[] = [
   {
@@ -643,6 +684,7 @@ export const brands: Brand[] = [
         name: "Mercedes-Benz C-Class",
         image: mbC,
         taglineKey: "tagline.compactExecutive",
+        partImages: mbCClassPartImages,
         images360: [],
         useSimulated360: true,
       },
