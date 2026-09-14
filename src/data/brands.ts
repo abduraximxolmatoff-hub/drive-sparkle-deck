@@ -248,6 +248,23 @@ import mbCBrakeFluid from "@/assets/parts/mercedes-c-class/brake-fluid.jpg";
 import mbCTransmission from "@/assets/parts/mercedes-c-class/transmission.jpg";
 import mbCSteering from "@/assets/parts/mercedes-c-class/steering.jpg";
 import mbCExhaust from "@/assets/parts/mercedes-c-class/exhaust.jpg";
+import mbETires from "@/assets/parts/mercedes-e-class/tires.jpg";
+import mbEWindows from "@/assets/parts/mercedes-e-class/windows.jpg";
+import mbEEngineOil from "@/assets/parts/mercedes-e-class/engine-oil.jpg";
+import mbEEngine from "@/assets/parts/mercedes-e-class/engine.jpg";
+import mbEBattery from "@/assets/parts/mercedes-e-class/battery.jpg";
+import mbEBrakes from "@/assets/parts/mercedes-e-class/brakes.jpg";
+import mbEHeadlights from "@/assets/parts/mercedes-e-class/headlights.jpg";
+import mbECooling from "@/assets/parts/mercedes-e-class/cooling.jpg";
+import mbEAirFilter from "@/assets/parts/mercedes-e-class/airfilter.jpg";
+import mbESuspension from "@/assets/parts/mercedes-e-class/suspension.jpg";
+import mbEFuelFilter from "@/assets/parts/mercedes-e-class/fuel-filter.jpg";
+import mbECabinFilter from "@/assets/parts/mercedes-e-class/cabin-filter.jpg";
+import mbESparkPlugs from "@/assets/parts/mercedes-e-class/spark-plugs.jpg";
+import mbEBrakeFluid from "@/assets/parts/mercedes-e-class/brake-fluid.jpg";
+import mbETransmission from "@/assets/parts/mercedes-e-class/transmission.jpg";
+import mbESteering from "@/assets/parts/mercedes-e-class/steering.jpg";
+import mbEExhaust from "@/assets/parts/mercedes-e-class/exhaust.jpg";
 
 
 
@@ -546,6 +563,26 @@ const mbCClassPartImages: PartImageMap = {
   transmission: mbCTransmission,
   steering: mbCSteering,
   exhaust: mbCExhaust,
+};
+
+const mbEClassPartImages: PartImageMap = {
+  tires: mbETires,
+  windows: mbEWindows,
+  oil: mbEEngineOil,
+  engine: mbEEngine,
+  battery: mbEBattery,
+  brakes: mbEBrakes,
+  headlights: mbEHeadlights,
+  cooling: mbECooling,
+  airfilter: mbEAirFilter,
+  suspension: mbESuspension,
+  fuel_filter: mbEFuelFilter,
+  cabin_filter: mbECabinFilter,
+  spark_plugs: mbESparkPlugs,
+  brake_fluid: mbEBrakeFluid,
+  transmission: mbETransmission,
+  steering: mbESteering,
+  exhaust: mbEExhaust,
 };
 
 
