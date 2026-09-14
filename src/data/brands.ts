@@ -730,6 +730,7 @@ export const brands: Brand[] = [
         name: "Mercedes-Benz E-Class",
         image: mbE,
         taglineKey: "tagline.businessSedan",
+        partImages: mbEClassPartImages,
         images360: [],
         useSimulated360: true,
       },
