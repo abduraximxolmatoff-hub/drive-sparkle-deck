@@ -265,10 +265,24 @@ import mbEBrakeFluid from "@/assets/parts/mercedes-e-class/brake-fluid.jpg";
 import mbETransmission from "@/assets/parts/mercedes-e-class/transmission.jpg";
 import mbESteering from "@/assets/parts/mercedes-e-class/steering.jpg";
 import mbEExhaust from "@/assets/parts/mercedes-e-class/exhaust.jpg";
-
-
-
-
+// Mercedes-Benz G-Class high-quality part images
+import mbGTires from "@/assets/parts/mercedes-g-class/tires.jpg";
+import mbGWindows from "@/assets/parts/mercedes-g-class/windows.jpg";
+import mbGEngineOil from "@/assets/parts/mercedes-g-class/engine-oil.jpg";
+import mbGEngine from "@/assets/parts/mercedes-g-class/engine.jpg";
+import mbGBattery from "@/assets/parts/mercedes-g-class/battery.jpg";
+import mbGBrakes from "@/assets/parts/mercedes-g-class/brakes.jpg";
+import mbGHeadlights from "@/assets/parts/mercedes-g-class/headlights.jpg";
+import mbGCooling from "@/assets/parts/mercedes-g-class/cooling.jpg";
+import mbGAirFilter from "@/assets/parts/mercedes-g-class/airfilter.jpg";
+import mbGSuspension from "@/assets/parts/mercedes-g-class/suspension.jpg";
+import mbGFuelFilter from "@/assets/parts/mercedes-g-class/fuel-filter.jpg";
+import mbGCabinFilter from "@/assets/parts/mercedes-g-class/cabin-filter.jpg";
+import mbGSparkPlugs from "@/assets/parts/mercedes-g-class/spark-plugs.jpg";
+import mbGBrakeFluid from "@/assets/parts/mercedes-g-class/brake-fluid.jpg";
+import mbGTransmission from "@/assets/parts/mercedes-g-class/transmission.jpg";
+import mbGSteering from "@/assets/parts/mercedes-g-class/steering.jpg";
+import mbGExhaust from "@/assets/parts/mercedes-g-class/exhaust.jpg";
 /** Per-part high-resolution image keyed by CarPart.id */
 export type PartImageMap = Partial<Record<string, string>>;
 
@@ -585,8 +599,25 @@ const mbEClassPartImages: PartImageMap = {
   exhaust: mbEExhaust,
 };
 
-
-
+const mbGClassPartImages: PartImageMap = {
+  tires: mbGTires,
+  windows: mbGWindows,
+  oil: mbGEngineOil,
+  engine: mbGEngine,
+  battery: mbGBattery,
+  brakes: mbGBrakes,
+  headlights: mbGHeadlights,
+  cooling: mbGCooling,
+  airfilter: mbGAirFilter,
+  suspension: mbGSuspension,
+  fuel_filter: mbGFuelFilter,
+  cabin_filter: mbGCabinFilter,
+  spark_plugs: mbGSparkPlugs,
+  brake_fluid: mbGBrakeFluid,
+  transmission: mbGTransmission,
+  steering: mbGSteering,
+  exhaust: mbGExhaust,
+};
 export const brands: Brand[] = [
   {
     slug: "bmw",
@@ -740,6 +771,7 @@ export const brands: Brand[] = [
         image: mbG63,
         taglineKey: "tagline.iconic4x4",
         legacySlugs: ["g63"],
+        partImages: mbGClassPartImages,
         images360: [],
         useSimulated360: true,
       },
