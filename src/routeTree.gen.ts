@@ -10,16 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as MaintenanceRouteImport } from './routes/maintenance'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as BrandModelRouteImport } from './routes/$brand.$model'
 import { Route as BrandSlugRouteImport } from './routes/brand.$slug'
+import { Route as ApiPublicHooksSendRemindersRouteImport } from './routes/api/public/hooks/send-reminders'
 import { Route as BrandSlugModelModelRouteImport } from './routes/brand.$slug.model.$model'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BrandsRoute = BrandsRouteImport.update({
@@ -47,6 +54,12 @@ const BrandSlugRoute = BrandSlugRouteImport.update({
   path: '/brand/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksSendRemindersRoute =
+  ApiPublicHooksSendRemindersRouteImport.update({
+    id: '/api/public/hooks/send-reminders',
+    path: '/api/public/hooks/send-reminders',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BrandSlugModelModelRoute = BrandSlugModelModelRouteImport.update({
   id: '/model/$model',
   path: '/model/$model',
@@ -55,69 +68,83 @@ const BrandSlugModelModelRoute = BrandSlugModelModelRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/brands': typeof BrandsRoute
   '/maintenance': typeof MaintenanceRoute
   '/profile': typeof ProfileRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
+  '/api/public/hooks/send-reminders': typeof ApiPublicHooksSendRemindersRoute
   '/brand/$slug/model/$model': typeof BrandSlugModelModelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/brands': typeof BrandsRoute
   '/maintenance': typeof MaintenanceRoute
   '/profile': typeof ProfileRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
+  '/api/public/hooks/send-reminders': typeof ApiPublicHooksSendRemindersRoute
   '/brand/$slug/model/$model': typeof BrandSlugModelModelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/brands': typeof BrandsRoute
   '/maintenance': typeof MaintenanceRoute
   '/profile': typeof ProfileRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
+  '/api/public/hooks/send-reminders': typeof ApiPublicHooksSendRemindersRoute
   '/brand/$slug/model/$model': typeof BrandSlugModelModelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/brands'
     | '/maintenance'
     | '/profile'
     | '/$brand/$model'
     | '/brand/$slug'
+    | '/api/public/hooks/send-reminders'
     | '/brand/$slug/model/$model'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/brands'
     | '/maintenance'
     | '/profile'
     | '/$brand/$model'
     | '/brand/$slug'
+    | '/api/public/hooks/send-reminders'
     | '/brand/$slug/model/$model'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/brands'
     | '/maintenance'
     | '/profile'
     | '/$brand/$model'
     | '/brand/$slug'
+    | '/api/public/hooks/send-reminders'
     | '/brand/$slug/model/$model'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   BrandsRoute: typeof BrandsRoute
   MaintenanceRoute: typeof MaintenanceRoute
   ProfileRoute: typeof ProfileRoute
   BrandModelRoute: typeof BrandModelRoute
   BrandSlugRoute: typeof BrandSlugRouteWithChildren
+  ApiPublicHooksSendRemindersRoute: typeof ApiPublicHooksSendRemindersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -127,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/brands': {
@@ -164,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BrandSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/send-reminders': {
+      id: '/api/public/hooks/send-reminders'
+      path: '/api/public/hooks/send-reminders'
+      fullPath: '/api/public/hooks/send-reminders'
+      preLoaderRoute: typeof ApiPublicHooksSendRemindersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/brand/$slug/model/$model': {
       id: '/brand/$slug/model/$model'
       path: '/model/$model'
@@ -188,11 +229,13 @@ const BrandSlugRouteWithChildren = BrandSlugRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   BrandsRoute: BrandsRoute,
   MaintenanceRoute: MaintenanceRoute,
   ProfileRoute: ProfileRoute,
   BrandModelRoute: BrandModelRoute,
   BrandSlugRoute: BrandSlugRouteWithChildren,
+  ApiPublicHooksSendRemindersRoute: ApiPublicHooksSendRemindersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
