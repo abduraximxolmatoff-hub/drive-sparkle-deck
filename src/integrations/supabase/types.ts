@@ -14,7 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      part_reminders: {
+        Row: {
+          enabled: boolean
+          id: string
+          interval_km: number | null
+          interval_months: number | null
+          last_date: string | null
+          last_km: number | null
+          last_notified: string | null
+          part_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          enabled?: boolean
+          id?: string
+          interval_km?: number | null
+          interval_months?: number | null
+          last_date?: string | null
+          last_km?: number | null
+          last_notified?: string | null
+          part_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          enabled?: boolean
+          id?: string
+          interval_km?: number | null
+          interval_months?: number | null
+          last_date?: string | null
+          last_km?: number | null
+          last_notified?: string | null
+          part_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      push_subscriptions: {
+        Row: {
+          auth: string
+          created_at: string
+          endpoint: string
+          id: string
+          p256dh: string
+          user_id: string
+        }
+        Insert: {
+          auth: string
+          created_at?: string
+          endpoint: string
+          id?: string
+          p256dh: string
+          user_id: string
+        }
+        Update: {
+          auth?: string
+          created_at?: string
+          endpoint?: string
+          id?: string
+          p256dh?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_cars: {
+        Row: {
+          brand_slug: string
+          current_km: number | null
+          km_updated_at: string | null
+          model_slug: string
+          updated_at: string
+          user_id: string
+          year: number
+        }
+        Insert: {
+          brand_slug: string
+          current_km?: number | null
+          km_updated_at?: string | null
+          model_slug: string
+          updated_at?: string
+          user_id: string
+          year: number
+        }
+        Update: {
+          brand_slug?: string
+          current_km?: number | null
+          km_updated_at?: string | null
+          model_slug?: string
+          updated_at?: string
+          user_id?: string
+          year?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
