@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { User, Heart, Bell, Plus, Trash2 } from "lucide-react";
+import { User, Heart, Plus, Trash2 } from "lucide-react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AutoInfoLogo } from "@/components/AutoInfoLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -9,12 +9,17 @@ import { BottomNav } from "@/components/BottomNav";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { brands } from "@/data/brands";
 import { useFavorites } from "@/hooks/use-favorites";
+import { MaintenanceReminders } from "@/components/MaintenanceReminders";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({
     meta: [
       { title: "Profile — AutoINFO" },
-      { name: "description", content: "Your AutoINFO demo profile and maintenance reminders." },
+      { name: "description", content: "Asosiy mashinangiz va servis eslatmalari — AutoINFO." },
+      { property: "og:title", content: "Profil — AutoINFO" },
+      { property: "og:description", content: "Asosiy mashinangiz va servis eslatmalari." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: ProfilePage,
@@ -38,12 +43,6 @@ function ProfilePage() {
 
   const favs = allModels.filter((m) => favorites.includes(m.key));
 
-  const reminders = [
-    { key: "oil", label: t("reminder.oil"), due: "1 200 km" },
-    { key: "tires", label: t("reminder.tires"), due: "12 " + t("unit.days") },
-    { key: "battery", label: t("reminder.battery"), due: "3 " + t("unit.months") },
-    { key: "brakes", label: t("reminder.brakes"), due: "5 000 km" },
-  ];
 
   return (
     <main key={lang} className="relative min-h-screen pb-28">
@@ -82,24 +81,7 @@ function ProfilePage() {
           <p className="text-sm leading-relaxed text-foreground/90">{t("profile.goal")}</p>
         </div>
 
-        {/* Reminders */}
-        <div className="rounded-3xl border border-border bg-card-gradient p-5 backdrop-blur-md shadow-card">
-          <div className="mb-3 flex items-center gap-2">
-            <Bell className="h-4 w-4 text-primary" />
-            <h2 className="font-display text-lg font-semibold">{t("profile.reminders")}</h2>
-          </div>
-          <ul className="grid gap-2 sm:grid-cols-2">
-            {reminders.map((r) => (
-              <li
-                key={r.key}
-                className="flex items-center justify-between rounded-xl border border-border/60 bg-background/40 px-3 py-2.5"
-              >
-                <span className="text-sm text-foreground/90">{r.label}</span>
-                <span className="text-xs font-semibold text-primary">{r.due}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <MaintenanceReminders />
 
         {/* Favorites */}
         <div className="rounded-3xl border border-border bg-card-gradient p-5 backdrop-blur-md shadow-card">
