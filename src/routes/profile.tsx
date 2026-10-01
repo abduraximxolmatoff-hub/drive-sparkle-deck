@@ -43,12 +43,6 @@ function ProfilePage() {
 
   const favs = allModels.filter((m) => favorites.includes(m.key));
 
-  const reminders = [
-    { key: "oil", label: t("reminder.oil"), due: "1 200 km" },
-    { key: "tires", label: t("reminder.tires"), due: "12 " + t("unit.days") },
-    { key: "battery", label: t("reminder.battery"), due: "3 " + t("unit.months") },
-    { key: "brakes", label: t("reminder.brakes"), due: "5 000 km" },
-  ];
 
   return (
     <main key={lang} className="relative min-h-screen pb-28">
