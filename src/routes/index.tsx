@@ -7,6 +7,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { BottomNav } from "@/components/BottomNav";
 import { BrandShowcaseCard } from "@/components/BrandShowcaseCard";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { CarSearch } from "@/components/CarSearch";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,7 +37,7 @@ function HomePage() {
         <LanguageSwitcher />
       </header>
 
-      <section className="relative z-10 mx-auto max-w-3xl px-4 pb-6 pt-6 text-center sm:px-6 sm:pt-10">
+      <section className="relative z-20 mx-auto max-w-3xl px-4 pb-6 pt-6 text-center sm:px-6 sm:pt-10">
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,6 +56,7 @@ function HomePage() {
         >
           {t("home.subtitle")}
         </motion.p>
+        <CarSearch />
       </section>
 
       <section className="relative z-10 mx-auto grid max-w-3xl gap-4 px-4 pb-6 sm:px-6">
