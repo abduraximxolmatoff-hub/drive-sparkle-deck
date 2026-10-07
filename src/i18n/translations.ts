@@ -449,3 +449,37 @@ const chev: Record<Lang, Dict> = {
 
 for (const l of LANGS)
   Object.assign(translations[l], extra[l], schedule[l], more[l], cobalt[l], chev[l]);
+
+const search: Record<Lang, Dict> = {
+  uz: {
+    "search.placeholder": "Model yoki brendni qidiring… (masalan: Cobalt, G-Class)",
+    "search.clear": "Tozalash",
+    "search.recent": "So‘nggi qidiruvlar",
+    "search.popular": "Mashhur modellar",
+    "search.notFound": "Bunday model topilmadi",
+    "search.didYouMean": "Balki siz buni qidirgandirsiz:",
+    "search.allBrands": "Barcha brendlarni ko‘rish",
+    "search.brand": "Brend",
+  },
+  ru: {
+    "search.placeholder": "Найдите модель или бренд… (например: Cobalt, G-Class)",
+    "search.clear": "Очистить",
+    "search.recent": "Недавние запросы",
+    "search.popular": "Популярные модели",
+    "search.notFound": "Такая модель не найдена",
+    "search.didYouMean": "Возможно, вы искали:",
+    "search.allBrands": "Смотреть все бренды",
+    "search.brand": "Бренд",
+  },
+  en: {
+    "search.placeholder": "Search a model or brand… (e.g. Cobalt, G-Class)",
+    "search.clear": "Clear",
+    "search.recent": "Recent searches",
+    "search.popular": "Popular models",
+    "search.notFound": "No matching model found",
+    "search.didYouMean": "Did you mean:",
+    "search.allBrands": "View all brands",
+    "search.brand": "Brand",
+  },
+};
+for (const l of LANGS) Object.assign(translations[l], search[l]);
