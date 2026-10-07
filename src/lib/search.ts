@@ -96,6 +96,7 @@ function scoreTerm(q: string, term: string): number {
   if (q.length >= 2 && t.includes(q)) return 60;
   if (q.length < 3) return 0;
   const fq = fold(q), ft = fold(t);
+  if (fq.length < 3) return 0;
   if (ft === fq) return 50;
   if (ft.startsWith(fq)) return 45;
   const prefix = ft.slice(0, Math.max(fq.length, 3));
