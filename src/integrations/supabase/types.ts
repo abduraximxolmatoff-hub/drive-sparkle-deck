@@ -80,6 +80,24 @@ export type Database = {
         }
         Relationships: []
       }
+      scan_usage: {
+        Row: {
+          count: number
+          day: string
+          user_id: string
+        }
+        Insert: {
+          count?: number
+          day: string
+          user_id: string
+        }
+        Update: {
+          count?: number
+          day?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_cars: {
         Row: {
           brand_slug: string
