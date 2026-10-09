@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Search, X, Clock } from "lucide-react";
+import { Search, X, Clock, Camera } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { brands } from "@/data/brands";
 import { searchCars, suggestCars, matchRange, POPULAR, type SearchResult } from "@/lib/search";
@@ -113,7 +113,7 @@ export function CarSearch() {
           role="combobox"
           aria-expanded={open}
           aria-controls="car-search-list"
-          className="h-14 w-full rounded-2xl bg-transparent pl-12 pr-12 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none [&::-webkit-search-cancel-button]:hidden"
+          className="h-14 w-full rounded-2xl bg-transparent pl-12 pr-24 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none [&::-webkit-search-cancel-button]:hidden"
         />
         {value && (
           <button
@@ -124,11 +124,18 @@ export function CarSearch() {
               setQ("");
               inputRef.current?.focus();
             }}
-            className="absolute right-3 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+            className="absolute right-14 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
           >
             <X className="h-4 w-4" />
           </button>
         )}
+        <Link
+          to="/scanner"
+          aria-label={t("nav.scanner")}
+          className="absolute right-2 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25"
+        >
+          <Camera className="h-5 w-5" />
+        </Link>
       </div>
 
       {(showEmpty || showResults) && (

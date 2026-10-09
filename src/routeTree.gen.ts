@@ -14,6 +14,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as MaintenanceRouteImport } from './routes/maintenance'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ScannerRouteImport } from './routes/scanner'
 import { Route as BrandModelRouteImport } from './routes/$brand.$model'
 import { Route as BrandSlugRouteImport } from './routes/brand.$slug'
 import { Route as ApiPublicHooksSendRemindersRouteImport } from './routes/api/public/hooks/send-reminders'
@@ -44,6 +45,11 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScannerRoute = ScannerRouteImport.update({
+  id: '/scanner',
+  path: '/scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BrandModelRoute = BrandModelRouteImport.update({
   id: '/$brand/$model',
   path: '/$brand/$model',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/brands': typeof BrandsRoute
   '/maintenance': typeof MaintenanceRoute
   '/profile': typeof ProfileRoute
+  '/scanner': typeof ScannerRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
   '/api/public/hooks/send-reminders': typeof ApiPublicHooksSendRemindersRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/brands': typeof BrandsRoute
   '/maintenance': typeof MaintenanceRoute
   '/profile': typeof ProfileRoute
+  '/scanner': typeof ScannerRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
   '/api/public/hooks/send-reminders': typeof ApiPublicHooksSendRemindersRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/brands': typeof BrandsRoute
   '/maintenance': typeof MaintenanceRoute
   '/profile': typeof ProfileRoute
+  '/scanner': typeof ScannerRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
   '/api/public/hooks/send-reminders': typeof ApiPublicHooksSendRemindersRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/brands'
     | '/maintenance'
     | '/profile'
+    | '/scanner'
     | '/$brand/$model'
     | '/brand/$slug'
     | '/api/public/hooks/send-reminders'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/brands'
     | '/maintenance'
     | '/profile'
+    | '/scanner'
     | '/$brand/$model'
     | '/brand/$slug'
     | '/api/public/hooks/send-reminders'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/brands'
     | '/maintenance'
     | '/profile'
+    | '/scanner'
     | '/$brand/$model'
     | '/brand/$slug'
     | '/api/public/hooks/send-reminders'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   BrandsRoute: typeof BrandsRoute
   MaintenanceRoute: typeof MaintenanceRoute
   ProfileRoute: typeof ProfileRoute
+  ScannerRoute: typeof ScannerRoute
   BrandModelRoute: typeof BrandModelRoute
   BrandSlugRoute: typeof BrandSlugRouteWithChildren
   ApiPublicHooksSendRemindersRoute: typeof ApiPublicHooksSendRemindersRoute
@@ -182,6 +195,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scanner': {
+      id: '/scanner'
+      path: '/scanner'
+      fullPath: '/scanner'
+      preLoaderRoute: typeof ScannerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$brand/$model': {
@@ -233,6 +253,7 @@ const rootRouteChildren: RootRouteChildren = {
   BrandsRoute: BrandsRoute,
   MaintenanceRoute: MaintenanceRoute,
   ProfileRoute: ProfileRoute,
+  ScannerRoute: ScannerRoute,
   BrandModelRoute: BrandModelRoute,
   BrandSlugRoute: BrandSlugRouteWithChildren,
   ApiPublicHooksSendRemindersRoute: ApiPublicHooksSendRemindersRoute,
