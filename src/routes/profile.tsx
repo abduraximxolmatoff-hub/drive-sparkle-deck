@@ -10,6 +10,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { brands } from "@/data/brands";
 import { useFavorites } from "@/hooks/use-favorites";
 import { MaintenanceReminders } from "@/components/MaintenanceReminders";
+import { ProfileHeader } from "@/components/ProfileHeader";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({
@@ -53,22 +54,7 @@ function ProfilePage() {
       </header>
 
       <section className="relative z-10 mx-auto max-w-3xl space-y-5 px-4 pt-6 sm:px-6">
-        {/* Identity */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-4 rounded-3xl border border-border bg-card-gradient p-5 backdrop-blur-md shadow-card"
-        >
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/15 text-primary">
-            <User className="h-7 w-7" />
-          </div>
-          <div>
-            <h1 className="font-display text-2xl font-bold">{t("profile.guest")}</h1>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              {t("profile.demoAccount")}
-            </p>
-          </div>
-        </motion.div>
+        <ProfileHeader />
 
         {/* App goal */}
         <div
