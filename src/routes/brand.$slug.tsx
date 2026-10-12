@@ -41,7 +41,8 @@ export const Route = createFileRoute("/brand/$slug")({
   notFoundComponent: BrandPageNotFoundComponent,
 });
 
-function BrandPageErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function BrandPageErrorComponent({ error: rawError, reset }: { error: unknown; reset: () => void }) {
+  const error = rawError instanceof Error ? rawError : new Error(String(rawError));
   const router = useRouter();
   return (
     <div className="flex min-h-screen items-center justify-center p-6 text-center">
