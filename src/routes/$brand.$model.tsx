@@ -57,7 +57,8 @@ export const Route = createFileRoute("/$brand/$model")({
   notFoundComponent: ModelDetailNotFoundComponent,
 });
 
-function ModelDetailErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ModelDetailErrorComponent({ error: rawError, reset }: { error: unknown; reset: () => void }) {
+  const error = rawError instanceof Error ? rawError : new Error(String(rawError));
   const router = useRouter();
 
   return (
