@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { translations, type Lang, LANGS } from "./translations";
+import { serviceTranslations } from "./service-translations";
 
 interface LanguageContextValue {
   lang: Lang;
@@ -49,7 +50,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const t = useCallback(
     (key: string) => {
       const dict = translations[lang];
-      return dict[key] ?? translations.en[key] ?? key;
+      return serviceTranslations[key]?.[lang] ?? dict[key] ?? translations.en[key] ?? key;
     },
     [lang],
   );
