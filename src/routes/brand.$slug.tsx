@@ -30,10 +30,12 @@ export const Route = createFileRoute("/brand/$slug")({
         property: "og:description",
         content: loaderData?.brand.tagline ?? "",
       },
-      {
-        property: "og:image",
-        content: loaderData?.brand.models[0]?.image ?? "",
-      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      ...(loaderData?.brand.models[0]?.image?.startsWith("https://") ? [
+        { property: "og:image", content: loaderData?.brand.models[0]?.image },
+        { name: "twitter:image", content: loaderData?.brand.models[0]?.image },
+      ] : []),
     ],
   }),
   component: BrandPage,

@@ -10,7 +10,11 @@ import { useLanguage } from "@/i18n/LanguageContext";
 export const Route = createFileRoute("/brands")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Brands — AutoINFO" },
+      { property: "og:title", content: "Brands — AutoINFO" },
+      { property: "og:description", content: "Explore the AutoINFO car brand and model catalog." },
       { name: "description", content: "All car brands available in AutoINFO." },
     ],
   }),
