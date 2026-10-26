@@ -17,6 +17,8 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ScannerRouteImport } from './routes/scanner'
 import { Route as BrandModelRouteImport } from './routes/$brand.$model'
 import { Route as BrandSlugRouteImport } from './routes/brand.$slug'
+import { Route as MaintenanceCategoryCategoryRouteImport } from './routes/maintenance_.category.$category'
+import { Route as MaintenanceProviderProviderRouteImport } from './routes/maintenance_.provider.$provider'
 import { Route as ApiPublicHooksSendRemindersRouteImport } from './routes/api/public/hooks/send-reminders'
 import { Route as BrandSlugModelModelRouteImport } from './routes/brand.$slug.model.$model'
 
@@ -60,6 +62,18 @@ const BrandSlugRoute = BrandSlugRouteImport.update({
   path: '/brand/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MaintenanceCategoryCategoryRoute =
+  MaintenanceCategoryCategoryRouteImport.update({
+    id: '/maintenance_/category/$category',
+    path: '/maintenance/category/$category',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MaintenanceProviderProviderRoute =
+  MaintenanceProviderProviderRouteImport.update({
+    id: '/maintenance_/provider/$provider',
+    path: '/maintenance/provider/$provider',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksSendRemindersRoute =
   ApiPublicHooksSendRemindersRouteImport.update({
     id: '/api/public/hooks/send-reminders',
@@ -81,6 +95,8 @@ export interface FileRoutesByFullPath {
   '/scanner': typeof ScannerRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
+  '/maintenance/category/$category': typeof MaintenanceCategoryCategoryRoute
+  '/maintenance/provider/$provider': typeof MaintenanceProviderProviderRoute
   '/api/public/hooks/send-reminders': typeof ApiPublicHooksSendRemindersRoute
   '/brand/$slug/model/$model': typeof BrandSlugModelModelRoute
 }
@@ -93,6 +109,8 @@ export interface FileRoutesByTo {
   '/scanner': typeof ScannerRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
+  '/maintenance/category/$category': typeof MaintenanceCategoryCategoryRoute
+  '/maintenance/provider/$provider': typeof MaintenanceProviderProviderRoute
   '/api/public/hooks/send-reminders': typeof ApiPublicHooksSendRemindersRoute
   '/brand/$slug/model/$model': typeof BrandSlugModelModelRoute
 }
@@ -106,6 +124,8 @@ export interface FileRoutesById {
   '/scanner': typeof ScannerRoute
   '/$brand/$model': typeof BrandModelRoute
   '/brand/$slug': typeof BrandSlugRouteWithChildren
+  '/maintenance_/category/$category': typeof MaintenanceCategoryCategoryRoute
+  '/maintenance_/provider/$provider': typeof MaintenanceProviderProviderRoute
   '/api/public/hooks/send-reminders': typeof ApiPublicHooksSendRemindersRoute
   '/brand/$slug/model/$model': typeof BrandSlugModelModelRoute
 }
@@ -120,6 +140,8 @@ export interface FileRouteTypes {
     | '/scanner'
     | '/$brand/$model'
     | '/brand/$slug'
+    | '/maintenance/category/$category'
+    | '/maintenance/provider/$provider'
     | '/api/public/hooks/send-reminders'
     | '/brand/$slug/model/$model'
   fileRoutesByTo: FileRoutesByTo
@@ -132,6 +154,8 @@ export interface FileRouteTypes {
     | '/scanner'
     | '/$brand/$model'
     | '/brand/$slug'
+    | '/maintenance/category/$category'
+    | '/maintenance/provider/$provider'
     | '/api/public/hooks/send-reminders'
     | '/brand/$slug/model/$model'
   id:
@@ -144,6 +168,8 @@ export interface FileRouteTypes {
     | '/scanner'
     | '/$brand/$model'
     | '/brand/$slug'
+    | '/maintenance_/category/$category'
+    | '/maintenance_/provider/$provider'
     | '/api/public/hooks/send-reminders'
     | '/brand/$slug/model/$model'
   fileRoutesById: FileRoutesById
@@ -157,6 +183,8 @@ export interface RootRouteChildren {
   ScannerRoute: typeof ScannerRoute
   BrandModelRoute: typeof BrandModelRoute
   BrandSlugRoute: typeof BrandSlugRouteWithChildren
+  MaintenanceCategoryCategoryRoute: typeof MaintenanceCategoryCategoryRoute
+  MaintenanceProviderProviderRoute: typeof MaintenanceProviderProviderRoute
   ApiPublicHooksSendRemindersRoute: typeof ApiPublicHooksSendRemindersRoute
 }
 
@@ -218,6 +246,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BrandSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/maintenance_/category/$category': {
+      id: '/maintenance_/category/$category'
+      path: '/maintenance/category/$category'
+      fullPath: '/maintenance/category/$category'
+      preLoaderRoute: typeof MaintenanceCategoryCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maintenance_/provider/$provider': {
+      id: '/maintenance_/provider/$provider'
+      path: '/maintenance/provider/$provider'
+      fullPath: '/maintenance/provider/$provider'
+      preLoaderRoute: typeof MaintenanceProviderProviderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/send-reminders': {
       id: '/api/public/hooks/send-reminders'
       path: '/api/public/hooks/send-reminders'
@@ -256,6 +298,8 @@ const rootRouteChildren: RootRouteChildren = {
   ScannerRoute: ScannerRoute,
   BrandModelRoute: BrandModelRoute,
   BrandSlugRoute: BrandSlugRouteWithChildren,
+  MaintenanceCategoryCategoryRoute: MaintenanceCategoryCategoryRoute,
+  MaintenanceProviderProviderRoute: MaintenanceProviderProviderRoute,
   ApiPublicHooksSendRemindersRoute: ApiPublicHooksSendRemindersRoute,
 }
 export const routeTree = rootRouteImport
