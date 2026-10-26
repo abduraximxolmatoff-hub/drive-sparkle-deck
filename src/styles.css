@@ -164,3 +164,22 @@
 .animate-pan-bg {
   animation: pan-bg 30s ease-in-out infinite;
 }
+
+/* Service-directory accents stay scoped to the existing charcoal/gold theme. */
+@theme inline {
+  --color-emergency: var(--emergency);
+  --color-emergency-foreground: var(--emergency-foreground);
+  --color-service-positive: var(--service-positive);
+}
+:root {
+  --emergency: oklch(0.73 0.17 38);
+  --emergency-foreground: oklch(0.14 0.01 38);
+  --service-positive: oklch(0.76 0.14 155);
+  --service-emergency-surface: linear-gradient(115deg, color-mix(in oklab, var(--emergency) 9%, var(--card)), var(--card));
+}
+.service-page { letter-spacing: 0; animation: service-enter 250ms ease-out; }
+.service-page h1, .service-page h2, .service-page h3 { letter-spacing: 0; }
+.service-emergency { background: var(--service-emergency-surface); border-color: color-mix(in oklab, var(--emergency) 25%, transparent); }
+.service-map { background-image: repeating-linear-gradient(35deg, transparent 0 35px, var(--border) 36px 38px, transparent 39px 80px), repeating-linear-gradient(125deg, transparent 0 50px, var(--border) 51px 53px, transparent 54px 100px); }
+@keyframes service-enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .service-page { animation: none; } .service-category { transition: none; } }
