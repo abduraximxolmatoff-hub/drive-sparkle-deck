@@ -54,16 +54,6 @@ export const Route = createRootRoute({
         content:
           "AutoINFO is an interactive web application for exploring car brands and their models.",
       },
-      {
-        property: "og:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/286a9bc0-d530-4338-bd14-3811797ec939/id-preview-1afea5f3--875e25a6-fea3-4a29-9629-94959018bbd0.lovable.app-1777440774173.png",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/286a9bc0-d530-4338-bd14-3811797ec939/id-preview-1afea5f3--875e25a6-fea3-4a29-9629-94959018bbd0.lovable.app-1777440774173.png",
-      },
     ],
     links: [
       {

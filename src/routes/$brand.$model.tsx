@@ -46,10 +46,12 @@ export const Route = createFileRoute("/$brand/$model")({
         property: "og:description",
         content: loaderData?.brand.tagline ?? "Premium automotive model details",
       },
-      {
-        property: "og:image",
-        content: loaderData?.model.image ?? "",
-      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      ...(loaderData?.model.image?.startsWith("https://") ? [
+        { property: "og:image", content: loaderData?.model.image },
+        { name: "twitter:image", content: loaderData?.model.image },
+      ] : []),
     ],
   }),
   component: ModelDetailPage,

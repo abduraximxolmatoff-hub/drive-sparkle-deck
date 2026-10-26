@@ -12,6 +12,8 @@ import { CarSearch } from "@/components/CarSearch";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "AutoINFO — Understand Your Car. Drive Smarter." },
       {
         name: "description",
