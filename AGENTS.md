@@ -6,3 +6,4 @@
 
 - Service directory data and filters live in a browser-safe data module with reusable UI and unnested category/provider routes, preserving the existing maintenance page and enabling future provider data replacement.
 - Service translations extend the existing language context through a separate dictionary, keeping the current language choice and unrelated translations unchanged.
+- Service maps use Google Maps JavaScript loaded asynchronously inside effects with the managed browser key; directions use coordinate-based Google Maps URLs, and coincident sample locations share a marker rather than fabricating coordinates.

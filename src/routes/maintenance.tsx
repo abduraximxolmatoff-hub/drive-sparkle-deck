@@ -15,6 +15,7 @@ import {
   serviceHead,
 } from "@/components/services/ServiceUI";
 import { CarCareTips } from "@/components/services/CarCareTips";
+import { ServiceMap } from "@/components/services/ServiceMap";
 export const Route = createFileRoute("/maintenance")({
   head: () =>
     serviceHead(
@@ -72,6 +73,7 @@ function MaintenancePage() {
       <section className="mt-10">
         <h2 className="font-display text-xl font-semibold">{t("svc.nearby")}</h2>
         <SampleNotice />
+        <ServiceMap providers={providers} />
         <div className="grid gap-3 lg:grid-cols-2">
           {providers.map((p) => (
             <ServiceProviderCard key={p.id} provider={p} />

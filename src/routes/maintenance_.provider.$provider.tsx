@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { serviceProviders, findCategory } from "@/data/services";
+import { ServiceMap, ServiceDirectionsButton } from "@/components/services/ServiceMap";
 import { ServiceShell, BackLink, SampleNotice, serviceHead } from "@/components/services/ServiceUI";
 export const Route = createFileRoute("/maintenance_/provider/$provider")({
   loader: ({ params }) => {
@@ -83,10 +84,7 @@ function ServiceProviderDetail() {
             <Phone />
             {t("svc.call")}
           </Button>
-          <Button onClick={demo} variant="secondary" className="h-11">
-            <Navigation />
-            {t("svc.directions")}
-          </Button>
+          <ServiceDirectionsButton provider={p} />
           <Button
             onClick={() => {
               setRating(saved);
@@ -163,14 +161,7 @@ function ServiceProviderDetail() {
             ))}
           </div>
           <h2 className="mt-7 font-display text-xl font-semibold">{t("svc.map")}</h2>
-          <div className="service-map relative mt-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-border bg-secondary">
-            <div className="relative flex flex-col items-center gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                <MapPin />
-              </span>
-              <p className="rounded-lg bg-background/90 px-3 py-2 text-xs">{t("svc.mapSample")}</p>
-            </div>
-          </div>
+          <ServiceMap providers={[p]} />
         </aside>
       </div>
       <Dialog open={rateOpen} onOpenChange={setRateOpen}>
