@@ -15,7 +15,7 @@ import {
   serviceHead,
 } from "@/components/services/ServiceUI";
 import { CarCareTips } from "@/components/services/CarCareTips";
-import { ServiceMap } from '@/components/services/ServiceMap';
+import { ServiceMap } from "@/components/services/ServiceMap";
 export const Route = createFileRoute("/maintenance")({
   head: () =>
     serviceHead(

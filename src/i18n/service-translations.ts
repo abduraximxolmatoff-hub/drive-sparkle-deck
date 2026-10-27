@@ -2,10 +2,18 @@ import type { Lang } from "./translations";
 export type ServiceText = Record<Lang, string>;
 export const text = (uz: string, ru: string, en: string): ServiceText => ({ uz, ru, en });
 export const serviceTranslations: Record<string, ServiceText> = {
-  'svc.interactiveMap': text('Servislar xaritasi', 'Карта автосервисов', 'Service map'),
-  'svc.mapLoading': text('Xarita yuklanmoqda...', 'Карта загружается...', 'Loading map...'),
-  'svc.mapError': text('Xarita ochilmadi. Yo‘nalish tugmasidan foydalanishingiz mumkin.', 'Карта недоступна. Можно открыть маршрут кнопкой ниже.', 'Map unavailable. You can still open directions below.'),
-  'svc.mapDemoWarning': text('Namunaviy joylashuvlar: bu nuqtalar haqiqiy servis manzillari sifatida tasdiqlanmagan.', 'Пример расположения: эти точки не подтверждены как адреса реальных сервисов.', 'Sample locations: these points are not verified real workshop addresses.'),
+  "svc.interactiveMap": text("Servislar xaritasi", "Карта автосервисов", "Service map"),
+  "svc.mapLoading": text("Xarita yuklanmoqda...", "Карта загружается...", "Loading map..."),
+  "svc.mapError": text(
+    "Xarita ochilmadi. Yo‘nalish tugmasidan foydalanishingiz mumkin.",
+    "Карта недоступна. Можно открыть маршрут кнопкой ниже.",
+    "Map unavailable. You can still open directions below.",
+  ),
+  "svc.mapDemoWarning": text(
+    "Namunaviy joylashuvlar: bu nuqtalar haqiqiy servis manzillari sifatida tasdiqlanmagan.",
+    "Пример расположения: эти точки не подтверждены как адреса реальных сервисов.",
+    "Sample locations: these points are not verified real workshop addresses.",
+  ),
   "svc.title": text("Avtoservis", "Автосервис", "Car services"),
   "svc.subtitle": text(
     "Avtomobilingiz uchun kerakli xizmatni toping",

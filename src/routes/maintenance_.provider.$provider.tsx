@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { serviceProviders, findCategory } from "@/data/services";
-import { ServiceMap, ServiceDirectionsButton } from '@/components/services/ServiceMap';
+import { ServiceMap, ServiceDirectionsButton } from "@/components/services/ServiceMap";
 import { ServiceShell, BackLink, SampleNotice, serviceHead } from "@/components/services/ServiceUI";
 export const Route = createFileRoute("/maintenance_/provider/$provider")({
   loader: ({ params }) => {

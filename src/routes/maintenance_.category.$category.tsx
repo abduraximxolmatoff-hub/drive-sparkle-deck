@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { findCategory, filterProviders, type ProviderFilters } from "@/data/services";
-import { ServiceMap } from '@/components/services/ServiceMap';
+import { ServiceMap } from "@/components/services/ServiceMap";
 import {
   ServiceShell,
   ServiceLocation,
