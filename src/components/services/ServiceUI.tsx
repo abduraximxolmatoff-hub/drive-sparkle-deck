@@ -1,26 +1,414 @@
-import type { ReactNode } from 'react';
-import { Link } from '@tanstack/react-router';
-import { ArrowLeft, ArrowUpRight, ChevronRight, MapPin, Search, Star, Disc3, Zap, ScanLine, Wrench, Droplets, Snowflake, Sparkles, Truck, BatteryCharging, Paintbrush, KeyRound, TriangleAlert, Siren } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { AutoInfoLogo } from '@/components/AutoInfoLogo';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import { BottomNav } from '@/components/BottomNav';
-import { useLanguage } from '@/i18n/LanguageContext';
-import { findCategory, serviceFilters, type ServiceCategory, type ServiceProvider, type ProviderFilters } from '@/data/services';
-const icons = {tire:Disc3,electric:Zap,diagnostic:ScanLine,mechanic:Wrench,oil:Droplets,ac:Snowflake,wash:Sparkles,tow:Truck,battery:BatteryCharging,body:Paintbrush,lock:KeyRound,accident:TriangleAlert};
-export function ServiceIcon({category,className}:{category:ServiceCategory;className?:string}){const Icon=icons[category.icon as keyof typeof icons]??Wrench;return <Icon className={className}/>;}
-export function ServiceShell({children}:{children:ReactNode}){return <main className="service-page min-h-screen pb-28"><header className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-6 sm:px-6"><AutoInfoLogo size="sm"/><LanguageSwitcher/></header><div className="mx-auto max-w-6xl px-4 sm:px-6">{children}</div><BottomNav/></main>;}
-export function ServiceLocation(){const {t}=useLanguage();return <Select value="tashkent"><SelectTrigger aria-label={t('svc.location')} className="h-10 w-auto min-w-32 gap-2 rounded-full border-border bg-secondary/60"><MapPin className="h-4 w-4 text-primary"/><SelectValue/></SelectTrigger><SelectContent><SelectItem value="tashkent">{t('svc.city')}</SelectItem></SelectContent></Select>;}
-export function ServiceSearch({value,onChange}:{value:string;onChange:(v:string)=>void}){const {t}=useLanguage();return <div className="relative"><Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground"/><Input aria-label={t('svc.search')} placeholder={t('svc.search')} value={value} onChange={e=>onChange(e.target.value)} className="h-12 rounded-xl border-border bg-card pl-12 text-base"/></div>;}
-export function BackLink({category}:{category?:string}){const {t}=useLanguage();return <Button asChild variant="ghost" size="sm" className="mb-5 -ml-2 text-muted-foreground">{category?<Link to="/maintenance/category/$category" params={{category}}><ArrowLeft/>{t('svc.back')}</Link>:<Link to="/maintenance"><ArrowLeft/>{t('svc.back')}</Link>}</Button>;}
-export function ServiceCategoryCard({category}:{category:ServiceCategory}){const {lang}=useLanguage();return <Link to="/maintenance/category/$category" params={{category:category.id}} className="service-category group relative flex min-h-44 flex-col rounded-[20px] border border-border bg-card p-4 transition duration-200 hover:border-primary/40 hover:bg-secondary active:scale-[0.98] sm:min-h-48 sm:p-5"><div className="flex items-center justify-between"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary"><ServiceIcon category={category} className="h-6 w-6"/></span><ArrowUpRight className="h-4 w-4 text-muted-foreground transition group-hover:text-primary"/></div><h3 className="mt-4 break-words font-display text-base font-semibold sm:text-lg">{category.name[lang]}</h3><p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{category.description[lang]}</p></Link>;}
-export function QuickServiceButton({id}:{id:string}){const {lang,t}=useLanguage();const c=findCategory(id);if(!c)return null;return <Button asChild variant="secondary" className="h-auto min-h-16 flex-col gap-2 rounded-xl px-2 py-3 text-xs sm:text-sm"><Link to="/maintenance/category/$category" params={{category:id}}><ServiceIcon category={c} className="text-primary"/>{id==='tires'?t('svc.tireQuick'):id==='mechanic'?t('svc.mechanicQuick'):c.name[lang]}</Link></Button>;}
-export function EmergencyServiceCard(){const {t,lang}=useLanguage();return <section className="service-emergency relative mt-7 overflow-hidden rounded-[22px] border p-5 sm:p-7"><div className="flex gap-4"><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emergency/15 text-emergency"><Siren className="h-6 w-6"/></span><div><h2 className="font-display text-xl font-semibold sm:text-2xl">{t('svc.emergency')}</h2><p className="mt-1 text-sm text-muted-foreground">{t('svc.emergencySub')}</p></div></div><div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 sm:flex sm:flex-wrap">{['towing','battery','tires','mechanic'].map(id=>{const c=findCategory(id);return c?<Link key={id} to="/maintenance/category/$category" params={{category:id}} className="flex items-center gap-2 text-xs text-foreground/85 sm:text-sm"><ServiceIcon category={c} className="h-4 w-4 shrink-0 text-emergency"/>{id==='mechanic'?t('svc.roadside'):id==='tires'?t('svc.tireQuick'):c.name[lang]}</Link>:null;})}</div><Button asChild className="mt-5 bg-emergency text-emergency-foreground hover:bg-emergency/90"><Link to="/maintenance/category/$category" params={{category:'towing'}}>{t('svc.help')}<ArrowUpRight/></Link></Button></section>;}
-export function ServiceProviderCard({provider:p}:{provider:ServiceProvider}){const {t,lang}=useLanguage();return <article className="flex gap-3 rounded-2xl border border-border bg-card p-3 sm:gap-5 sm:p-4"><Link to="/maintenance/provider/$provider" params={{provider:p.id}} className="shrink-0"><img src={p.coverImage} alt={p.name} width={1536} height={1024} loading="lazy" className="h-24 w-20 rounded-xl object-cover sm:h-32 sm:w-40"/></Link><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center justify-between gap-2"><Link to="/maintenance/provider/$provider" params={{provider:p.id}} className="font-display text-lg font-semibold hover:text-primary">{p.name}</Link><span className={`text-xs font-medium ${p.isOpen?'text-service-positive':'text-muted-foreground'}`}>{p.is24_7?'24/7 · ':''}{t(p.isOpen?'svc.open':'svc.closed')}</span></div><p className="mt-1 text-xs text-muted-foreground">{p.category.slice(0,2).map(id=>findCategory(id)?.name[lang]).join(' • ')}</p><div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs"><span className="flex items-center gap-1"><Star className="h-3.5 w-3.5 fill-primary text-primary"/>{p.rating} <span className="text-muted-foreground">({p.reviewCount})</span></span><span className="flex items-center gap-1 text-muted-foreground"><MapPin className="h-3.5 w-3.5"/>{p.distance} km</span></div><p className="mt-2 hidden text-xs text-muted-foreground sm:block">{p.address[lang]}</p><div className="mt-2 flex justify-end"><Button asChild variant="ghost" size="sm" className="h-7 px-2 text-primary"><Link to="/maintenance/provider/$provider" params={{provider:p.id}}>{t('svc.view')}<ChevronRight/></Link></Button></div></div></article>;}
-export function SampleNotice(){const {t}=useLanguage();return <p className="my-4 flex items-start gap-2 text-xs leading-relaxed text-muted-foreground"><TriangleAlert className="mt-0.5 h-3.5 w-3.5 shrink-0"/>{t('svc.sample')}</p>;}
-export function ServiceEmpty({reset}:{reset:()=>void}){const {t}=useLanguage();return <div className="py-16 text-center"><Search className="mx-auto mb-4 h-8 w-8 text-muted-foreground"/><h2 className="text-xl font-semibold">{t('svc.empty')}</h2><p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">{t('svc.emptySub')}</p><Button onClick={reset} variant="outline" className="mt-5">{t('svc.reset')}</Button></div>;}
-export function FilterBar({value:f,onChange}:{value:ProviderFilters;onChange:(f:ProviderFilters)=>void}){const {t}=useLanguage();const update=(key:string,value:unknown)=>onChange({...f,[key]:value});return <div className="my-5 flex flex-wrap gap-2"><FilterSelect label={t('svc.distance')} value={String(f.distance??'all')} options={serviceFilters.distances.map(n=>({value:String(n),label:`≤ ${n} km`}))} onChange={v=>update('distance',v==='all'?undefined:Number(v))}/><FilterSelect label={t('svc.rating')} value={String(f.rating??'all')} options={serviceFilters.ratings.map(n=>({value:String(n),label:`${n}+ ★`}))} onChange={v=>update('rating',v==='all'?undefined:Number(v))}/><FilterSelect label={t('svc.price')} value={String(f.price??'all')} options={serviceFilters.prices.map(n=>({value:String(n),label:`≤ ${n.toLocaleString()} ${t('svc.currency')}`}))} onChange={v=>update('price',v==='all'?undefined:Number(v))}/>{[['openNow','svc.openNow'],['alwaysOpen','24/7']].map(([key,label])=><Button key={key} size="sm" variant={f[key as 'openNow'|'alwaysOpen']?'default':'secondary'} aria-pressed={Boolean(f[key as 'openNow'|'alwaysOpen'])} onClick={()=>update(key,!f[key as 'openNow'|'alwaysOpen'])}>{t(label)}</Button>)}<FilterSelect label={t('svc.sort')} value={f.sort??'nearest'} includeAll={false} options={[{value:'nearest',label:t('svc.nearest')},{value:'rating',label:t('svc.topRated')},{value:'reviews',label:t('svc.mostReviews')}]} onChange={v=>update('sort',v)}/></div>;}
-function FilterSelect({label,value,options,onChange,includeAll=true}:{label:string;value:string;options:{value:string;label:string}[];onChange:(v:string)=>void;includeAll?:boolean}){const {t}=useLanguage();return <Select value={value} onValueChange={onChange}><SelectTrigger aria-label={label} className="h-8 w-auto gap-2 bg-secondary text-xs"><SelectValue/></SelectTrigger><SelectContent>{includeAll&&<SelectItem value="all">{label}: {t('svc.all')}</SelectItem>}{options.map(o=><SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}</SelectContent></Select>;}
-export function serviceHead(title:string,description:string,image?:string){return {meta:[{title},{name:'description',content:description},{property:'og:title',content:title},{property:'og:description',content:description},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'},...(image?.startsWith('https://')?[{property:'og:image',content:image},{name:'twitter:image',content:image}]:[])]};}
+import type { ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  ChevronRight,
+  MapPin,
+  Search,
+  Star,
+  Disc3,
+  Zap,
+  ScanLine,
+  Wrench,
+  Droplets,
+  Snowflake,
+  Sparkles,
+  Truck,
+  BatteryCharging,
+  Paintbrush,
+  KeyRound,
+  TriangleAlert,
+  Siren,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { AutoInfoLogo } from "@/components/AutoInfoLogo";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { BottomNav } from "@/components/BottomNav";
+import { useLanguage } from "@/i18n/LanguageContext";
+import {
+  findCategory,
+  serviceFilters,
+  type ServiceCategory,
+  type ServiceProvider,
+  type ProviderFilters,
+} from "@/data/services";
+const icons = {
+  tire: Disc3,
+  electric: Zap,
+  diagnostic: ScanLine,
+  mechanic: Wrench,
+  oil: Droplets,
+  ac: Snowflake,
+  wash: Sparkles,
+  tow: Truck,
+  battery: BatteryCharging,
+  body: Paintbrush,
+  lock: KeyRound,
+  accident: TriangleAlert,
+};
+export function ServiceIcon({
+  category,
+  className,
+}: {
+  category: ServiceCategory;
+  className?: string;
+}) {
+  const Icon = icons[category.icon as keyof typeof icons] ?? Wrench;
+  return <Icon className={className} />;
+}
+export function ServiceShell({ children }: { children: ReactNode }) {
+  return (
+    <main className="service-page min-h-screen pb-28">
+      <header className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-6 sm:px-6">
+        <AutoInfoLogo size="sm" />
+        <LanguageSwitcher />
+      </header>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">{children}</div>
+      <BottomNav />
+    </main>
+  );
+}
+export function ServiceLocation() {
+  const { t } = useLanguage();
+  return (
+    <Select value="tashkent">
+      <SelectTrigger
+        aria-label={t("svc.location")}
+        className="h-10 w-auto min-w-32 gap-2 rounded-full border-border bg-secondary/60"
+      >
+        <MapPin className="h-4 w-4 text-primary" />
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="tashkent">{t("svc.city")}</SelectItem>
+      </SelectContent>
+    </Select>
+  );
+}
+export function ServiceSearch({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const { t } = useLanguage();
+  return (
+    <div className="relative">
+      <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+      <Input
+        aria-label={t("svc.search")}
+        placeholder={t("svc.search")}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="h-12 rounded-xl border-border bg-card pl-12 text-base"
+      />
+    </div>
+  );
+}
+export function BackLink({ category }: { category?: string }) {
+  const { t } = useLanguage();
+  return (
+    <Button asChild variant="ghost" size="sm" className="mb-5 -ml-2 text-muted-foreground">
+      {category ? (
+        <Link to="/maintenance/category/$category" params={{ category }}>
+          <ArrowLeft />
+          {t("svc.back")}
+        </Link>
+      ) : (
+        <Link to="/maintenance">
+          <ArrowLeft />
+          {t("svc.back")}
+        </Link>
+      )}
+    </Button>
+  );
+}
+export function ServiceCategoryCard({ category }: { category: ServiceCategory }) {
+  const { lang } = useLanguage();
+  return (
+    <Link
+      to="/maintenance/category/$category"
+      params={{ category: category.id }}
+      className="service-category group relative flex min-h-44 flex-col rounded-[20px] border border-border bg-card p-4 transition duration-200 hover:border-primary/40 hover:bg-secondary active:scale-[0.98] sm:min-h-48 sm:p-5"
+    >
+      <div className="flex items-center justify-between">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <ServiceIcon category={category} className="h-6 w-6" />
+        </span>
+        <ArrowUpRight className="h-4 w-4 text-muted-foreground transition group-hover:text-primary" />
+      </div>
+      <h3 className="mt-4 break-words font-display text-base font-semibold sm:text-lg">
+        {category.name[lang]}
+      </h3>
+      <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+        {category.description[lang]}
+      </p>
+    </Link>
+  );
+}
+export function QuickServiceButton({ id }: { id: string }) {
+  const { lang, t } = useLanguage();
+  const c = findCategory(id);
+  if (!c) return null;
+  return (
+    <Button
+      asChild
+      variant="secondary"
+      className="h-auto min-h-16 flex-col gap-2 rounded-xl px-2 py-3 text-xs sm:text-sm"
+    >
+      <Link to="/maintenance/category/$category" params={{ category: id }}>
+        <ServiceIcon category={c} className="text-primary" />
+        {id === "tires"
+          ? t("svc.tireQuick")
+          : id === "mechanic"
+            ? t("svc.mechanicQuick")
+            : c.name[lang]}
+      </Link>
+    </Button>
+  );
+}
+export function EmergencyServiceCard() {
+  const { t, lang } = useLanguage();
+  return (
+    <section className="service-emergency relative mt-7 overflow-hidden rounded-[22px] border p-5 sm:p-7">
+      <div className="flex gap-4">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emergency/15 text-emergency">
+          <Siren className="h-6 w-6" />
+        </span>
+        <div>
+          <h2 className="font-display text-xl font-semibold sm:text-2xl">{t("svc.emergency")}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">{t("svc.emergencySub")}</p>
+        </div>
+      </div>
+      <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 sm:flex sm:flex-wrap">
+        {["towing", "battery", "tires", "mechanic"].map((id) => {
+          const c = findCategory(id);
+          return c ? (
+            <Link
+              key={id}
+              to="/maintenance/category/$category"
+              params={{ category: id }}
+              className="flex items-center gap-2 text-xs text-foreground/85 sm:text-sm"
+            >
+              <ServiceIcon category={c} className="h-4 w-4 shrink-0 text-emergency" />
+              {id === "mechanic"
+                ? t("svc.roadside")
+                : id === "tires"
+                  ? t("svc.tireQuick")
+                  : c.name[lang]}
+            </Link>
+          ) : null;
+        })}
+      </div>
+      <Button asChild className="mt-5 bg-emergency text-emergency-foreground hover:bg-emergency/90">
+        <Link to="/maintenance/category/$category" params={{ category: "towing" }}>
+          {t("svc.help")}
+          <ArrowUpRight />
+        </Link>
+      </Button>
+    </section>
+  );
+}
+export function ServiceProviderCard({ provider: p }: { provider: ServiceProvider }) {
+  const { t, lang } = useLanguage();
+  return (
+    <article className="flex gap-3 rounded-2xl border border-border bg-card p-3 sm:gap-5 sm:p-4">
+      <Link to="/maintenance/provider/$provider" params={{ provider: p.id }} className="shrink-0">
+        <img
+          src={p.coverImage}
+          alt={p.name}
+          width={1536}
+          height={1024}
+          loading="lazy"
+          className="h-24 w-20 rounded-xl object-cover sm:h-32 sm:w-40"
+        />
+      </Link>
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <Link
+            to="/maintenance/provider/$provider"
+            params={{ provider: p.id }}
+            className="font-display text-lg font-semibold hover:text-primary"
+          >
+            {p.name}
+          </Link>
+          <span
+            className={`text-xs font-medium ${p.isOpen ? "text-service-positive" : "text-muted-foreground"}`}
+          >
+            {p.is24_7 ? "24/7 · " : ""}
+            {t(p.isOpen ? "svc.open" : "svc.closed")}
+          </span>
+        </div>
+        <p className="mt-1 text-xs text-muted-foreground">
+          {p.category
+            .slice(0, 2)
+            .map((id) => findCategory(id)?.name[lang])
+            .join(" • ")}
+        </p>
+        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+          <span className="flex items-center gap-1">
+            <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+            {p.rating} <span className="text-muted-foreground">({p.reviewCount})</span>
+          </span>
+          <span className="flex items-center gap-1 text-muted-foreground">
+            <MapPin className="h-3.5 w-3.5" />
+            {p.distance} km
+          </span>
+        </div>
+        <p className="mt-2 hidden text-xs text-muted-foreground sm:block">{p.address[lang]}</p>
+        <div className="mt-2 flex justify-end">
+          <Button asChild variant="ghost" size="sm" className="h-7 px-2 text-primary">
+            <Link to="/maintenance/provider/$provider" params={{ provider: p.id }}>
+              {t("svc.view")}
+              <ChevronRight />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </article>
+  );
+}
+export function SampleNotice() {
+  const { t } = useLanguage();
+  return (
+    <p className="my-4 flex items-start gap-2 text-xs leading-relaxed text-muted-foreground">
+      <TriangleAlert className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+      {t("svc.sample")}
+    </p>
+  );
+}
+export function ServiceEmpty({ reset }: { reset: () => void }) {
+  const { t } = useLanguage();
+  return (
+    <div className="py-16 text-center">
+      <Search className="mx-auto mb-4 h-8 w-8 text-muted-foreground" />
+      <h2 className="text-xl font-semibold">{t("svc.empty")}</h2>
+      <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">{t("svc.emptySub")}</p>
+      <Button onClick={reset} variant="outline" className="mt-5">
+        {t("svc.reset")}
+      </Button>
+    </div>
+  );
+}
+export function FilterBar({
+  value: f,
+  onChange,
+}: {
+  value: ProviderFilters;
+  onChange: (f: ProviderFilters) => void;
+}) {
+  const { t } = useLanguage();
+  const update = (key: string, value: unknown) => onChange({ ...f, [key]: value });
+  return (
+    <div className="my-5 flex flex-wrap gap-2">
+      <FilterSelect
+        label={t("svc.distance")}
+        value={String(f.distance ?? "all")}
+        options={serviceFilters.distances.map((n) => ({ value: String(n), label: `≤ ${n} km` }))}
+        onChange={(v) => update("distance", v === "all" ? undefined : Number(v))}
+      />
+      <FilterSelect
+        label={t("svc.rating")}
+        value={String(f.rating ?? "all")}
+        options={serviceFilters.ratings.map((n) => ({ value: String(n), label: `${n}+ ★` }))}
+        onChange={(v) => update("rating", v === "all" ? undefined : Number(v))}
+      />
+      <FilterSelect
+        label={t("svc.price")}
+        value={String(f.price ?? "all")}
+        options={serviceFilters.prices.map((n) => ({
+          value: String(n),
+          label: `≤ ${n.toLocaleString()} ${t("svc.currency")}`,
+        }))}
+        onChange={(v) => update("price", v === "all" ? undefined : Number(v))}
+      />
+      {[
+        ["openNow", "svc.openNow"],
+        ["alwaysOpen", "24/7"],
+      ].map(([key, label]) => (
+        <Button
+          key={key}
+          size="sm"
+          variant={f[key as "openNow" | "alwaysOpen"] ? "default" : "secondary"}
+          aria-pressed={Boolean(f[key as "openNow" | "alwaysOpen"])}
+          onClick={() => update(key, !f[key as "openNow" | "alwaysOpen"])}
+        >
+          {t(label)}
+        </Button>
+      ))}
+      <FilterSelect
+        label={t("svc.sort")}
+        value={f.sort ?? "nearest"}
+        includeAll={false}
+        options={[
+          { value: "nearest", label: t("svc.nearest") },
+          { value: "rating", label: t("svc.topRated") },
+          { value: "reviews", label: t("svc.mostReviews") },
+        ]}
+        onChange={(v) => update("sort", v)}
+      />
+    </div>
+  );
+}
+function FilterSelect({
+  label,
+  value,
+  options,
+  onChange,
+  includeAll = true,
+}: {
+  label: string;
+  value: string;
+  options: { value: string; label: string }[];
+  onChange: (v: string) => void;
+  includeAll?: boolean;
+}) {
+  const { t } = useLanguage();
+  return (
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger aria-label={label} className="h-8 w-auto gap-2 bg-secondary text-xs">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {includeAll && (
+          <SelectItem value="all">
+            {label}: {t("svc.all")}
+          </SelectItem>
+        )}
+        {options.map((o) => (
+          <SelectItem key={o.value} value={o.value}>
+            {o.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
+export function serviceHead(title: string, description: string, image?: string) {
+  return {
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      ...(image?.startsWith("https://")
+        ? [
+            { property: "og:image", content: image },
+            { name: "twitter:image", content: image },
+          ]
+        : []),
+    ],
+  };
+}

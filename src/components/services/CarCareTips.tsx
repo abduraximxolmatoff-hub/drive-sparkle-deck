@@ -1,4 +1,14 @@
-import { Disc3, Droplet, BatteryCharging, CircleStop, Wind, Thermometer, Lightbulb, Wrench, Activity } from "lucide-react";
+import {
+  Disc3,
+  Droplet,
+  BatteryCharging,
+  CircleStop,
+  Wind,
+  Thermometer,
+  Lightbulb,
+  Wrench,
+  Activity,
+} from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { Lang } from "@/i18n/translations";
 type Item = {
@@ -101,4 +111,24 @@ const ITEMS: Item[] = [
   },
 ];
 
-export function CarCareTips(){ const {lang,t}=useLanguage(); return <details className="mt-10 border-t border-border pt-6"><summary className="cursor-pointer font-display text-lg text-muted-foreground">{t("svc.care")}</summary><div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{ITEMS.map(it=><article key={it.id} className="rounded-lg border border-border bg-card p-4"><h3 className="flex items-center gap-2 font-semibold"><it.icon className="h-4 w-4 text-primary"/>{it.title[lang]}</h3><p className="mt-2 text-sm text-muted-foreground">{it.text[lang]}</p></article>)}</div></details>;}
+export function CarCareTips() {
+  const { lang, t } = useLanguage();
+  return (
+    <details className="mt-10 border-t border-border pt-6">
+      <summary className="cursor-pointer font-display text-lg text-muted-foreground">
+        {t("svc.care")}
+      </summary>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {ITEMS.map((it) => (
+          <article key={it.id} className="rounded-lg border border-border bg-card p-4">
+            <h3 className="flex items-center gap-2 font-semibold">
+              <it.icon className="h-4 w-4 text-primary" />
+              {it.title[lang]}
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">{it.text[lang]}</p>
+          </article>
+        ))}
+      </div>
+    </details>
+  );
+}
