@@ -1,3 +1,4 @@
+/// <reference types="google.maps" />
 let pending: Promise<typeof google.maps> | undefined;
 export function loadServiceMap(): Promise<typeof google.maps> {
   if (window.google?.maps?.Map) return Promise.resolve(window.google.maps);
