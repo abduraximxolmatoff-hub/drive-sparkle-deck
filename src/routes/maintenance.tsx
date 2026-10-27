@@ -1,8 +1,85 @@
-import { useState } from 'react';
-import { createFileRoute } from '@tanstack/react-router';
-import { useLanguage } from '@/i18n/LanguageContext';
-import { matchingCategories, filterProviders } from '@/data/services';
-import { ServiceShell, ServiceLocation, ServiceSearch, EmergencyServiceCard, QuickServiceButton, ServiceCategoryCard, ServiceProviderCard, ServiceEmpty, SampleNotice, serviceHead } from '@/components/services/ServiceUI';
-import { CarCareTips } from '@/components/services/CarCareTips';
-export const Route=createFileRoute('/maintenance')({head:()=>serviceHead('Avtoservis — AutoINFO','Toshkentdagi avtomobil xizmatlari, shoshilinch yordam va servislar katalogi.'),component:MaintenancePage});
-function MaintenancePage(){const {t}=useLanguage();const [query,setQuery]=useState('');const categories=matchingCategories(query);const providers=filterProviders({query});return <ServiceShell><div className="flex flex-wrap items-center justify-between gap-4 pt-3"><div><p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">AutoINFO / {t('nav.service')}</p><h1 className="font-display text-3xl font-bold sm:text-4xl">{t('svc.title')}</h1><p className="mt-2 text-sm text-muted-foreground">{t('svc.subtitle')}</p></div><ServiceLocation/></div><div className="mt-6"><ServiceSearch value={query} onChange={setQuery}/></div>{!query&&<><EmergencyServiceCard/><section className="mt-7"><h2 className="mb-3 font-display text-lg font-semibold">{t('svc.quick')}</h2><div className="grid grid-cols-4 gap-2 sm:gap-3">{['towing','battery','tires','mechanic'].map(id=><QuickServiceButton key={id} id={id}/>)}</div></section></>}<section className="mt-8"><div className="mb-4 flex items-center justify-between"><h2 className="font-display text-xl font-semibold">{t('svc.categories')}</h2><span className="text-xs text-muted-foreground">{categories.length.toString().padStart(2,'0')}</span></div><div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">{categories.map(c=><ServiceCategoryCard key={c.id} category={c}/>)}</div></section><section className="mt-10"><h2 className="font-display text-xl font-semibold">{t('svc.nearby')}</h2><SampleNotice/><div className="grid gap-3 lg:grid-cols-2">{providers.map(p=><ServiceProviderCard key={p.id} provider={p}/>)}</div>{!categories.length&&!providers.length&&<ServiceEmpty reset={()=>setQuery('')}/>}</section><CarCareTips/></ServiceShell>;}
+import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { matchingCategories, filterProviders } from "@/data/services";
+import {
+  ServiceShell,
+  ServiceLocation,
+  ServiceSearch,
+  EmergencyServiceCard,
+  QuickServiceButton,
+  ServiceCategoryCard,
+  ServiceProviderCard,
+  ServiceEmpty,
+  SampleNotice,
+  serviceHead,
+} from "@/components/services/ServiceUI";
+import { CarCareTips } from "@/components/services/CarCareTips";
+export const Route = createFileRoute("/maintenance")({
+  head: () =>
+    serviceHead(
+      "Avtoservis — AutoINFO",
+      "Toshkentdagi avtomobil xizmatlari, shoshilinch yordam va servislar katalogi.",
+    ),
+  component: MaintenancePage,
+});
+function MaintenancePage() {
+  const { t } = useLanguage();
+  const [query, setQuery] = useState("");
+  const categories = matchingCategories(query);
+  const providers = filterProviders({ query });
+  return (
+    <ServiceShell>
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-3">
+        <div>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">
+            AutoINFO / {t("nav.service")}
+          </p>
+          <h1 className="font-display text-3xl font-bold sm:text-4xl">{t("svc.title")}</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{t("svc.subtitle")}</p>
+        </div>
+        <ServiceLocation />
+      </div>
+      <div className="mt-6">
+        <ServiceSearch value={query} onChange={setQuery} />
+      </div>
+      {!query && (
+        <>
+          <EmergencyServiceCard />
+          <section className="mt-7">
+            <h2 className="mb-3 font-display text-lg font-semibold">{t("svc.quick")}</h2>
+            <div className="grid grid-cols-4 gap-2 sm:gap-3">
+              {["towing", "battery", "tires", "mechanic"].map((id) => (
+                <QuickServiceButton key={id} id={id} />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
+      <section className="mt-8">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="font-display text-xl font-semibold">{t("svc.categories")}</h2>
+          <span className="text-xs text-muted-foreground">
+            {categories.length.toString().padStart(2, "0")}
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+          {categories.map((c) => (
+            <ServiceCategoryCard key={c.id} category={c} />
+          ))}
+        </div>
+      </section>
+      <section className="mt-10">
+        <h2 className="font-display text-xl font-semibold">{t("svc.nearby")}</h2>
+        <SampleNotice />
+        <div className="grid gap-3 lg:grid-cols-2">
+          {providers.map((p) => (
+            <ServiceProviderCard key={p.id} provider={p} />
+          ))}
+        </div>
+        {!categories.length && !providers.length && <ServiceEmpty reset={() => setQuery("")} />}
+      </section>
+      <CarCareTips />
+    </ServiceShell>
+  );
+}
