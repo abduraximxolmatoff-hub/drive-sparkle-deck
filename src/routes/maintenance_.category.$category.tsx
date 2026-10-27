@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { findCategory, filterProviders, type ProviderFilters } from "@/data/services";
+import { ServiceMap } from '@/components/services/ServiceMap';
 import {
   ServiceShell,
   ServiceLocation,
@@ -55,6 +56,7 @@ function ServiceDetail() {
         </span>
       </div>
       <SampleNotice />
+      <ServiceMap providers={providers} />
       <div className="grid gap-3 lg:grid-cols-2">
         {providers.map((p) => (
           <ServiceProviderCard key={p.id} provider={p} />
