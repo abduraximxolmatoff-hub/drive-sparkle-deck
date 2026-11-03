@@ -133,26 +133,36 @@ export function BackLink({ category }: { category?: string }) {
     </Button>
   );
 }
+const categoryImages = import.meta.glob<string>("../../assets/services/cats/*.png", {
+  eager: true,
+  import: "default",
+});
+export const categoryImage = (id: string) =>
+  categoryImages[`../../assets/services/cats/${id}.png`];
 export function ServiceCategoryCard({ category }: { category: ServiceCategory }) {
   const { lang } = useLanguage();
+  const img = categoryImage(category.id);
   return (
     <Link
       to="/maintenance/category/$category"
       params={{ category: category.id }}
-      className="service-category group relative flex min-h-44 flex-col rounded-[20px] border border-border bg-card p-4 transition duration-200 hover:border-primary/40 hover:bg-secondary active:scale-[0.98] sm:min-h-48 sm:p-5"
+      className="group relative flex h-36 overflow-hidden rounded-[20px] border border-border bg-card p-4 transition duration-200 hover:border-primary/40 hover:bg-secondary active:scale-[0.98] sm:h-40 sm:p-5"
     >
-      <div className="flex items-center justify-between">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-          <ServiceIcon category={category} className="h-6 w-6" />
-        </span>
-        <ArrowUpRight className="h-4 w-4 text-muted-foreground transition group-hover:text-primary" />
-      </div>
-      <h3 className="mt-4 break-words font-display text-base font-semibold sm:text-lg">
+      <h3 className="relative z-10 max-w-[60%] break-words font-display text-base font-semibold leading-snug sm:text-lg">
         {category.name[lang]}
       </h3>
-      <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-        {category.description[lang]}
-      </p>
+      {img ? (
+        <img
+          src={img}
+          alt=""
+          width={816}
+          height={816}
+          loading="lazy"
+          className="pointer-events-none absolute -bottom-3 -right-3 h-28 w-28 object-contain drop-shadow-xl transition duration-300 group-hover:scale-105 sm:h-32 sm:w-32"
+        />
+      ) : (
+        <ServiceIcon category={category} className="absolute bottom-4 right-4 h-10 w-10 text-primary" />
+      )}
     </Link>
   );
 }

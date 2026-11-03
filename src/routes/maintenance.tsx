@@ -44,19 +44,7 @@ function MaintenancePage() {
       <div className="mt-6">
         <ServiceSearch value={query} onChange={setQuery} />
       </div>
-      {!query && (
-        <>
-          <EmergencyServiceCard />
-          <section className="mt-7">
-            <h2 className="mb-3 font-display text-lg font-semibold">{t("svc.quick")}</h2>
-            <div className="grid grid-cols-4 gap-2 sm:gap-3">
-              {["towing", "battery", "tires", "mechanic"].map((id) => (
-                <QuickServiceButton key={id} id={id} />
-              ))}
-            </div>
-          </section>
-        </>
-      )}
+      {!query && <EmergencyServiceCard />}
       <section className="mt-8">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="font-display text-xl font-semibold">{t("svc.categories")}</h2>
@@ -70,6 +58,7 @@ function MaintenancePage() {
           ))}
         </div>
       </section>
+      {!query && <FuelStationsMap />}
       <section className="mt-10">
         <h2 className="font-display text-xl font-semibold">{t("svc.nearby")}</h2>
         <SampleNotice />
