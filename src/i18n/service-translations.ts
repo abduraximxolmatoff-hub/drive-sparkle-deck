@@ -2,6 +2,27 @@ import type { Lang } from "./translations";
 export type ServiceText = Record<Lang, string>;
 export const text = (uz: string, ru: string, en: string): ServiceText => ({ uz, ru, en });
 export const serviceTranslations: Record<string, ServiceText> = {
+  "fuel.title": text("Yoqilg‘i shoxobchalari", "Заправки", "Fuel stations"),
+  "fuel.subtitle": text(
+    "Benzin, metan, propan va elektr quvvatlash",
+    "Бензин, метан, пропан и электрозарядки",
+    "Petrol, methane, propane and EV charging",
+  ),
+  "fuel.petrol": text("Benzin", "Бензин", "Petrol"),
+  "fuel.methane": text("Metan", "Метан", "Methane"),
+  "fuel.propane": text("Propan", "Пропан", "Propane"),
+  "fuel.electric": text("Elektro", "Электро", "EV"),
+  "fuel.error": text(
+    "Shoxobchalarni yuklab bo‘lmadi. Keyinroq urinib ko‘ring.",
+    "Не удалось загрузить заправки. Попробуйте позже.",
+    "Couldn't load stations. Please try again later.",
+  ),
+  "fuel.empty": text("Yaqin atrofda topilmadi", "Поблизости не найдено", "None found nearby"),
+  "fuel.source": text(
+    "Manzillar Google Maps ma’lumotlari asosida. Narx va mavjudlikni joyida tekshiring.",
+    "Адреса по данным Google Maps. Цены и наличие уточняйте на месте.",
+    "Locations from Google Maps. Check prices and availability on site.",
+  ),
   "svc.interactiveMap": text("Servislar xaritasi", "Карта автосервисов", "Service map"),
   "svc.mapLoading": text("Xarita yuklanmoqda...", "Карта загружается...", "Loading map..."),
   "svc.mapError": text(
