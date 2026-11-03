@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { MapPin, Navigation, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { loadServiceMap } from "@/lib/google-map-loader";
 import { serviceDirectionsUrl } from "@/lib/service-directions";
-import { getFuelStations, type FuelType } from "@/lib/fuel-stations.functions";
+import { getFuelStations, type FuelType, type FuelStation } from "@/lib/fuel-stations.functions";
 import fuelImg from "@/assets/services/cats/fuel.png";
 
 const TYPES: { id: FuelType; key: string; color: string }[] = [
@@ -21,11 +20,22 @@ export function FuelStationsMap() {
   const [selectedId, setSelectedId] = useState<string>();
   const [mapState, setMapState] = useState<"loading" | "ready" | "error">("loading");
   const container = useRef<HTMLDivElement>(null);
-  const { data = [], isLoading, isError } = useQuery({
-    queryKey: ["fuel-stations", type],
-    queryFn: () => getFuelStations({ data: { type } }),
-    staleTime: 60 * 60 * 1000,
-  });
+  const [data, setData] = useState<FuelStation[]>([]);
+  const [isLoading, setLoading] = useState(true);
+  const [isError, setError] = useState(false);
+  useEffect(() => {
+    let off = false;
+    setLoading(true);
+    setError(false);
+    setData([]);
+    getFuelStations({ data: { type } })
+      .then((d) => !off && setData(d))
+      .catch(() => !off && setError(true))
+      .finally(() => !off && setLoading(false));
+    return () => {
+      off = true;
+    };
+  }, [type]);
   const color = TYPES.find((x) => x.id === type)!.color;
   const selected = data.find((s) => s.id === selectedId) ?? data[0];
 
