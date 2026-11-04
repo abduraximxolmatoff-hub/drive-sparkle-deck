@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      car_listings: {
+        Row: {
+          brand: string
+          city: string
+          created_at: string
+          description: string | null
+          id: string
+          is_demo: boolean
+          latitude: number
+          longitude: number
+          mileage_km: number
+          model: string
+          phone: string
+          price_usd: number
+          seller_name: string
+          user_id: string | null
+          year: number
+        }
+        Insert: {
+          brand: string
+          city: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_demo?: boolean
+          latitude: number
+          longitude: number
+          mileage_km?: number
+          model: string
+          phone: string
+          price_usd: number
+          seller_name: string
+          user_id?: string | null
+          year: number
+        }
+        Update: {
+          brand?: string
+          city?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_demo?: boolean
+          latitude?: number
+          longitude?: number
+          mileage_km?: number
+          model?: string
+          phone?: string
+          price_usd?: number
+          seller_name?: string
+          user_id?: string | null
+          year?: number
+        }
+        Relationships: []
+      }
       part_reminders: {
         Row: {
           enabled: boolean
