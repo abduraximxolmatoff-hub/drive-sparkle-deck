@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as MaintenanceRouteImport } from './routes/maintenance'
+import { Route as MarketRouteImport } from './routes/market'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ScannerRouteImport } from './routes/scanner'
 import { Route as BrandModelRouteImport } from './routes/$brand.$model'
@@ -40,6 +41,11 @@ const BrandsRoute = BrandsRouteImport.update({
 const MaintenanceRoute = MaintenanceRouteImport.update({
   id: '/maintenance',
   path: '/maintenance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketRoute = MarketRouteImport.update({
+  id: '/market',
+  path: '/market',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/brands': typeof BrandsRoute
   '/maintenance': typeof MaintenanceRoute
+  '/market': typeof MarketRoute
   '/profile': typeof ProfileRoute
   '/scanner': typeof ScannerRoute
   '/$brand/$model': typeof BrandModelRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/brands': typeof BrandsRoute
   '/maintenance': typeof MaintenanceRoute
+  '/market': typeof MarketRoute
   '/profile': typeof ProfileRoute
   '/scanner': typeof ScannerRoute
   '/$brand/$model': typeof BrandModelRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/brands': typeof BrandsRoute
   '/maintenance': typeof MaintenanceRoute
+  '/market': typeof MarketRoute
   '/profile': typeof ProfileRoute
   '/scanner': typeof ScannerRoute
   '/$brand/$model': typeof BrandModelRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/brands'
     | '/maintenance'
+    | '/market'
     | '/profile'
     | '/scanner'
     | '/$brand/$model'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/brands'
     | '/maintenance'
+    | '/market'
     | '/profile'
     | '/scanner'
     | '/$brand/$model'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/brands'
     | '/maintenance'
+    | '/market'
     | '/profile'
     | '/scanner'
     | '/$brand/$model'
@@ -179,6 +191,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BrandsRoute: typeof BrandsRoute
   MaintenanceRoute: typeof MaintenanceRoute
+  MarketRoute: typeof MarketRoute
   ProfileRoute: typeof ProfileRoute
   ScannerRoute: typeof ScannerRoute
   BrandModelRoute: typeof BrandModelRoute
@@ -216,6 +229,13 @@ declare module '@tanstack/react-router' {
       path: '/maintenance'
       fullPath: '/maintenance'
       preLoaderRoute: typeof MaintenanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/market': {
+      id: '/market'
+      path: '/market'
+      fullPath: '/market'
+      preLoaderRoute: typeof MarketRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -294,6 +314,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BrandsRoute: BrandsRoute,
   MaintenanceRoute: MaintenanceRoute,
+  MarketRoute: MarketRoute,
   ProfileRoute: ProfileRoute,
   ScannerRoute: ScannerRoute,
   BrandModelRoute: BrandModelRoute,
