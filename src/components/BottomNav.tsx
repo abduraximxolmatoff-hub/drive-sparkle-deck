@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Home, Car, Wrench, User, Camera } from "lucide-react";
+import { Home, Store, Wrench, User, Camera } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 export function BottomNav() {
@@ -8,7 +8,7 @@ export function BottomNav() {
 
   const items = [
     { to: "/", label: t("nav.home"), icon: Home, exact: true },
-    { to: "/brands", label: t("nav.brands"), icon: Car, exact: false },
+    { to: "/market", label: t("nav.market"), icon: Store, exact: false },
     { to: "/maintenance", label: t("nav.service"), icon: Wrench, exact: false },
     { to: "/scanner", label: t("nav.scanner"), icon: Camera, exact: false },
     { to: "/profile", label: t("nav.profile"), icon: User, exact: false },

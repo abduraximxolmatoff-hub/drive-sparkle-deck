@@ -15,6 +15,13 @@
       "when": 1791629466343,
       "tag": "0001_create_profiles",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793786607582,
+      "tag": "0002_create_car_listings",
+      "breakpoints": true
     }
   ]
 }
