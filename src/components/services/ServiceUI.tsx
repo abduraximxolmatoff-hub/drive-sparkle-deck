@@ -232,17 +232,7 @@ export function EmergencyServiceCard() {
 export function ServiceProviderCard({ provider: p }: { provider: ServiceProvider }) {
   const { t, lang } = useLanguage();
   return (
-    <article className="flex gap-3 rounded-2xl border border-border bg-card p-3 sm:gap-5 sm:p-4">
-      <Link to="/maintenance/provider/$provider" params={{ provider: p.id }} className="shrink-0">
-        <img
-          src={p.coverImage}
-          alt={p.name}
-          width={1536}
-          height={1024}
-          loading="lazy"
-          className="h-24 w-20 rounded-xl object-cover sm:h-32 sm:w-40"
-        />
-      </Link>
+    <article className="rounded-2xl border border-border bg-card p-4">
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <Link
