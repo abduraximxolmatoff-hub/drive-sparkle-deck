@@ -197,6 +197,7 @@ const extra: Record<Lang, Dict> = {
   uz: {
     "nav.home": "Asosiy",
     "nav.brands": "Brendlar",
+    "nav.market": "Savdo",
     "nav.service": "Servis",
     "nav.profile": "Profil",
     "brands.subtitle": "Barcha brendlar va modellar ro‘yxati.",
@@ -228,6 +229,7 @@ const extra: Record<Lang, Dict> = {
   ru: {
     "nav.home": "Главная",
     "nav.brands": "Бренды",
+    "nav.market": "Продажа",
     "nav.service": "Сервис",
     "nav.profile": "Профиль",
     "brands.subtitle": "Все бренды и список моделей.",
@@ -258,6 +260,7 @@ const extra: Record<Lang, Dict> = {
   en: {
     "nav.home": "Home",
     "nav.brands": "Brands",
+    "nav.market": "Market",
     "nav.service": "Service",
     "nav.profile": "Profile",
     "brands.subtitle": "All brands and their models.",
