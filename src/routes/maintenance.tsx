@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FuelStationsMap } from "@/components/services/FuelStationsMap";
 import { createFileRoute } from "@tanstack/react-router";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { matchingCategories, filterProviders } from "@/data/services";
