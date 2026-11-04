@@ -148,7 +148,7 @@ export function ServiceCategoryCard({ category }: { category: ServiceCategory })
       params={{ category: category.id }}
       className="group relative flex h-36 overflow-hidden rounded-[20px] border border-border bg-card p-4 transition duration-200 hover:border-primary/40 hover:bg-secondary active:scale-[0.98] sm:h-40 sm:p-5"
     >
-      <h3 className="relative z-10 max-w-[60%] break-words font-display text-base font-semibold leading-snug sm:text-lg">
+      <h3 className="relative z-10 font-display text-[15px] font-semibold leading-snug sm:text-lg">
         {category.name[lang]}
       </h3>
       {img ? (
