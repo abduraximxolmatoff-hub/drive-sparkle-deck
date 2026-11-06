@@ -61,7 +61,7 @@ function MarketPage() {
   const [open, setOpen] = useState(false);
   const [mapErr, setMapErr] = useState(false);
   const mapEl = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<google.maps.Map>();
+  const mapRef = useRef<google.maps.Map | undefined>(undefined);
   const markers = useRef<google.maps.Marker[]>([]);
   const strip = useRef<HTMLDivElement>(null);
 
